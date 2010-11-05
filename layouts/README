@@ -1,0 +1,25 @@
+These layouts have been created from scratch, the XML syntax should be self-explanatory.
+Most of the time, 'id' attributes correspond to the XKB name of the key.
+
+All files require utf-8 encoding **WITHOUT BOM**!
+Four characters have to be escaped to keep the file XML-compliant:
+ "   =>   &quot; (or use single-quote delimiters)
+ &   =>   &amp;
+ <   =>   &lt;
+ >   =>   &gt;
+
+The following files have a non-free licence:
+ * dvorak-fr.xml: CC-BY-NA (w/ kind authorization of Francis Leboutte, dvorak-fr designer)
+
+Other interesting layouts:
+ * Qwerty-like layouts:
+   * EUR-key: http://eurkey.steffen.bruentjen.eu/
+ * German dvorak-like layouts:
+   * Ristome: http://www.ristome.de/
+   * de-ergo: http://forschung.goebel-consult.de/de-ergo
+   * eMeier: http://www.dingo.saar.de/Bilder/de-emeier.html
+   * NEO: http://pebbles.schattenlauf.de/layout/index_us.html
+ * English dvorak-like layouts:
+   * Qwerf / C-dvorak / Capewell: http://www.geocities.com/smozoma/projects/keyboard/
+   * CarpalX / xbul: http://mkweb.bcgsc.ca/carpalx/?xbul
+ * 

@@ -1,0 +1,67 @@
+textarea.error {
+	background-color: red;
+}
+
+/* visual hints
+.hints li.active {
+	background-image: url(grid4-brown.gif);
+} */
+.hints li.active {
+	background-color: brown;
+}
+.hints li.active * {
+	font-weight: bold;
+	color: white;
+}
+/*
+.hints .left2  { background-color: #fb0; }
+.hints .right2 { background-color: #f88; }
+.hints .left3, .hints .right3 { background-color: #ff0; }
+.hints .left4, .hints .right4 { background-color: #9f9; }
+.hints .left5, .hints .right5 { background-color: #99f; }
+*/
+.hints .left2  { background-color: #db0; }
+.hints .right2 { background-color: #ee0; }
+.hints .left3, .hints .right3 { background-color: #ac0; }
+.hints .left4, .hints .right4 { background-color: #3bb; }
+.hints .left5, .hints .right5 { background-color: #88f; }
+
+.hints li#ac01, .hints li#ac02, .hints li#ac03,
+.hints li#ac08, .hints li#ac09, .hints li#ac10,
+.hints li#ac04, .hints li#ac07 { /* home row */
+	background-image: url(grid4.gif);
+	font-weight: bold;
+	color: white;
+}
+
+/* keyboard settings: layout, geometry */
+form#keyboardSelector {
+	float: right;
+}
+form#keyboardSelector dl * {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+form#keyboardSelector dl dt {
+	float: left;
+	width: 200px;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: right;
+}
+form#keyboardSelector dl dd {
+	text-align: left;
+	margin-left: 210px;
+	height: 1.5em;
+	line-height: 1.5em;
+}
+
+/* page footer */
+div#footer {
+	color: brown;
+	border-top: 1px outset brown;
+	padding-top: 5px;
+	font-size: smaller;
+}
+

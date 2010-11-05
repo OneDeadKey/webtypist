@@ -1,0 +1,156 @@
+<KTouchLecture>
+  <Title>fr-dvorak-bepo n°1</Title>
+  <Comment></Comment>
+  <Levels>
+    <Level>
+      <NewCharacters>e, t</NewCharacters>
+      <Line>eeee tttt eeee tttt eeee tttt eeee tttt eeee</Line>
+      <Line>eett ttee eett ttee ttee eett eett eett eett</Line>
+      <Line>etet etet etet etet tete tete tete tete tete</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>s, i</NewCharacters>
+      <Line>iiii ssss iiii ssss iiii ssss iiii ssss iiii</Line>
+      <Line>ssss iiii ssss iiii ssss iiii ssss iiii ssss</Line>
+      <Line>eeee tttt eeee tttt sstt eeii sstt iiee iiss</Line>
+      <Line>iets iest iets iets iets iets iets iets iets</Line>
+      <Line>stei stei stei stei stei stei stei stei stei</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>u, n</NewCharacters>
+      <Line>uuuu nnnn uuuu nnnn uuuu nnnn uuuu nnnn uuuu</Line>
+      <Line>nnnn uuuu nnnn uuuu nnnn uuuu uuuu nnnn uuuu</Line>
+      <Line>uunn uunn uunn uunn uunn nnuu nnuu nnuu nnuu</Line>
+      <Line>nunu nunu nunu nunu nunu unun unun unun unun</Line>
+      <Line>uiet uiet nste nste nste nste nste nste nste </Line>
+      <Line>uisn uisn uisn uisn uisn uisn uisn uisn uisn</Line>
+      <Line>snui snui snui snui snui snui snui snui snui</Line>
+      <Line>uent uent uent uent uent uent uent uent uent</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>a, r</NewCharacters>
+      <Line>aaaa rrrr aaaa rrrr aaaa rrrr aaaa rrrr aaaa</Line>
+      <Line>rrrr aaaa rrrr aaaa rrrr aaaa rrrr aaaa rrrr</Line>
+      <Line>aarr aarr aarr aarr aarr aarr aarr aarr aarr</Line>
+      <Line>rraa rraa rraa rraa rraa rraa rraa rraa rraa</Line>
+      <Line>arar arar arar arar arar arar arar arar arar</Line>
+      <Line>rara rara rara rara rara rara rara rara rara</Line>
+      <Line>aert aert aert aert aert aert aert aert aert</Line>
+      <Line>rnau rnau rnau rnau rnau rnau rnau rnau rnau</Line>
+      <Line>airs airs airs airs airs airs airs airs airs</Line>
+      <Line>auie auie auie auie auie auie auie auie auie</Line>
+      <Line>rnst rnst rnst rnst rnst rnst rnst rnst rnst</Line>
+      <Line>eiua eiua eiua eiua eiua eiua eiua eiua eiua</Line>
+      <Line>tsnr tsnr tsnr tsnr tsnr tsnr tsnr tsnr tsnr</Line>
+    </Level>
+    
+    <Level>
+      <NewCharacters>,, c</NewCharacters>
+      <Line>,,,, cccc ,,,, cccc ,,,, cccc ,,,, cccc ,,,,</Line>
+      <Line>cccc ,,,, cccc ,,,, cccc ,,,, cccc ,,,, cccc</Line>
+      <Line>a,a, a,a, a,a, a,a, a,a, a,a, a,a, a,a, a,a,</Line>
+      <Line>e,e, e,e, e,e, e,e, e,e, e,e, e,e, e,e, e,e,</Line>
+      <Line>rcrc rcrc rcrc rcrc rcrc rcrc rcrc rcrc rcrc</Line>
+      <Line>tctc tctc tctc tctc tctc tctc tctc tctc tctc</Line>
+      <Line>auie ,cts nrau ie,c tsnr auie ,cts nrau ie,c</Line>
+      <Line>,eiu ctsn ,eiu ctsn ,eiu ctsn ,eiu ctsn ctsn</Line>
+    </Level>
+
+    <Level>
+   
+      <NewCharacters>o, v</NewCharacters>
+      <Line>oooo vvvv oooo vvvv oooo vvvv oooo vvvv oooo</Line>
+      <Line>vvvv oooo vvvv oooo vvvv oooo vvvv oooo vvvv</Line>
+      <Line>vvoo vvoo vvoo vvoo vvoo vvoo vvoo vvoo vvoo</Line>
+      <Line>oovv oovv oovv oovv oovv oovv oovv oovv oovv</Line>
+      <Line>uieo uieo uieo uieo uieo uieo uieo uieo uieo</Line>
+      <Line>nstv nstv nstv nstv nstv nstv nstv nstv nstv</Line>
+      <Line>oavr oavr oavr oavr oavr oavr oavr oavr oavr</Line>
+      <Line>vsoi vsoi vsoi vsoi vsoi vsoi vsoi vsoi vsoi</Line>
+      <Line>oa,v ansv orsa oa,v ansv orsa oa,v ansv orsa</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>p, d</NewCharacters>
+      <Line>pppp dddd pppp dddd pppp dddd pppp dddd pppp</Line>
+      <Line>dddd pppp dddd pppp dddd pppp dddd pppp dddd</Line>
+      <Line>ppdd ppdd ppdd ppdd ppdd ppdd ppdd ppdd ppdd</Line>
+      <Line>ddpp ddpp ddpp ddpp ddpp ddpp ddpp ddpp ddpp</Line>
+      <Line>dpdp dpdp dpdp dpdp dpdp dpdp dpdp dpdp dpdp</Line>
+      <Line>auop auop auop auop auop auop auop auop auop</Line>
+      <Line>rnvd rnvd rnvd rnvd rnvd rnvd rnvd rnvd rnvd</Line>
+      <Line>povd povd povd povd povd povd povd povd povd</Line>
+      <Line>dvop dvop dvop dvop dvop dvop dvop dvop dvop</Line>
+      <Line>opnr doas opnr doas opnr doas opnr doas opnr</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>é, l</NewCharacters>
+      <Line>éééé llll éééé llll éééé llll éééé llll éééé</Line>
+      <Line>llll éééé llll éééé llll éééé llll éééé llll</Line>
+      <Line>ééll ééll ééll ééll ééll ééll ééll ééll ééll</Line>
+      <Line>lléé lléé lléé lléé lléé lléé lléé lléé lléé</Line>
+      <Line>opéa vdlr opéa vdlr opéa vdlr opéa vdlr opéa</Line>
+      <Line>époa ldvr époa ldvr époa ldvr époa ldvr époa</Line>
+      <Line>oéau vlrn oéau vlrn oéau vlrn oéau vlrn oéau </Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>b, f</NewCharacters>
+      <Line>bbbb ffff bbbb ffff bbbb ffff bbbb ffff bbbb</Line>
+      <Line>ffff bbbb ffff ffff bbbb ffff ffff bbbb ffff</Line>
+      <Line>bbff bbff bbff bbff bbff bbff bbff bbff bbff</Line>
+      <Line>ffbb ffbb ffbb ffbb ffbb ffbb ffbb ffbb ffbb</Line>
+      <Line>bépo fldv bépo fldv bépo fldv bépo fldv bépo</Line>
+      <Line>eoip uéab tvsd nlrf eoip uéab tvsd nlrf eoip</Line>
+      <Line>uéab tvsd nlrf eoip uéab tvsd nlrf eoip uéab</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>., q</NewCharacters>
+      <Line>.... qqqq .... qqqq .... qqqq .... qqqq ....</Line>
+      <Line>qqqq .... qqqq .... qqqq .... qqqq .... qqqq</Line>
+      <Line>..qq ..qq ..qq ..qq ..qq ..qq ..qq ..qq ..qq</Line>
+      <Line>qq.. qq.. qq.. qq.. qq.. qq.. qq.. qq.. qq..</Line>
+      <Line>.eoa qtvr .eoa qtvr .eoa qtvr .eoa qtvr .eoa</Line>
+      <Line>au.e rnqt au.e rnqt au.e rnqt au.e rnqt au.e</Line>
+      <Line>qtsn .eiu qtsn .eiu qtsn .eiu qtsn .eiu qtsn</Line>
+      <Line>qtcs .e,i qtcs .e,i qtcs .e,i qtcs .e,i qtcs</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>h, g</NewCharacters>
+      <Line>hhhh gggg hhhh gggg hhhh gggg hhhh gggg hhhh</Line>
+      <Line>gggg hhhh gggg hhhh gggg hhhh gggg hhhh gggg</Line>
+      <Line>hhgg hhgg hhgg hhgg hhgg hhgg hhgg hhgg hhgg</Line>
+      <Line>gghh gghh gghh gghh gghh gghh gghh gghh gghh</Line>
+      <Line>ctqg ,e.h ctqg ,e.h ctqg ,e.h ctqg ,e.h ctqg</Line>
+      <Line>gqtc h.e, gqtc h.e, gqtc h.e, gqtc h.e, gqtc</Line>
+      <Line>gggg hhhh qqqq .... gggg hhhh qqqq .... gggg</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>y, x</NewCharacters>
+      <Line>yyyy xxxx yyyy xxxx yyyy xxxx yyyy xxxx yyyy</Line>
+      <Line>xxxx yyyy xxxx yyyy xxxx yyyy xxxx yyyy xxxx</Line>
+      <Line>yyxx yyxx yyxx yyxx yyxx yyxx yyxx yyxx yyxx</Line>
+      <Line>.hyo qgxv .hyo qgxv .hyo qgxv .hyo qgxv .hyo</Line>
+      <Line>xlnr yéua xlnr yéua xlnr yéua xlnr yéua xlnr</Line>
+      <Line>tqgx e.hy tqgx e.hy tqgx e.hy tqgx e.hy tqgx</Line>
+    </Level>
+
+    <Level>
+      <NewCharacters>à, j</NewCharacters>
+      <Line>àààà jjjj àààà jjjj àààà jjjj àààà jjjj àààà</Line>
+      <Line>jjjj àààà jjjj àààà jjjj àààà jjjj àààà jjjj</Line>
+      <Line>ààjj ààjj ààjj ààjj ààjj ààjj ààjj ààjj ààjj</Line>
+      <Line>jjàà jjàà jjàà jjàà jjàà jjàà jjàà jjàà jjàà </Line>
+      <Line>qgxj .hyà qgxj .hyà qgxj .hyà qgxj .hyà qgxj </Line>
+      <Line>qvtj .oeà qvtj .oeà qvtj .oeà qvtj .oeà qvtj </Line>
+    </Level>
+
+    </Levels>
+</KTouchLecture>

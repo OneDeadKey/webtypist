@@ -1,0 +1,567 @@
+<KTouchLecture>
+  <Title>fr-dvorak-bepo n°2</Title>
+  <Comment>Loin d'être idéal!!! Mais ça doit être utilisable...</Comment>
+  <Levels>
+    <Level>
+      <NewCharacters>et</NewCharacters>
+      <Line>e eeee et tette ette te</Line>
+      <Line>ee ete tette ete eete ete</Line>
+      <Line>tee tee tte e t eet t eett</Line>
+      <Line>eet etet et e ette ete ee</Line>
+      <Line>tette eet eeee t et tette</Line>
+      <Line>ee tette tette te t t tt</Line>
+      <Line>t eete ee tt tette te</Line>
+      <Line>ee et te e ett ete t e</Line>
+      <Line>tee ett te eett eeeee eteet</Line>
+      <Line>e ee eeee eet te ett eett</Line>
+      <Line>tte tette tte etet te ett</Line>
+      <Line>te tette ett eeeee te ete</Line>
+      <Line>eet et eet t eet tt etet</Line>
+      <Line>e te eete ette e e eete</Line>
+      <Line>et tette ett te et eete</Line>
+      <Line>ette tt tee eteet eeeee eet</Line>
+      <Line>eet eeee e eeee eeeee eet</Line>
+      <Line>ee te e ett ette tee tt</Line>
+      <Line>et eete eeeee ete tte et</Line>
+      <Line>ette t ee eet te e t e etet</Line>
+      <Line>tte tee tte et te t ett</Line>
+      <Line>ete tt e eeeee eteet tee</Line>
+      <Line>te te ette te ee te e eeee</Line>
+      <Line>te eet te eett e eteet</Line>
+      <Line>eet eeee tee ett ett te</Line>
+      <Line>tee eeee te eteet eett t</Line>
+      <Line>te eett ett tee ette tee</Line>
+      <Line>ee ette ee et eeeee tette</Line>
+      <Line>et ee tette eteet tt te</Line>
+      <Line>ete eteet te tte te eteet</Line>
+    </Level>
+    <Level>
+      <NewCharacters>is</NewCharacters>
+      <Line>ri sis testes sets rites</Line>
+      <Line>siestes tisses rit rit sieste</Line>
+      <Line>sis risettes es tisse siestes</Line>
+      <Line>sis titi sises tisse ries</Line>
+      <Line>rites titi risse risette site</Line>
+      <Line>rie tisse rit tests restes</Line>
+      <Line>ses tisses reis teste tisses</Line>
+      <Line>es esse sise tisses rie</Line>
+      <Line>est siestes retisses rite</Line>
+      <Line>ri sets tises tests risette</Line>
+      <Line>se risse risettes retisse</Line>
+      <Line>tises rit rit si est tisse</Line>
+      <Line>sieste est tisse risse esses</Line>
+      <Line>reste set test tise es testes</Line>
+      <Line>tises reis sieste teste risses</Line>
+      <Line>tisses sis titi teste rite</Line>
+      <Line>es risses ses tisses reis</Line>
+      <Line>tises ris es siestes rets</Line>
+      <Line>ses si rets risse ries tise</Line>
+      <Line>reis ses sise tes est retisse</Line>
+      <Line>retisses sets se test tise titi</Line>
+      <Line>esse si risse set ses retisses</Line>
+      <Line>reis sis sites tettes ses</Line>
+      <Line>es rite ris ses testes</Line>
+      <Line>risettes reis rets rie sets tes</Line>
+      <Line>siestes tisses tettes reste</Line>
+      <Line>retisse sis sises es si tests</Line>
+      <Line>esse es reis site reste rit</Line>
+      <Line>reste risses tees tees risettes</Line>
+      <Line>retisse rite set site tises</Line>
+    </Level>
+    <Level>
+      <NewCharacters>un</NewCharacters>
+      <Line>sentit rentes ruinent insistent</Line>
+      <Line>ruiniste ressentisse nuits tu</Line>
+      <Line>initie retenus tisent rentent</Line>
+      <Line>ruine usent reins nuises reinettes</Line>
+      <Line>suit essuient rissent retienne</Line>
+      <Line>nenni retentisses reteints</Line>
+      <Line>tennis sienne ressens retient</Line>
+      <Line>nette sussent intestins restitue</Line>
+      <Line>sunnites ressentis rusent tiennent</Line>
+      <Line>retentissent unes sunnite tut ressente</Line>
+      <Line>tissent senties ressuis intestine</Line>
+      <Line>intestin suisses issus renies</Line>
+      <Line>restitues sentines entent retinssent</Line>
+      <Line>retentit suinte tins tissus sen</Line>
+      <Line>retenu tins senti in rieuses</Line>
+      <Line>renies resentie suinte sentis</Line>
+      <Line>tinsses riens ressue ressuent</Line>
+      <Line>ruineuses resentit sut unit nenni</Line>
+      <Line>tutu resentie eue reines</Line>
+      <Line>ressentis unes reins tinettes</Line>
+      <Line>sentine suints teinte ressente</Line>
+      <Line>restitues ruts situes tisseuses</Line>
+      <Line>nui eusses russe tinsses</Line>
+      <Line>unissent ressuies ressui retenues</Line>
+      <Line>nient ruiniste retiennent</Line>
+      <Line>nuise retenti rissent russe</Line>
+      <Line>nue retienne tueuse ressentie</Line>
+      <Line>eusse suie situent inti reinette</Line>
+      <Line>rustine sinusite tenus instituent</Line>
+      <Line>retinsses sunnite suintent ru</Line>
+    </Level>
+    <Level>
+      <NewCharacters>ra</NewCharacters>
+      <Line>trais raturerais tarais rentreras</Line>
+      <Line>tannisa irriteras ratinasse</Line>
+      <Line>assises teinterait intenterais</Line>
+      <Line>rainetasses saints tuerai rainerai</Line>
+      <Line>sain riraient tsaristes nantissent</Line>
+      <Line>ressuient nitrate attentat assenant</Line>
+      <Line>tannisais saute ruinerais arrisent</Line>
+      <Line>saunassent nitreras attisent ai</Line>
+      <Line>autiste ternissait ressaisiras</Line>
+      <Line>retentit astis unitarienne terrent</Line>
+      <Line>ressassai sursaturaient enserras</Line>
+      <Line>unitaire restait starisait tartes</Line>
+      <Line>arienne tuteurent ressueraient</Line>
+      <Line>saisirait surinera reterserai</Line>
+      <Line>surirais assise sertisseurs tanneries</Line>
+      <Line>nain resentissait ressentais</Line>
+      <Line>ra rainetaient entrais</Line>
+      <Line>attitrasses niera terri tartiner</Line>
+      <Line>transies saurissait asinien ait</Line>
+      <Line>tenterai nitratas initierai tassa</Line>
+      <Line>stature susurrer retrairas transissait</Line>
+      <Line>tsaristes ratasses errasses ressente</Line>
+      <Line>irritant errer essuieraient insisterai</Line>
+      <Line>urine entretenir ruses natterais</Line>
+      <Line>niaisai sentait essuiera raseur</Line>
+      <Line>attristantes traitasses serrera atterrerait</Line>
+      <Line>ruinassent assistantes essartassent</Line>
+      <Line>niaiseries saturateurs sauris ratatines</Line>
+      <Line>sautereau enture instants sereine</Line>
+      <Line>sires rata ressassaient retenants</Line>
+    </Level>
+    <Level>
+      <NewCharacters>nc</NewCharacters>
+      <Line>entretiennent recentreras sectateurs</Line>
+      <Line>ensaisinera rentais trine nana entres</Line>
+      <Line>terrassassent encastrassent transcrira</Line>
+      <Line>ressuscite crissai causerait renaissaient</Line>
+      <Line>incrustant transissait sucrerai</Line>
+      <Line>ensaisinai ternaires restantes</Line>
+      <Line>ressaisiraient ruine entier arrisent</Line>
+      <Line>recenserai ternissure entreraient</Line>
+      <Line>recentreras entrains tenanciers</Line>
+      <Line>teinterais issante rinceuse retentai</Line>
+      <Line>entreraient retraceras rancirent</Line>
+      <Line>insistait recrutent recentraient</Line>
+      <Line>ressassent resentissais crasseras</Line>
+      <Line>cure ruiniste cuirassier</Line>
+      <Line>cartes satinasse assassinaient</Line>
+      <Line>tartarin cuitant initierait antenne</Line>
+      <Line>curera retentais tarsiens canner</Line>
+      <Line>tannises cranasse centiares rentrait</Line>
+      <Line>structuraient entretenaient cessas</Line>
+      <Line>enciras teins causait ennuieraient</Line>
+      <Line>crassant racinera intestine castratrices</Line>
+      <Line>transes caserneras recentrassent</Line>
+      <Line>scient tentants caricaturerait</Line>
+      <Line>retercent tanneurs carient assainisses</Line>
+      <Line>carencerais caricaturerait renaissante</Line>
+      <Line>saunasse caressant arisassent</Line>
+      <Line>restante craner reterseraient</Line>
+      <Line>reteins ressaisirent narcisses</Line>
+      <Line>urinaient instinct stressante</Line>
+      <Line>internais sciures rainetas causant</Line>
+    </Level>
+    <Level>
+      <NewCharacters>qg</NewCharacters>
+      <Line>antarctiques rugisse taquets essanges</Line>
+      <Line>narguerai gaies encaustiquait</Line>
+      <Line>gangrena engainerais castagnai</Line>
+      <Line>argentan nitrique arrangeras</Line>
+      <Line>gringue tanguera gringuera acquerra</Line>
+      <Line>reggae augurent augure stagiaires</Line>
+      <Line>guignaient essangeasses garanti</Line>
+      <Line>engrangeas rengrenasses craquasse</Line>
+      <Line>enseignait aurige esquarre acquises</Line>
+      <Line>usagers artistiques carguaient</Line>
+      <Line>gratteras arrangeraient essartage</Line>
+      <Line>arrangeants asiatiques essangent</Line>
+      <Line>gansant cargua granitasses engaineraient</Line>
+      <Line>taquais garas acquittasse ressaignasse</Line>
+      <Line>atteignit gringueraient garantit</Line>
+      <Line>craignis statiques stagnerais</Line>
+      <Line>taquinai ennuageant strings esquisserais</Line>
+      <Line>encaissages grenages castagner angiectasies</Line>
+      <Line>ingurgite quinteuses encage tanguait</Line>
+      <Line>reteignant renseignas rangeasse</Line>
+      <Line>tangence enquiquiner regrattant</Line>
+      <Line>gargariser truquassent enquiquinantes</Line>
+      <Line>gag gangrenante transgressera</Line>
+      <Line>trusquinassent incasique atteignisse</Line>
+      <Line>rangeais craquetteraient cagnent</Line>
+      <Line>entaquerai gants garrigues assignant</Line>
+      <Line>essangeais attigent rengaineraient</Line>
+      <Line>engrangeais grugerait inquisiteur</Line>
+      <Line>geignes rengraciasses suraigu</Line>
+      <Line>seguia sacquasses interagisse</Line>
+    </Level>
+    <Level>
+      <NewCharacters>hx</NewCharacters>
+      <Line>chuintent rechutait guincherais</Line>
+      <Line>annexassent schahs transsahariennes</Line>
+      <Line>gauchies ataraxie hisse ruchassent</Line>
+      <Line>texte anarthries rushs surchargeras</Line>
+      <Line>enharnachait chues surtaxerai rechignaient</Line>
+      <Line>chaussant chassieux eschais rushs</Line>
+      <Line>hernieux hercher inauthentique</Line>
+      <Line>chergui rechargera ataraxies</Line>
+      <Line>recachetasse exhaussa hercher chicaneries</Line>
+      <Line>arracherais chasserait rucha architectura</Line>
+      <Line>charge haschischins authentiquerais</Line>
+      <Line>enchantas tahitienne hauturiers</Line>
+      <Line>charcutes harnacherais technique</Line>
+      <Line>xanthie chierai haussaient taxaient</Line>
+      <Line>charcutera haineux ha charretier</Line>
+      <Line>excitatrices chanstiquerais aeschne</Line>
+      <Line>tahitiens surexcitai crachasse</Line>
+      <Line>chaussas surtaxera aeschnes chartrier</Line>
+      <Line>chenaux cherreraient agriches</Line>
+      <Line>charretins rechantais chuintera</Line>
+      <Line>incurieux ranchers surhausserait</Line>
+      <Line>existait heureuse scratcher schisteux</Line>
+      <Line>rehaussa ex rechaussa cachuchas</Line>
+      <Line>guiches chartreuses chahutera</Line>
+      <Line>rattachasse existasse encharneras</Line>
+      <Line>harnacherais herseur anthrax rechignaient</Line>
+      <Line>herseurs ruchasses ruchais enharnaches</Line>
+      <Line>nixe excuserais shuntera</Line>
+      <Line>chaises harnaches tahitien surtaxas</Line>
+      <Line>chergui crachiner chahuteras</Line>
+    </Level>
+    <Level>
+      <NewCharacters>yj</NewCharacters>
+      <Line>injecterais grasseyantes jactas</Line>
+      <Line>jectisse jaugeur jucha essuyeurs</Line>
+      <Line>juchais jugeant jetterait rayeraient</Line>
+      <Line>jurats nycturies jetteras ennuyas</Line>
+      <Line>ajustant ressuyer jacasseraient</Line>
+      <Line>jerseys jaunissant interjetasse</Line>
+      <Line>grasseyerai jaunit raja cyanurassent</Line>
+      <Line>jetteraient attrayante aryenne rajeunissant</Line>
+      <Line>injectait ressayes jaugeasses</Line>
+      <Line>jacassera sujette jurasses satyres</Line>
+      <Line>injectassent jaretteras retrayaient</Line>
+      <Line>jattes stryges grasseyeras</Line>
+      <Line>tajines enjugua juchai jactai</Line>
+      <Line>jet jasait jugea jacte injecterais</Line>
+      <Line>geyser tyranniseras jeux cynique</Line>
+      <Line>rajeunirait enrayai jucheraient</Line>
+      <Line>essayant jaugeas essayeur tuyauteraient</Line>
+      <Line>rasseye jaugeages trayeuses</Line>
+      <Line>enrayure cyanurerais jugeraient</Line>
+      <Line>jasasses rajeunie jeunets ressuyer</Line>
+      <Line>rejettera ressuyai yen juste rayeras</Line>
+      <Line>interjetaient rejetais surjet syngnathes</Line>
+      <Line>jeta enjuguerait rejet rayer</Line>
+      <Line>enrayais rejugeait ennuyaient</Line>
+      <Line>ressaye jacassera tyrans rayera</Line>
+      <Line>jus assujettiraient tuyautas</Line>
+      <Line>rejugeas jasai trayeuse ajustages</Line>
+      <Line>enrayasse essayes rajustes jacasseras</Line>
+      <Line>synarchie rajahs injecterai tuyau</Line>
+      <Line>injuriais attrayants rejugeait</Line>
+    </Level>
+    <Level>
+      <NewCharacters>àê</NewCharacters>
+      <Line>gênais arrêtai têteau entêtai</Line>
+      <Line>enquêterait arêtieres hêtraies</Line>
+      <Line>crêtes quêterais enrênai</Line>
+      <Line>guêtrera gênait enrênasses</Line>
+      <Line>guêtra gênerais quêtera chênaies</Line>
+      <Line>entêtants guêtrai enrêneras</Line>
+      <Line>arête enquêteuse rêche entêterais</Line>
+      <Line>chêne arrêtent enquêta à</Line>
+      <Line>gêner requête guêtrerait</Line>
+      <Line>entêtaient entêtas arrêteraient</Line>
+      <Line>enrênasse enquêtrices enquêtaient</Line>
+      <Line>gênant enrênas quêtent requêta</Line>
+      <Line>hêtraie entêta enquêtasses</Line>
+      <Line>têtus quête entêtassent</Line>
+      <Line>gênaient gêneur enquêtasse</Line>
+      <Line>quêtes enquêtaient enrênasse</Line>
+      <Line>têtu arrêtasses requêteras</Line>
+      <Line>arrêtent chênaie arrêtant enquêtrice</Line>
+      <Line>quêterait gêna gênait entêtait</Line>
+      <Line>enrêneras quêteras arrêteraient</Line>
+      <Line>guêtrerais entêtas entêterai</Line>
+      <Line>gêneuses gênerait enrênera</Line>
+      <Line>entêtera enrênant enrênent</Line>
+      <Line>quêteraient gênera entêtes entêtes</Line>
+      <Line>guêtre entêta chênaie gênerait</Line>
+      <Line>gênerait acquêts quêtai entêterais</Line>
+      <Line>quêtais quêtera requêtassent</Line>
+      <Line>arrêtaient quêtassent enquêtasse</Line>
+      <Line>quêta guêtrera têtes enrênas</Line>
+      <Line>guêtrer êtes arrêta gênantes</Line>
+    </Level>
+    <Level>
+      <NewCharacters>mk</NewCharacters>
+      <Line>murmureras amusies amarinaient</Line>
+      <Line>meringua raugmentasses uniquement</Line>
+      <Line>acharnement ramequins ramarrer marraient</Line>
+      <Line>mixte massacreur masticatrices</Line>
+      <Line>mitigeraient amnistiants amenuisas</Line>
+      <Line>aimant snack cramassent uraniums</Line>
+      <Line>marchanties karma grimasse mutas</Line>
+      <Line>transhumasse simas intimement chamarrures</Line>
+      <Line>hameaux transmette ramageaient</Line>
+      <Line>mutinant menacer masquants entamant</Line>
+      <Line>exterminer mayen munies thermites</Line>
+      <Line>immigrer ramie massacrai arrimassent</Line>
+      <Line>skient sarmenteras essaime</Line>
+      <Line>essaimait maniements geignement</Line>
+      <Line>mithriaques emmagasinaient germaniseraient</Line>
+      <Line>germant marrant mithracisme</Line>
+      <Line>materniserais mixture ameutai sketch</Line>
+      <Line>centimes mêmement minages armurerie</Line>
+      <Line>maintenus muniras martres mayes</Line>
+      <Line>massacrants mitigeur remercies jerkerai</Line>
+      <Line>germanisasses remania humanisasses</Line>
+      <Line>emmener maquent samurais minuteraient</Line>
+      <Line>incrimine minimiseras segment</Line>
+      <Line>menteur murets assainissements</Line>
+      <Line>imagineraient amnistiasse saumureras</Line>
+      <Line>manucurent ramageant astigmates</Line>
+      <Line>imanats musa augmentais jacket</Line>
+      <Line>armant samariums karstique</Line>
+      <Line>amerries emmagasiner chemiseries</Line>
+      <Line>chemiseras rentamas incriminasses</Line>
+    </Level>
+    <Level>
+      <NewCharacters>'o</NewCharacters>
+      <Line>qu'assoient inconsistance qu'encartouchasse</Line>
+      <Line>n'encrassa n'imaginassent secousse</Line>
+      <Line>contusionne canasson j'incarnasse</Line>
+      <Line>m'attiras m'engrangeas contant</Line>
+      <Line>n'extrairai qu'arracherait n'attirions</Line>
+      <Line>qu'emmurant amocheras jussion croirait</Line>
+      <Line>t'incrustai m'esquissent m'arrosas</Line>
+      <Line>moujingue m'ajustons cahotes essayassions</Line>
+      <Line>m'occasionnerions rechargeons t'enrhumerai</Line>
+      <Line>contrera n'annonceront griotte</Line>
+      <Line>qu'essangeai qu'ignorons registreront</Line>
+      <Line>n'amnistiera moucheronneront qu'engage</Line>
+      <Line>conteras m'arnaquerait qu'existerait</Line>
+      <Line>m'accroches morceaux m'intentons</Line>
+      <Line>j'entêterai essors j'entachais m'amnistiait</Line>
+      <Line>m'entres exocrines n'annoterons</Line>
+      <Line>concrets t'arguaient jargonnons</Line>
+      <Line>qu'engagea qu'ocrasse tourniquions</Line>
+      <Line>t'accotai commuterai hormoner</Line>
+      <Line>soumettait s'assommer m'usent accoteras</Line>
+      <Line>marmorisera tenonnent rassasiassions</Line>
+      <Line>qu'essouchera qu'entamassions qu'enrochasses</Line>
+      <Line>accoteras enchatonneront nourrie</Line>
+      <Line>contai qu'accoutrer moirasses</Line>
+      <Line>qu'asseyaient rotais emmitonnerai</Line>
+      <Line>ouragan m'arquions qu'emmagasinerons</Line>
+      <Line>qu'escamotas qu'encastreras n'amortisses</Line>
+      <Line>ristourner m'ennuyasses innocente</Line>
+      <Line>m'entremettait accouasse n'inaugureras</Line>
+      <Line>mottasse recroisons m'enseignions</Line>
+    </Level>
+    <Level>
+      <NewCharacters>vp</NewCharacters>
+      <Line>panoramiquai trouvaient m'aposta</Line>
+      <Line>convoques progresseras espionnages</Line>
+      <Line>s'appuient gravitera n'intervenais</Line>
+      <Line>emparer t'estrapassassions tympanismes</Line>
+      <Line>incorpores repairas suspensives</Line>
+      <Line>crypterons conpressais t'avachit</Line>
+      <Line>t'empannasse verras prouvasse percevons</Line>
+      <Line>t'inventas qu'arpente t'imputes</Line>
+      <Line>patronneras givrassent avirons poursuivions</Line>
+      <Line>t'estrapasserai n'accapara qu'empoissonnerai</Line>
+      <Line>sapins piocheras compositrice</Line>
+      <Line>qu'entrecoupas accompagneraient compostas</Line>
+      <Line>n'invoquerais programmais pronom vernissassions</Line>
+      <Line>qu'opposait harponnas tamponnions</Line>
+      <Line>tapinerions recouvres attraperions</Line>
+      <Line>n'apeurant t'interceptes chopperions</Line>
+      <Line>qu'apprêtera capiteuses m'empruntasse</Line>
+      <Line>s'entrouvrirent computasses qu'environnais</Line>
+      <Line>portes aposterions pajotait</Line>
+      <Line>qu'approcheraient t'exporta photocopie</Line>
+      <Line>t'ovationne convies exempteront</Line>
+      <Line>caveraient qu'estompant cryptographies</Line>
+      <Line>n'interrompissions m'asphyxierait gastroscopies</Line>
+      <Line>vaporisions triporteur inviteras</Line>
+      <Line>ovocyte t'asperger pestasse</Line>
+      <Line>j'appuyais m'entrevoient j'appauvrissais</Line>
+      <Line>soupeser n'improviseront m'entraverions</Line>
+      <Line>expirera chromatopsie vanneur</Line>
+      <Line>supportons repiqueront t'aposteront</Line>
+      <Line>prestataire t'assoupi pacagerait</Line>
+    </Level>
+    <Level>
+      <NewCharacters>dl</NewCharacters>
+      <Line>cailler l'enchevêtrasse plancherons</Line>
+      <Line>j'oxydais n'internationalises</Line>
+      <Line>l'emmortaisasses attendues qu'engourdiront</Line>
+      <Line>d'interagir doucin m'ensilerais</Line>
+      <Line>inadvertance noyades l'impressionnerais</Line>
+      <Line>t'assaille duplexions glandions</Line>
+      <Line>s'islamiserait laceras louchissant</Line>
+      <Line>attardant louchons l'humectassent</Line>
+      <Line>d'emmanchures t'incendierions qu'auditionnais</Line>
+      <Line>codages l'archerie m'interdissent</Line>
+      <Line>s'aveugleraient ravitaillerais m'alimentais</Line>
+      <Line>n'enluminant dessellai tressaillisses</Line>
+      <Line>paissellerions l'instrumentaient reconduirai</Line>
+      <Line>l'arraisonna devisait n'immortalisassions</Line>
+      <Line>qu'illusionnerons ramollie cardigan disgracias</Line>
+      <Line>t'utilisera qu'endommageasses d'ailette</Line>
+      <Line>suralimentes qu'indexer l'annulerait</Line>
+      <Line>salinages gravidique carnavals</Line>
+      <Line>m'alanguie j'intellectualiserai</Line>
+      <Line>m'alertons salivent sensationnalismes</Line>
+      <Line>d'excursions chiada raclions cacarder</Line>
+      <Line>l'accastillons m'emploierai l'apiquer</Line>
+      <Line>m'alertera universaliserai l'enthousiasmera</Line>
+      <Line>l'anglaisent reproduisisses l'apepsie</Line>
+      <Line>t'allieraient oille calligraphiassions</Line>
+      <Line>plaqueur l'apposeraient crapulant</Line>
+      <Line>d'apatride ophiologie l'encaquaient</Line>
+      <Line>l'encliquetteras grisollerons druidesses</Line>
+      <Line>t'attendit indisposerais s'ensevelies</Line>
+      <Line>endure m'exalte trillais cancales</Line>
+    </Level>
+    <Level>
+      <NewCharacters>éf</NewCharacters>
+      <Line>éternuas dénucléariseraient</Line>
+      <Line>réescompterons dédifférenciasses</Line>
+      <Line>déraidirions n'inséreront n'éclusant</Line>
+      <Line>n'écopions m'écorcera dévirolais</Line>
+      <Line>n'intérioriseras t'étrécirais décauseras</Line>
+      <Line>excentré qu'insufflions d'affermages</Line>
+      <Line>t'égayeraient fustigea morfla t'épamprerions</Line>
+      <Line>immatériel plissé d'irréels dévoyées</Line>
+      <Line>déstockés intriqué francisons</Line>
+      <Line>russifiera qu'indifféraient qu'africanisions</Line>
+      <Line>expérimental mélangeras d'étrangleuse</Line>
+      <Line>cémentant déferrasses fouillis</Line>
+      <Line>télécopierai l'affoles qu'acidifierions</Line>
+      <Line>n'infirmerons n'infligions j'ensoufrerai</Line>
+      <Line>déserteuse réprimeraient céda</Line>
+      <Line>dérouilleraient cloués solifluons qu'écope</Line>
+      <Line>cimentée cousinées européaniserais</Line>
+      <Line>affaissons qu'affinassent olifants</Line>
+      <Line>listées profitera fieffais disqualifiasse</Line>
+      <Line>d'encyclopédistes l'émotionna écrémer</Line>
+      <Line>d'électrocardiographe réparerais codifieront</Line>
+      <Line>plafonnant séchés t'infusons</Line>
+      <Line>réengagerons qu'éditons crucifié</Line>
+      <Line>septennalité formulerai dépalisses</Line>
+      <Line>m'informeras décapitalisais s'anéantit</Line>
+      <Line>d'affirmatif n'opacifias régir frapperont</Line>
+      <Line>salifiasse décrurent conopée</Line>
+      <Line>qu'accédait disséminerais fructifiasses</Line>
+      <Line>émotté planétarisation atténuasse</Line>
+      <Line>d'antidiphtérique suppléassions s'étoffent</Line>
+    </Level>
+    <Level>
+      <NewCharacters>bz</NewCharacters>
+      <Line>m'endimanchez qu'aléseriez désensibilisait</Line>
+      <Line>bringueballassent abondanciste trouviez</Line>
+      <Line>dizaines n'associassiez blablatent</Line>
+      <Line>t'estourbissions l'abrogerons m'emberlificota</Line>
+      <Line>l'excitable célébrai détrompez</Line>
+      <Line>fourbure qu'éraillerez banderole</Line>
+      <Line>embusqueriez m'ébavureriez qu'endettez</Line>
+      <Line>appesantirez carrelassiez l'oringuerez</Line>
+      <Line>n'embraserai débourberions qu'absorbai</Line>
+      <Line>l'assumez engloba n'enleviez t'emperleriez</Line>
+      <Line>bossuassions jouable m'exaspérerez</Line>
+      <Line>refusiez m'amélioreriez décompressez</Line>
+      <Line>débilitants d'attribuer électrifiassiez</Line>
+      <Line>l'étouffiez bredouilleront bleuira</Line>
+      <Line>incultivables s'assouplirez monazites</Line>
+      <Line>l'accostez qu'ombrageaient l'aurifierez</Line>
+      <Line>n'itérassiez s'ébahis l'élaborer</Line>
+      <Line>hasardez verbiagions brimbales</Line>
+      <Line>bobineriez t'ennobliraient n'embrigadera</Line>
+      <Line>l'imperméabiliseras n'évoquassiez brocardés</Line>
+      <Line>j'embouquai tuberculineront remblayassions</Line>
+      <Line>qu'attrapassiez d'impubliables n'attifassiez</Line>
+      <Line>attirable n'arrêtiez qu'épeulez</Line>
+      <Line>revoteriez cisaillerez n'abasourdirez</Line>
+      <Line>l'attablassent n'embringuas désemmanchassiez</Line>
+      <Line>débrailleront voitureriez bachotées</Line>
+      <Line>l'engraverez m'embouteillais n'ébaucheraient</Line>
+      <Line>n'ébruitons n'oxygénerez buffet</Line>
+      <Line>canerez m'aseptiseriez baroudasse</Line>
+      <Line>j'obombrais n'immortalisiez t'arborent</Line>
+    </Level>
+    <Level>
+      <NewCharacters>wç</NewCharacters>
+      <Line>qu'écrabouilla télescoperions éternuait</Line>
+      <Line>s'écrouler liaisonnée squattérisez</Line>
+      <Line>embêtant dériverait réera mercerisés</Line>
+      <Line>réassignasse l'épointait déglinguerions</Line>
+      <Line>kilométrerions abdiquées désentoilais</Line>
+      <Line>délimiterait dénasalisera squattériserions</Line>
+      <Line>contesté hérissonnerait l'élevant</Line>
+      <Line>ramendée déconfiriez égrainassions</Line>
+      <Line>m'indifféras l'exécreriez réitérez</Line>
+      <Line>t'évente t'épaulant l'échantillonnait</Line>
+      <Line>trébucheront t'énoueraient d'épouser</Line>
+      <Line>rocouée transmutabilité n'épiliez</Line>
+      <Line>sécularisera d'antidétonants anévrismaux</Line>
+      <Line>t'égermerions impétrés débourbera</Line>
+      <Line>n'échampir réexpédiez qu'étoilerez</Line>
+      <Line>déblaiera qu'étamiez m'aliénais</Line>
+      <Line>dépensaient l'évoquer nagées n'ébarbait</Line>
+      <Line>n'alésassent rélargiriez écatissent</Line>
+      <Line>déjuchons désavantages réincarnerons</Line>
+      <Line>qu'émerveillait détressait géodésies</Line>
+      <Line>qu'écussonniez m'homogénéisera régularise</Line>
+      <Line>gelées m'épousassent déguerpiraient</Line>
+      <Line>t'allégerons bridés bitté soigné</Line>
+      <Line>dépaillai réexportas l'éludaient</Line>
+      <Line>l'étalonnes renoncés désensablais</Line>
+      <Line>étrésillonnasses calmées l'hydrogénions</Line>
+      <Line>écorchures d'unilatérale s'ébranlant</Line>
+      <Line>défiger qu'étiquettera qu'avérassions</Line>
+      <Line>l'éclaboussassiez t'émbéguines t'étreignisses</Line>
+      <Line>n'égueuleraient concrétassions l'excédait</Line>
+    </Level>
+    <Level>
+      <NewCharacters>ETISUNRANCQGHXYJÀÊMKOVPDLÉFBZW</NewCharacters>
+      <Line>n'agglomérait m'élucubrez désargenterai</Line>
+      <Line>réprimeront n'alphabétisaient d'alambiquée</Line>
+      <Line>attitré décomposera détrousserons</Line>
+      <Line>t'ébarbent d'alizés déphasas</Line>
+      <Line>kilométrons délasserais t'éclairait</Line>
+      <Line>s'arrêteront mortaisé périmassent</Line>
+      <Line>qu'éploierait incinérée n'annonçaient</Line>
+      <Line>hébéphréniques prénommassions dénationalisait</Line>
+      <Line>cinéphiles démesurée déscolarisation</Line>
+      <Line>débouilles désengourdis dénonciez</Line>
+      <Line>usurpée présupposée s'écarteraient</Line>
+      <Line>m'émotterais recepés l'enstérai</Line>
+      <Line>qu'équerrais qu'effaça numérotaient</Line>
+      <Line>balancées s'élargissais hydratée</Line>
+      <Line>retubé emprésureraient mildiousés</Line>
+      <Line>s'épelleraient t'éventiez n'éradiqueras</Line>
+      <Line>colorée l'antéposerons d'infatuée</Line>
+      <Line>cédille qu'électrocutai révisas</Line>
+      <Line>décédassent coopératives défilassions</Line>
+      <Line>qu'égriserez d'intériorisations</Line>
+      <Line>désoxygénation législatif m'évaluerons</Line>
+      <Line>mésestimeras bousculée échaulerez</Line>
+      <Line>déforme qu'épinglerai n'érodé</Line>
+      <Line>éructera couraillé l'éniellasses</Line>
+      <Line>prédicateur hésitez d'océaniens</Line>
+      <Line>réifiasse qu'éclissasse m'émorfilerai</Line>
+      <Line>démurgeraient l'enrégimenterait équilibrages</Line>
+      <Line>j'épilasse l'abatée bondérisé</Line>
+      <Line>désynchroniserez gaulées dévalisions</Line>
+      <Line>macérer zézayant perpétuel</Line>
+    </Level>
+  </Levels>
+</KTouchLecture>

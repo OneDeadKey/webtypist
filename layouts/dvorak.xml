@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+  <title>dvorak</title>
+
+  <variant id="ANSI" name="English (ANSI)">
+    <!--row #1-->
+    <key name="TLDE" base="`" shift="~" />
+    <key name="AE01" base="1" shift="!" />
+    <key name="AE02" base="2" shift="@" />
+    <key name="AE03" base="3" shift="#" />
+    <key name="AE04" base="4" shift="$" />
+    <key name="AE05" base="5" shift="%" />
+    <key name="AE06" base="6" shift="^" />
+    <key name="AE07" base="7" shift="&amp;" />
+    <key name="AE08" base="8" shift="*" />
+    <key name="AE09" base="9" shift="(" />
+    <key name="AE10" base="0" shift=")" />
+    <key name="AE11" base="[" shift="{" />
+    <key name="AE12" base="]" shift="}" />
+    <!--row #2-->
+    <key name="AD01" base="'" shift='"' />
+    <key name="AD02" base="," shift="&lt;" />
+    <key name="AD03" base="." shift="&gt;" />
+    <key name="AD04" base="p" shift="P" />
+    <key name="AD05" base="y" shift="Y" />
+    <key name="AD06" base="f" shift="F" />
+    <key name="AD07" base="g" shift="G" />
+    <key name="AD08" base="c" shift="C" />
+    <key name="AD09" base="r" shift="R" />
+    <key name="AD10" base="l" shift="L" />
+    <key name="AD11" base="/" shift="?" />
+    <key name="AD12" base="=" shift="+" />
+    <!--row #3-->
+    <key name="AC01" base="a" shift="A" />
+    <key name="AC02" base="o" shift="O" />
+    <key name="AC03" base="e" shift="E" />
+    <key name="AC04" base="u" shift="U" />
+    <key name="AC05" base="i" shift="I" />
+    <key name="AC06" base="d" shift="D" />
+    <key name="AC07" base="h" shift="H" />
+    <key name="AC08" base="t" shift="T" />
+    <key name="AC09" base="n" shift="N" />
+    <key name="AC10" base="s" shift="S" />
+    <key name="AC11" base="-" shift="_" />
+    <key name="BKSL" base="\" shift="|" />
+    <!--row #4-->
+    <key name="LSGT" base="\" shift="|" />
+    <key name="AB01" base=";" shift=":" />
+    <key name="AB02" base="q" shift="Q" />
+    <key name="AB03" base="j" shift="J" />
+    <key name="AB04" base="k" shift="K" />
+    <key name="AB05" base="x" shift="X" />
+    <key name="AB06" base="b" shift="B" />
+    <key name="AB07" base="m" shift="M" />
+    <key name="AB08" base="w" shift="W" />
+    <key name="AB09" base="v" shift="V" />
+    <key name="AB10" base="z" shift="Z" />
+    <!--spacebar-->
+    <key name="SPCE" base=" " shift=" " />
+  </variant>
+
+  <!--
+     -<variant id="en_GB" include="ANSI">
+     -  <key name="TLDE" base="`" shift="¬" />
+     -  <key name="AE02" base="2" shift='"' />
+     -  <key name="AE03" base="3" shift="£" />
+     -  <key name="AC11" base="'" shift="@" />
+     -  <key name="BKSL" base="#" shift="~" />
+     -</variant>
+     -->
+
+  <variant id="es_ES" include="da_DK" name="Español" url="http://djelibeibi.unex.es/dvorak/">
+    <!-- same numbers/symbols/diacritics as in Qwerty-ES -->
+    <key name="TLDE" base="º" shift="ª" />
+    <key name="AE04" base="4" shift="$" />
+    <key name="AE11" base="'" shift="?" />
+    <key name="AE12" base="¡" shift="¿" />
+    <key name="AD11" base="`" shift="^" />
+    <key name="AD12" base="+" shift="*" />
+    <key name="AC11" base="´" shift="¨" />
+    <key name="BKSL" base="ç" shift="Ç" />
+    <key name="LSGT" base="&lt;" shift="&gt;" />
+    <!-- adaptation to the spanish language -->
+    <key name="AD01" base="." shift=":" />
+    <key name="AD02" base="," shift=";" />
+    <key name="AD03" base="ñ" shift="Ñ" />
+    <key name="AD09" base="h" shift="H" />
+    <key name="AC07" base="r" shift="R" />
+    <key name="AB01" base="-" shift="_" />
+  </variant>
+
+  <!-- North-European Dvorak variants -->
+  <variant id="da_DK" include="ANSI" name="Dansk" url="http://danskdvorak.dk/">
+    <key name="TLDE" base="~" shift="¶" />
+    <key name="AE02" base="2" shift='"' />
+    <key name="AE03" base="3" shift="£" />
+    <key name="AE04" base="4" shift="¤" />
+    <key name="AE06" base="6" shift="&amp;" />
+    <key name="AE07" base="7" shift="/" />
+    <key name="AE08" base="8" shift="(" />
+    <key name="AE09" base="9" shift=")" />
+    <key name="AE10" base="0" shift="=" />
+    <key name="AE11" base="+" shift="?" />
+    <key name="AE12" base="´" shift="`" />
+    <key name="AD01" base="å" shift="Å" />
+    <key name="AD02" base="," shift=";" />
+    <key name="AD03" base="." shift=":" />
+    <key name="AD11" base="&lt;" shift="&gt;" />
+    <key name="AD12" base="^" shift="¨" />
+    <key name="BKSL" base="*" shift="'" />
+    <key name="LSGT" base="ø" shift="Ø" />
+    <key name="AB01" base="æ" shift="Æ" />
+  </variant>
+
+  <variant id="no_NO" include="da_DK" name="Norsk" url="http://www.stenling.no/dvorak/">
+    <key name="TLDE" base="|" shift="§" />
+    <key name="AE12" base="\" shift="`" />
+    <key name="BKSL" base="&lt;" shift="&gt;" />
+  </variant>
+
+  <variant id="svorak" include="da_DK" name="Svenska (svorak)" url="http://www.users.one.se/liket/svorak/">
+    <key name="TLDE" base="½" shift="§" />
+    <key name="AE11" base="+" shift="?" />
+    <key name="AD02" base="ä" shift="Ä" />
+    <key name="AD03" base="ö" shift="Ö" />
+    <key name="AD11" base="," shift=";" />
+    <key name="BKSL" base="'" shift="*" />
+    <key name="LSGT" base="&lt;" shift="&gt;" />
+    <key name="AB01" base="." shift=":" />
+  </variant>
+
+  <variant id="sv_dvorak" include="ANSI" name="Svenska (sv_dvorak)" url="http://lundqvist.dyndns.org/sv_dvorak/">
+    <key name="TLDE" base="´" shift="§" />
+    <key name="AD01" base="å" shift="Å" />
+    <key name="BKSL" base=";" shift=":" />
+    <key name="LSGT" base="ö" shift="Ö" />
+    <key name="AB01" base="ä" shift="Ä" />
+  </variant>
+
+  <!-- Dvorak-like language-specific layouts -->
+  <variant separator="true"/>
+
+  <variant id="colemak" include="ANSI" name="Colemak">
+    <!--row #1-->
+    <!--
+       -<key name="TLDE" base="`" shift="~" />
+       -<key name="AE01" base="1" shift="!" />
+       -<key name="AE02" base="2" shift="@" />
+       -<key name="AE03" base="3" shift="#" />
+       -<key name="AE04" base="4" shift="$" />
+       -<key name="AE05" base="5" shift="%" />
+       -<key name="AE06" base="6" shift="^" />
+       -<key name="AE07" base="7" shift="&amp;" />
+       -<key name="AE08" base="8" shift="*" />
+       -<key name="AE09" base="9" shift="(" />
+       -<key name="AE10" base="0" shift=")" />
+       -->
+    <key name="AE11" base="-" shift="_" />
+    <key name="AE12" base="=" shift="+" />
+    <!--row #2-->
+    <key name="AD01" base="q" shift="Q" />
+    <key name="AD02" base="w" shift="W" />
+    <key name="AD03" base="f" shift="F" />
+    <key name="AD04" base="p" shift="P" />
+    <key name="AD05" base="g" shift="G" />
+    <key name="AD06" base="j" shift="J" />
+    <key name="AD07" base="l" shift="L" />
+    <key name="AD08" base="u" shift="U" />
+    <key name="AD09" base="y" shift="Y" />
+    <key name="AD10" base=";" shift=":" />
+    <key name="AD11" base="[" shift="{" />
+    <key name="AD12" base="]" shift="}" />
+    <key name="BKSL" base="\" shift="|" />
+    <!--row #3-->
+    <key name="AC01" base="a" shift="A" />
+    <key name="AC02" base="r" shift="R" />
+    <key name="AC03" base="s" shift="S" />
+    <key name="AC04" base="t" shift="T" />
+    <key name="AC05" base="d" shift="D" />
+    <key name="AC06" base="h" shift="H" />
+    <key name="AC07" base="n" shift="N" />
+    <key name="AC08" base="e" shift="E" />
+    <key name="AC09" base="i" shift="I" />
+    <key name="AC10" base="o" shift="O" />
+    <key name="AC11" base="'" shift='"' />
+    <key name="BKSL" base="\" shift="|" />
+    <!--row #4-->
+    <key name="LSGT" base="\" shift="|" />
+    <key name="AB01" base="z" shift="Z" />
+    <key name="AB02" base="x" shift="X" />
+    <key name="AB03" base="c" shift="C" />
+    <key name="AB04" base="v" shift="V" />
+    <key name="AB05" base="b" shift="B" />
+    <key name="AB06" base="k" shift="K" />
+    <key name="AB07" base="m" shift="M" />
+    <key name="AB08" base="," shift="&lt;" />
+    <key name="AB09" base="." shift="&gt;" />
+    <key name="AB10" base="/" shift="?" />
+    <!--spacebar-->
+    <key name="SPCE" base=" " shift=" " />
+  </variant>
+
+  <variant id="dvorak-fr" name="Français (dvorak-fr)" url="http://www.algo.be/ergo/dvorak-fr.html">
+  <!-- NON-FREE layout, w/ kind authorization of its designer, Francis Leboutte -->
+    <!--row #1-->
+    <key name="TLDE" base="_" shift="*" />
+    <key name="AE01" base="=" shift="1" />
+    <key name="AE02" base="/" shift="2" />
+    <key name="AE03" base='-' shift="3" />
+    <key name="AE04" base="è" shift="4" />
+    <key name="AE05" base="\" shift="5" />
+    <key name="AE06" base="^" shift="6" />
+    <key name="AE07" base="(" shift="7" />
+    <key name="AE08" base="`" shift="8" />
+    <key name="AE09" base=")" shift="9" />
+    <key name="AE10" base='"' shift="0" />
+    <key name="AE11" base="[" shift="+" />
+    <key name="AE12" base="]" shift="%" />
+    <!--row #2-->
+    <key name="AD01" base=":" shift="?" />
+    <key name="AD02" base="'" shift="&lt;" />
+    <key name="AD03" base="é" shift="&gt;" />
+    <key name="AD04" base="g" shift="G" />
+    <key name="AD05" base="." shift="!" />
+    <key name="AD06" base="h" shift="H" />
+    <key name="AD07" base="v" shift="V" />
+    <key name="AD08" base="c" shift="C" />
+    <key name="AD09" base="m" shift="M" />
+    <key name="AD10" base="k" shift="K" />
+    <key name="AD11" base="z" shift="Z" />
+    <key name="AD12" base="¨" shift="&amp;" />
+    <!--row #3-->
+    <key name="AC01" base="o" shift="O" />
+    <key name="AC02" base="a" shift="A" />
+    <key name="AC03" base="u" shift="U" />
+    <key name="AC04" base="e" shift="E" />
+    <key name="AC05" base="b" shift="B" />
+    <key name="AC06" base="f" shift="F" />
+    <key name="AC07" base="s" shift="S" />
+    <key name="AC08" base="t" shift="T" />
+    <key name="AC09" base="n" shift="N" />
+    <key name="AC10" base="d" shift="D" />
+    <key name="AC11" base="w" shift="W" />
+    <key name="BKSL" base="~" shift="#" />
+    <!--row #4-->
+    <key name="LSGT" base="à" shift="ç" />
+    <key name="AB01" base=";" shift="|" />
+    <key name="AB02" base="q" shift="Q" />
+    <key name="AB03" base="," shift="@" />
+    <key name="AB04" base="i" shift="I" />
+    <key name="AB05" base="y" shift="Y" />
+    <key name="AB06" base="x" shift="X" />
+    <key name="AB07" base="r" shift="R" />
+    <key name="AB08" base="l" shift="L" />
+    <key name="AB09" base="p" shift="P" />
+    <key name="AB10" base="j" shift="J" />
+    <!--spacebar-->
+    <key name="SPCE" base=" " shift=" " />
+  </variant>
+
+  <variant id="fr-dvorak-bepo" name="Français (bépo)" url="http://clavier-dvorak.org/">
+    <!--row #1-->
+    <key name="TLDE" base="$" shift="#" />
+    <key name="AE01" base='"' shift="1" />
+    <key name="AE02" base="«" shift="2" />
+    <key name="AE03" base='»' shift="3" />
+    <key name="AE04" base="(" shift="4" />
+    <key name="AE05" base=")" shift="5" />
+    <key name="AE06" base="@" shift="6" />
+    <key name="AE07" base="+" shift="7" />
+    <key name="AE08" base="-" shift="8" />
+    <key name="AE09" base="/" shift="9" />
+    <key name="AE10" base="*" shift="0" />
+    <key name="AE11" base="=" shift="°" />
+    <key name="AE12" base="%" shift="`" />
+    <!--row #2-->
+    <key name="AD01" base="b" shift="B" />
+    <key name="AD02" base="é" shift="É" />
+    <key name="AD03" base="p" shift="P" />
+    <key name="AD04" base="o" shift="O" />
+    <key name="AD05" base="è" shift="È" />
+    <key name="AD06" base="^" shift="!" />
+    <key name="AD07" base="v" shift="V" />
+    <key name="AD08" base="d" shift="D" />
+    <key name="AD09" base="l" shift="L" />
+    <key name="AD10" base="j" shift="J" />
+    <key name="AD11" base="z" shift="Z" />
+    <key name="AD12" base="w" shift="W" />
+    <!--row #3-->
+    <key name="AC01" base="a" shift="A" />
+    <key name="AC02" base="u" shift="U" />
+    <key name="AC03" base="i" shift="I" />
+    <key name="AC04" base="e" shift="E" />
+    <key name="AC05" base="," shift=";" />
+    <key name="AC06" base="c" shift="C" />
+    <key name="AC07" base="t" shift="T" />
+    <key name="AC08" base="s" shift="S" />
+    <key name="AC09" base="r" shift="R" />
+    <key name="AC10" base="n" shift="N" />
+    <key name="AC11" base="m" shift="M" />
+    <key name="BKSL" base="ç" shift="Ç" />
+    <!--row #4-->
+    <key name="LSGT" base="ê" shift="Ê" />
+    <key name="AB01" base="à" shift="À" />
+    <key name="AB02" base="y" shift="Y" />
+    <key name="AB03" base="x" shift="X" />
+    <key name="AB04" base="." shift=":" />
+    <key name="AB05" base="k" shift="K" />
+    <key name="AB06" base="'" shift="?" />
+    <key name="AB07" base="q" shift="Q" />
+    <key name="AB08" base="g" shift="G" />
+    <key name="AB09" base="h" shift="H" />
+    <key name="AB10" base="f" shift="F" />
+    <!--spacebar-->
+    <key name="SPCE" base=" " shift=" " />
+  </variant>
+
+  <variant id="turkish-F" name="Türkçe-F" include="es_ES">
+    <key name="TLDE" base="*" shift="+" />
+    <key name="AE03" base="3" shift="^" />
+    <key name="AE07" base="7" shift="'" />
+    <key name="AE11" base="/" shift="?" />
+    <key name="AE12" base="-" shift="_" />
+    <!--row #2-->
+    <key name="AD01" base="f" shift="F" />
+    <key name="AD02" base="g" shift="G" />
+    <key name="AD03" base="ğ" shift="Ğ" />
+    <key name="AD04" base="ı" shift="I" />
+    <key name="AD05" base="o" shift="O" />
+    <key name="AD06" base="d" shift="D" />
+    <key name="AD07" base="r" shift="R" />
+    <key name="AD08" base="n" shift="N" />
+    <key name="AD09" base="h" shift="H" />
+    <key name="AD10" base="p" shift="p" />
+    <key name="AD11" base="q" shift="Q" />
+    <key name="AD12" base="w" shift="W" />
+    <!--row #3-->
+    <key name="AC01" base="u" shift="U" />
+    <key name="AC02" base="i" shift="İ" />
+    <key name="AC03" base="e" shift="E" />
+    <key name="AC04" base="a" shift="A" />
+    <key name="AC05" base="ü" shift="Ü" />
+    <key name="AC06" base="t" shift="T" />
+    <key name="AC07" base="k" shift="K" />
+    <key name="AC08" base="m" shift="M" />
+    <key name="AC09" base="l" shift="L" />
+    <key name="AC10" base="y" shift="Y" />
+    <key name="AC11" base="ş" shift="Ş" />
+    <key name="BKSL" base="x" shift="X" />
+    <!--row #4-->
+    <key name="LSGT" base="&lt;" shift="&gt;" />
+    <key name="AB01" base="j" shift="J" />
+    <key name="AB02" base="ö" shift="Ö" />
+    <key name="AB03" base="v" shift="V" />
+    <key name="AB04" base="c" shift="C" />
+    <key name="AB05" base="ç" shift="Ç" />
+    <key name="AB06" base="z" shift="Z" />
+    <key name="AB07" base="s" shift="S" />
+    <key name="AB08" base="b" shift="B" />
+    <key name="AB09" base="." shift=":" />
+    <key name="AB10" base="," shift=";" />
+  </variant>
+
+</layout>

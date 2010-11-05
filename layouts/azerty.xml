@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+  <title>azerty</title>
+
+  <variant id="fr_FR" name="Français">
+    <!--row #1-->
+    <key name="TLDE" base="²" shift="³" />
+    <key name="AE01" base="&amp;" shift="1" />
+    <key name="AE02" base="é" shift="2" />
+    <key name="AE03" base='"' shift="3" />
+    <key name="AE04" base="'" shift="4" />
+    <key name="AE05" base="(" shift="5" />
+    <key name="AE06" base="-" shift="6" />
+    <key name="AE07" base="è" shift="7" />
+    <key name="AE08" base="_" shift="8" />
+    <key name="AE09" base="ç" shift="9" />
+    <key name="AE10" base="à" shift="0" />
+    <key name="AE11" base=")" shift="°" />
+    <key name="AE12" base="=" shift="+" />
+    <!--row #2-->
+    <key name="AD01" base="a" shift="A" />
+    <key name="AD02" base="z" shift="Z" />
+    <key name="AD03" base="e" shift="E" />
+    <key name="AD04" base="r" shift="R" />
+    <key name="AD05" base="t" shift="T" />
+    <key name="AD06" base="y" shift="Y" />
+    <key name="AD07" base="u" shift="U" />
+    <key name="AD08" base="i" shift="I" />
+    <key name="AD09" base="o" shift="O" />
+    <key name="AD10" base="p" shift="P" />
+    <key name="AD11" base="^" shift="¨" />
+    <key name="AD12" base="$" shift="£" />
+    <!--row #3-->
+    <key name="AC01" base="q" shift="Q" />
+    <key name="AC02" base="s" shift="S" />
+    <key name="AC03" base="d" shift="D" />
+    <key name="AC04" base="f" shift="F" />
+    <key name="AC05" base="g" shift="G" />
+    <key name="AC06" base="h" shift="H" />
+    <key name="AC07" base="j" shift="J" />
+    <key name="AC08" base="k" shift="K" />
+    <key name="AC09" base="l" shift="L" />
+    <key name="AC10" base="m" shift="M" />
+    <key name="AC11" base="ù" shift="%" />
+    <key name="BKSL" base="*" shift="µ" />
+    <!--row #4-->
+    <key name="LSGT" base="&lt;" shift="&gt;" />
+    <key name="AB01" base="w" shift="W" />
+    <key name="AB02" base="x" shift="X" />
+    <key name="AB03" base="c" shift="C" />
+    <key name="AB04" base="v" shift="V" />
+    <key name="AB05" base="b" shift="B" />
+    <key name="AB06" base="n" shift="N" />
+    <key name="AB07" base="," shift="?" />
+    <key name="AB08" base=";" shift="." />
+    <key name="AB09" base=":" shift="/" />
+    <key name="AB10" base="!" shift="§" />
+    <!--spacebar-->
+    <key name="SPCE" base=" " shift=" " />
+  </variant>
+
+  <variant id="fr_BE" include="fr_FR" name="Belge">
+    <key name="AE06" base="§" shift="6" />
+    <key name="AE08" base="!" shift="8" />
+    <key name="AE12" base="-" shift="_" />
+    <key name="BKSL" base="µ" shift="£" />
+    <key name="AD12" base="$" shift="*" />
+    <key name="AB10" base="+" shift="=" />
+  </variant>
+
+</layout>
