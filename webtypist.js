@@ -1,171 +1,8 @@
 
 /*****************************************************************************\
 |                                                                             |
-|  Basic Event Management Abstraction Layer                                   |
-|    completely useless... except to support Internet Explorer 6/7/8 :-/      |
-|      * fixes the 'this' reference issue in callbacks on IE<9                |
-|      * handles custom (= non W3C-standard) events on IE<9                   |
-|    exposed as window.EVENTS                                                 |
-|                                                                             |
-|*****************************************************************************|
-|                                                                             |
-|  Generic events:                                                            |
-|    EVENTS.bind(node, type, callback)                                        |
-|             equivalent to 'node.addEventListener(type, callback, false)'    |
-|    EVENTS.unbind(node, type, callback)                                      |
-|             equivalent to 'node.removeEventListener(type, callback, false)' |
-|    EVENTS.trigger(node, type)                                               |
-|             equivalent to 'dispatchEvent(type)' / 'node.fireEvent(type)'    |
-|                                                                             |
-|  Specific events:                                                           |
-|    EVENTS.onHashChange(callback)                                            |
-|             triggers 'callback()' when the URL hash is changed              |
-|    EVENTS.onDOMReady(callback)                                              |
-|             triggers 'callback()' when the DOM content is loaded            |
-|                                                                             |
-\*****************************************************************************/
-
-window.EVENTS = {
-  bind    : function(node, type, callback) {},
-  unbind  : function(node, type, callback) {},
-  trigger : function(node, type) {}
-};
-
-// ===========================================================================
-// Generic Events
-// ===========================================================================
-// addEventListener should work fine everywhere except with IE<9
-if (window.addEventListener) { // modern browsers
-  EVENTS.bind = function(node, type, callback) {
-    node.addEventListener(type, callback, false);
-  };
-  EVENTS.unbind = function(node, type, callback) {
-    node.removeEventListener(type, callback, false);
-  };
-  EVENTS.trigger = function(node, type) {
-    if (!EVENTS.eventList)
-      EVENTS.eventList = new Array();
-    var evtObject = EVENTS.eventList[type];
-    if (!evtObject) {
-      evtObject = document.createEvent("Event");
-      evtObject.initEvent(type, true, false);
-      EVENTS.eventList[type] = evtObject;
-    }
-    node.dispatchEvent(evtObject);
-  };
-  EVENTS.preventDefault = function(event) {
-    event.preventDefault();
-  };
-  EVENTS.stopPropagation = function(event) {
-    event.stopPropagation();
-  };
-}
-else if (window.attachEvent) { // Internet Explorer 6/7/8
-  // This also fixes the 'this' reference issue in all callbacks
-  // -- both for standard and custom events.
-  // http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
-  EVENTS.bind = function(node, type, callback) {
-    var ref = type + callback;
-    type = "on" + type;
-    if (type in node) try { // standard DOM event?
-      node["e"+ref] = callback;
-      node[ref] = function() { node["e"+ref](window.event); };
-      node.attachEvent(type, node[ref]);
-      return;
-    } catch(e) {}
-    // custom event
-    if (!node.eventList)
-      node.eventList = new Array();
-    if (!node.eventList[type])
-      node.eventList[type] = new Array();
-    node.eventList[type].push(callback);
-  };
-  EVENTS.unbind = function(node, type, callback) {
-    var ref = type + callback;
-    type = "on" + type;
-    if (type in node) try { // standard DOM event?
-      node.detachEvent(type, node[ref]);
-      node[ref] = null;
-      node["e"+ref] = null;
-      return;
-    } catch(e) {}
-    // custom event
-    if (!node || !node.eventList || !node.eventList[type])
-      return;
-    var callbacks = node.eventList[type];
-    var cbLength = callbacks.length;
-    for (var i = 0; i < cbLength; i++) {
-      if (callbacks[i] == callback) {
-        callbacks.slice(i, 1);
-        return;
-      }
-    }
-  };
-  EVENTS.trigger = function(node, type) {
-    type = "on" + type;
-    if (type in node) try { // standard DOM event?
-      node.fireEvent(type);
-      return;
-    } catch(e) {}
-    // custom event: pass an event-like structure to the callback
-    // + use call() to set the 'this' reference within the callback
-    var evtObject = {};
-    evtObject.target = node;
-    evtObject.srcElement = node;
-    if (!node || !node.eventList || !node.eventList[type])
-      return;
-    var callbacks = node.eventList[type];
-    var cbLength = callbacks.length;
-    for (var i = 0; i < cbLength; i++)
-      callbacks[i].call(node, evtObject);
-  };
-  EVENTS.preventDefault = function(event) {
-    event.returnValue = false;
-  };
-  EVENTS.stopPropagation = function(event) {
-    event.cancelBubble = true;
-  };
-}
-
-// ===========================================================================
-// Specific Events
-// ===========================================================================
-// 'hashchange' works on most recent browsers
-EVENTS.onHashChange = function(callback) {
-  if ("onhashchange" in window) // IE8 and modern browsers
-    EVENTS.bind(window, "hashchange", callback);
-  else { // use a setInterval loop for older browsers
-    var hash = "";
-    window.setInterval(function() {
-      if (hash != window.location.hash) {
-        hash = window.location.hash;
-        callback();
-      }
-    }, 250); // 250ms timerate by default
-  }
-};
-// 'DOMContentLoaded' should work fine everywhere except with IE<9
-EVENTS.onDOMReady = function(callback) {
-  if (window.addEventListener) // modern browsers
-    // http://perfectionlabstips.wordpress.com/2008/12/01/which-browsers-support-native-domcontentloaded-event/
-    // a few browsers support addEventListener without DOMContentLoaded: namely,
-    //   Firefox 1.0, Opera <8 and Safari <2 (according to the above link).
-    // As these browsers aren't supported any more, we can safely ignore them.
-    window.addEventListener("DOMContentLoaded", callback, true);
-  else { // Internet Explorer 6/7/8
-    // there are plenty other ways to do this without delaying the execution
-    // but we haven't taken the time to test the properly yet (FIXME)
-    // http://javascript.nwbox.com/IEContentLoaded/
-    // http://tanny.ica.com/ICA/TKO/tkoblog.nsf/dx/domcontentloaded-for-browsers-part-v
-    // http://www.javascriptfr.com/codes/DOMCONTENTLOADED-DOCUMENT-READY_49923.aspx
-    EVENTS.bind(window, "load", callback);
-  }
-};
-
-
-/*****************************************************************************\
-|                                                                             |
 |  Web Typist                                                                 |
+|  a free, web-based, touch-typing tutor                                      |
 |                                                                             |
 \*****************************************************************************/
 
@@ -173,6 +10,42 @@ function removeAllChildren(node) {
   // node.innerHTML = ""; // XXX dirty and not working with XHTML
   while (node.childNodes.length)
     node.removeChild(node.firstChild);
+}
+
+
+// ===========================================================================
+// Browser Abstraction Layer (events, XMLHttpRequest)
+// ===========================================================================
+window.EVENTS = {
+  addListener    : function(node, type, callback) {},
+  preventDefault : function(event) {},
+	onDOMReady     : function(callback) {}
+};
+if (window.addEventListener) { // modern browsers
+  EVENTS.addListener = function(node, type, callback) {
+    node.addEventListener(type, callback, false);
+  };
+  EVENTS.preventDefault = function(event) {
+    event.preventDefault();
+  };
+	EVENTS.onDOMReady = function(callback) {
+    window.addEventListener("DOMContentLoaded", callback, false);
+	};
+}
+else if (window.attachEvent) { // Internet Explorer 6/7/8
+  EVENTS.addListener = function(node, type, callback) {
+		// http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
+    var ref = type + callback;
+		node["e"+ref] = callback;
+		node[ref] = function() { node["e"+ref](window.event); };
+		node.attachEvent("on" + type, node[ref]);
+  };
+  EVENTS.preventDefault = function(event) {
+    event.returnValue = false;
+  };
+	EVENTS.onDOMReady = function(callback) {
+		window.attachEvent("onload", callback);
+	};
 }
 function xhrLoadXML(href, callback) {
   /* works with Firefox but not with Safari
@@ -210,6 +83,7 @@ function xhrLoadXML(href, callback) {
   }
 }
 
+
 // ===========================================================================
 // Cookie Management
 // ===========================================================================
@@ -229,6 +103,7 @@ function setCookie(name, value, expiredays) {
   }
   document.cookie = cookie;
 }
+
 
 // ===========================================================================
 // Keyboard Display
@@ -369,8 +244,6 @@ function drawKey(xmlElement) {
   gKeyboard.keymap[shift] = element;
 }
 
-//function highlightOn(event)  { return highlightKey(event, true);  }
-//function highlightOff(event) { return highlightKey(event, false); }
 function keyPress(event) {
   var keyChar = null;
   if (event.which == null)
@@ -418,7 +291,6 @@ function highlightKey(keyChar) {
   if (key) {
     gKeyboard.activeKey = key;
     key.className += " active";
-    //alert(key.className);
     // TODO: highlight the modifier, too
   }
 }
@@ -553,10 +425,12 @@ function nextPrompt() {
   }
 }
 
+
 // ===========================================================================
 // Metrics
 // ===========================================================================
 var gMetrics = {};
+
 
 // ===========================================================================
 // Startup
@@ -566,9 +440,17 @@ EVENTS.onDOMReady(function() {
   gKeyboard.variant  = document.getElementById("variant");
   gKeyboard.txtInput = document.getElementById("txtInput");
   gKeyboard.keymap  = new Array();
-  EVENTS.bind(gKeyboard.txtInput, "keypress", keyPress);
-  EVENTS.bind(gKeyboard.txtInput, "keydown",  keyDown);
-  //EVENTS.bind(gKeyboard.txtInput, "keyup",   highlightOff);
+
+	// 'keypress' tracks normal keys (characters)
+	// 'keydown' tracks special keys (tab, escape, backspace...)
+  // IE<9 and Safari 4 do not support 'oninput', using 'onkeyup' instead
+  // the thing is, 'oninput' works much better (less latency)...
+  EVENTS.addListener(gKeyboard.txtInput, "keypress", keyPress);
+  EVENTS.addListener(gKeyboard.txtInput, "keydown",  keyDown);
+  EVENTS.addListener(gKeyboard.txtInput, "keyup", function() {
+		textInput(this.value);
+	});
+
   var layout = getCookie("layout") || "layouts/qwerty.xml";
   setLayout(layout, getCookie("variantID"));
   setShape(getCookie("shape"));
