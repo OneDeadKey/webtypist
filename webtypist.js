@@ -2,7 +2,7 @@
 /*****************************************************************************\
 |                                                                             |
 |  Web Typist                                                                 |
-|  a free, web-based, touch-typing tutor                                      |
+|  a free, web-based, simple touch-typing tutor                               |
 |                                                                             |
 \*****************************************************************************/
 
@@ -16,10 +16,11 @@ function removeAllChildren(node) {
 // ===========================================================================
 // Browser Abstraction Layer (events, XMLHttpRequest)
 // ===========================================================================
-window.EVENTS = {
+
+var EVENTS = {
   addListener    : function(node, type, callback) {},
   preventDefault : function(event) {},
-	onDOMReady     : function(callback) {}
+  onDOMReady     : function(callback) {}
 };
 if (window.addEventListener) { // modern browsers
   EVENTS.addListener = function(node, type, callback) {
@@ -28,25 +29,26 @@ if (window.addEventListener) { // modern browsers
   EVENTS.preventDefault = function(event) {
     event.preventDefault();
   };
-	EVENTS.onDOMReady = function(callback) {
+  EVENTS.onDOMReady = function(callback) {
     window.addEventListener("DOMContentLoaded", callback, false);
-	};
+  };
 }
 else if (window.attachEvent) { // Internet Explorer 6/7/8
   EVENTS.addListener = function(node, type, callback) {
-		// http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
+    // http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
     var ref = type + callback;
-		node["e"+ref] = callback;
-		node[ref] = function() { node["e"+ref](window.event); };
-		node.attachEvent("on" + type, node[ref]);
+    node["e"+ref] = callback;
+    node[ref] = function() { node["e"+ref](window.event); };
+    node.attachEvent("on" + type, node[ref]);
   };
   EVENTS.preventDefault = function(event) {
     event.returnValue = false;
   };
-	EVENTS.onDOMReady = function(callback) {
-		window.attachEvent("onload", callback);
-	};
+  EVENTS.onDOMReady = function(callback) {
+    window.attachEvent("onload", callback);
+  };
 }
+
 function xhrLoadXML(href, callback) {
   /* works with Firefox but not with Safari
   if (document.implementation && document.implementation.createDocument) {
@@ -87,6 +89,7 @@ function xhrLoadXML(href, callback) {
 // ===========================================================================
 // Cookie Management
 // ===========================================================================
+
 function getCookie(name) {
   var results = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
   if (results)
@@ -108,6 +111,7 @@ function setCookie(name, value, expiredays) {
 // ===========================================================================
 // Keyboard Display
 // ===========================================================================
+
 var gKeyboard = {
   xmldoc : null,        // xml layout document
   keymap : new Array(), // [ (charString, keyRef) ]
@@ -245,6 +249,7 @@ function drawKey(xmlElement) {
 }
 
 function keyPress(event) {
+  // find which key has been pressed
   var keyChar = null;
   if (event.which == null)
     keyChar = String.fromCharCode(event.keyCode);  // IE
@@ -253,6 +258,7 @@ function keyPress(event) {
   else if (event.keyCode >= 32 && event.keyCode < 127)
     keyChar = String.fromCharCode(event.keyCode);
  
+  // highlight the key that has been pressed
   var key = gKeyboard.keymap[keyChar];
   if (key) {
     key.style.cssText = gKeyboard.usrInputStyle;
@@ -337,9 +343,11 @@ function textInput(value) {
   }
 }
 
+
 // ===========================================================================
 // Typing Lessons (aka KTouchLecture)
 // ===========================================================================
+
 var gLessons = {
   xmldoc: null,        // xml lesson document
   levelSelector: null,
@@ -429,32 +437,35 @@ function nextPrompt() {
 // ===========================================================================
 // Metrics
 // ===========================================================================
+
 var gMetrics = {};
 
 
 // ===========================================================================
 // Startup
 // ===========================================================================
+
 EVENTS.onDOMReady(function() {
   // set the keyboard layout
   gKeyboard.variant  = document.getElementById("variant");
   gKeyboard.txtInput = document.getElementById("txtInput");
   gKeyboard.keymap  = new Array();
-
-	// 'keypress' tracks normal keys (characters)
-	// 'keydown' tracks special keys (tab, escape, backspace...)
-  // IE<9 and Safari 4 do not support 'oninput', using 'onkeyup' instead
-  // the thing is, 'oninput' works much better (less latency)...
-  EVENTS.addListener(gKeyboard.txtInput, "keypress", keyPress);
-  EVENTS.addListener(gKeyboard.txtInput, "keydown",  keyDown);
-  EVENTS.addListener(gKeyboard.txtInput, "keyup", function() {
-		textInput(this.value);
-	});
-
   var layout = getCookie("layout") || "layouts/qwerty.xml";
   setLayout(layout, getCookie("variantID"));
   setShape(getCookie("shape"));
   showHints(getCookie("hints") == "on");
+
+  // bind event listeners to the text input:
+  //  'keypress' : tracks normal keys (characters)
+  //  'keydown'  : tracks special keys (tab, escape, backspace...)
+  //  'keyup'    : tracks inputs in the <textarea> node:
+  //     the 'input' event would work much better (less latency)
+  //     but it isn't supported by IE<9 and Safari 4
+  EVENTS.addListener(gKeyboard.txtInput, "keypress", keyPress);
+  EVENTS.addListener(gKeyboard.txtInput, "keydown",  keyDown);
+  EVENTS.addListener(gKeyboard.txtInput, "keyup", function() {
+    textInput(this.value);
+  });
 
   // set the typing lesson
   gLessons.levelSelector = document.getElementById("level");
@@ -466,3 +477,29 @@ EVENTS.onDOMReady(function() {
   // go, go, go!
   gKeyboard.txtInput.focus();
 });
+
+// ===========================================================================
+// Ad-Blocker test
+// ===========================================================================
+
+if (window.addEventListener) window.addEventListener("load", function() {
+  // Check that all keys are properly displayed
+  // AdBlockPlus is likely to hide a few keys *sigh*
+  var badRendering = document.getElementById("badRendering");
+  if (!badRendering) return;
+
+  var keys = [
+    "ae01", "ae02", "ae03", "ae04", "ae05", "ae06", "ae07", "ae08", "ae09", "ae10", "ae11", "ae12",
+    "ad01", "ad02", "ad03", "ad04", "ad05", "ad06", "ad07", "ad08", "ad09", "ad10", "ad11", "ad12",
+    "ac01", "ac02", "ac03", "ac04", "ac05", "ac06", "ac07", "ac08", "ac09", "ac10", "ac11",
+    "ab01", "ab02", "ab03", "ab04", "ab05", "ab06", "ab07", "ab08", "ab09", "ab10",
+  ];
+  for (var i = 0; i < keys.length; i++) {
+    var key = document.getElementById(keys[i]);
+    if (parseInt(key.getBoundingClientRect().width, 10) < 40) {
+      badRendering.style.display = "block";
+      break;
+    }
+  }
+}, false);
+

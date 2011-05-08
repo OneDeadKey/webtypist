@@ -30,3 +30,9 @@ h1, h2 {
 dd, dt {
   margin-bottom: 0.5em;
 }
+#badRendering {
+  text-align: center;
+  font-weight: bold;
+  color: brown;
+  display: none;
+}
