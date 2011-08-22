@@ -26,9 +26,9 @@ textarea.error {
 .hints .left4, .hints .right4 { background-color: #3bb; }
 .hints .left5, .hints .right5 { background-color: #88f; }
 
-.hints li#ac01, .hints li#ac02, .hints li#ac03,
-.hints li#ac08, .hints li#ac09, .hints li#ac10,
-.hints li#ac04, .hints li#ac07 { /* home row */
+.hints li#_ac01, .hints li#_ac02, .hints li#_ac03,
+.hints li#_ac08, .hints li#_ac09, .hints li#_ac10,
+.hints li#_ac04, .hints li#_ac07 { /* home row */
 	background-image: url(grid4.gif);
 	font-weight: bold;
 	color: white;
