@@ -125,27 +125,27 @@ var gKeyboard = {
 
 function setShape(value) {
   if (value == "pc105") {
-    document.getElementById("ae01").className = "left5"; 
-    document.getElementById("ae02").className = "left5"; 
-    document.getElementById("ae03").className = "left4"; 
-    document.getElementById("ae04").className = "left3"; 
-    document.getElementById("ae05").className = "left2"; 
-    document.getElementById("ae06").className = "left2"; 
-    document.getElementById("ae07").className = "right2"; 
-    document.getElementById("ae08").className = "right2"; 
-    document.getElementById("ae09").className = "right3"; 
-    document.getElementById("ae10").className = "right4"; 
+    document.getElementById("_ae01").className = "left5"; 
+    document.getElementById("_ae02").className = "left5"; 
+    document.getElementById("_ae03").className = "left4"; 
+    document.getElementById("_ae04").className = "left3"; 
+    document.getElementById("_ae05").className = "left2"; 
+    document.getElementById("_ae06").className = "left2"; 
+    document.getElementById("_ae07").className = "right2"; 
+    document.getElementById("_ae08").className = "right2"; 
+    document.getElementById("_ae09").className = "right3"; 
+    document.getElementById("_ae10").className = "right4"; 
   } else {
-    document.getElementById("ae01").className = "left5"; 
-    document.getElementById("ae02").className = "left4"; 
-    document.getElementById("ae03").className = "left3"; 
-    document.getElementById("ae04").className = "left2"; 
-    document.getElementById("ae05").className = "left2"; 
-    document.getElementById("ae06").className = "right2"; 
-    document.getElementById("ae07").className = "right2"; 
-    document.getElementById("ae08").className = "right3"; 
-    document.getElementById("ae09").className = "right4"; 
-    document.getElementById("ae10").className = "right5"; 
+    document.getElementById("_ae01").className = "left5"; 
+    document.getElementById("_ae02").className = "left4"; 
+    document.getElementById("_ae03").className = "left3"; 
+    document.getElementById("_ae04").className = "left2"; 
+    document.getElementById("_ae05").className = "left2"; 
+    document.getElementById("_ae06").className = "right2"; 
+    document.getElementById("_ae07").className = "right2"; 
+    document.getElementById("_ae08").className = "right3"; 
+    document.getElementById("_ae09").className = "right4"; 
+    document.getElementById("_ae10").className = "right5"; 
   }
   setCookie("shape", value);
   document.body.className = value;
@@ -222,7 +222,7 @@ function setVariant(variantID) {
 }
 
 function drawKey(xmlElement) {
-  var name  = xmlElement.getAttribute("name").toLowerCase();
+  var name  = "_" + xmlElement.getAttribute("name").toLowerCase();
   var base  = xmlElement.getAttribute("base");
   var shift = xmlElement.getAttribute("shift");
   var element = document.getElementById(name);
@@ -489,10 +489,10 @@ if (window.addEventListener) window.addEventListener("load", function() {
   if (!badRendering) return;
 
   var keys = [
-    "ae01", "ae02", "ae03", "ae04", "ae05", "ae06", "ae07", "ae08", "ae09", "ae10", "ae11", "ae12",
-    "ad01", "ad02", "ad03", "ad04", "ad05", "ad06", "ad07", "ad08", "ad09", "ad10", "ad11", "ad12",
-    "ac01", "ac02", "ac03", "ac04", "ac05", "ac06", "ac07", "ac08", "ac09", "ac10", "ac11",
-    "ab01", "ab02", "ab03", "ab04", "ab05", "ab06", "ab07", "ab08", "ab09", "ab10",
+    "_ae01", "_ae02", "_ae03", "_ae04", "_ae05", "_ae06", "_ae07", "_ae08", "_ae09", "_ae10", "_ae11", "_ae12",
+    "_ad01", "_ad02", "_ad03", "_ad04", "_ad05", "_ad06", "_ad07", "_ad08", "_ad09", "_ad10", "_ad11", "_ad12",
+    "_ac01", "_ac02", "_ac03", "_ac04", "_ac05", "_ac06", "_ac07", "_ac08", "_ac09", "_ac10", "_ac11",
+    "_ab01", "_ab02", "_ab03", "_ab04", "_ab05", "_ab06", "_ab07", "_ab08", "_ab09", "_ab10",
   ];
   for (var i = 0; i < keys.length; i++) {
     var key = document.getElementById(keys[i]);

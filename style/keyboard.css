@@ -7,7 +7,7 @@ ul#keyboard, ul#keyboard ul {
 * html ul#keyboard ul {
   /* IE6-specific hack
      required for the pc104/pc105 layouts
-     the TMx layout requires another hack on li#ac01, see below
+     the TMx layout requires another hack on li#_ac01, see below
    */
   width: 672px;
 }
@@ -96,27 +96,27 @@ li#aaRow li.specialKey {
 /* li#aaRow li.specialKey * {
   font-style: italic;
 } */
-ul#keyboard li#tab,
-ul#keyboard li#bksp {
+ul#keyboard li#_tab,
+ul#keyboard li#_bksp {
   width: 60px;
 }
-ul#keyboard li#caps,
-ul#keyboard li#rtrn {
+ul#keyboard li#_caps,
+ul#keyboard li#_rtrn {
   width: 73px;
 }
-ul#keyboard li#lfsh,
-ul#keyboard li#rtsh {
+ul#keyboard li#_lfsh,
+ul#keyboard li#_rtsh {
   width: 96px;
 }
-ul#keyboard li#spce {
+ul#keyboard li#_spce {
   width: 240px;
 }
-ul#keyboard li#menu {
+ul#keyboard li#_menu {
   width: 40px;
 }
 
 /* hide LSGT for pc104 (default) */
-li#lsgt, li#caps105, li#rtrn105 {
+li#_lsgt, li#_caps105, li#_rtrn105 {
   display: none;
 }
 
@@ -127,38 +127,38 @@ li#lsgt, li#caps105, li#rtrn105 {
 |                                                                             |
 \*****************************************************************************/
 
-.pc105 li#lfsh {
+.pc105 li#_lfsh {
   width: 50px !important;
 }
-.pc105 li#rtrn {
+.pc105 li#_rtrn {
   width: 27px !important;
   height: 86px !important;
   margin-top: -44px;
   margin-left: 48px;
 }
-.pc105 li#bksl {
+.pc105 li#_bksl {
   margin-top: 48px;
   margin-left: -31px;
 }
-.pc105 li#lsgt {
+.pc105 li#_lsgt {
   display: block;
 }
 /* visual tweaks for CapsLock and Return */
-.pc105 li#caps105, .pc105 li#rtrn105 {
+.pc105 li#_caps105, .pc105 li#_rtrn105 {
   background-color: #e8e8e8;
   display: block;
 }
-.pc105 li#caps {
+.pc105 li#_caps {
   width: 60px !important;
 }
-.pc105 li#caps, .pc105 li#rtrn {
+.pc105 li#_caps, .pc105 li#_rtrn {
   z-index: 1;
 }
-.pc105 li#caps105 {
+.pc105 li#_caps105 {
   margin-left: -64px;
   width: 73px !important;
 }
-.pc105 li#rtrn105 {
+.pc105 li#_rtrn105 {
   margin-top: -44px;
   margin-left: -44px;
   width: 40px !important;
@@ -171,50 +171,50 @@ li#lsgt, li#caps105, li#rtrn105 {
 |                                                                             |
 \*****************************************************************************/
 
-.tmx li#caps {
+.tmx li#_caps {
   display: none;
 }
-.tmx li#bksl {
+.tmx li#_bksl {
   margin-top: 94px;
   margin-left: -96px;
 }
-.tmx li#tlde, .tmx li#tab,  .tmx li#lfsh, .tmx li#lctl,
-.tmx li#ae12, .tmx li#ad12, .tmx li#rtsh, .tmx li#rctl,
-.tmx li#bksp, .tmx li#rtrn {
+.tmx li#_tlde, .tmx li#_tab,  .tmx li#_lfsh, .tmx li#_lctl,
+.tmx li#_ae12, .tmx li#_ad12, .tmx li#_rtsh, .tmx li#_rctl,
+.tmx li#_bksp, .tmx li#_rtrn {
   width: 46px !important;
 }
-.tmx li#lwin, .tmx li#lalt, .tmx li#rwin, .tmx li#ralt {
+.tmx li#_lwin, .tmx li#_lalt, .tmx li#_rwin, .tmx li#_ralt {
   width: 63px !important;
 }
-.tmx li#tlde, .tmx li#tab, .tmx li#lfsh, .tmx li#lctl {
+.tmx li#_tlde, .tmx li#_tab, .tmx li#_lfsh, .tmx li#_lctl {
   margin-left: 3px;
 }
-.tmx li#ac01 {
+.tmx li#_ac01 {
   margin-left: 55px;
 }
-* html .tmx li#ac01 {
+* html .tmx li#_ac01 {
   /* IE6-specific hack */
   margin-left: 29px;
 }
-.tmx li#ae06, .tmx li#ad06, .tmx li#ac06, .tmx li#ab06 {
+.tmx li#_ae06, .tmx li#_ad06, .tmx li#_ac06, .tmx li#_ab06 {
   margin-left: 54px;
 }
-.tmx li#bksp {
+.tmx li#_bksp {
   margin-left: -378px;
   height: 86px !important;
 }
-.tmx li#rtrn {
+.tmx li#_rtrn {
   margin-left: -326px;
   height: 86px !important;
 }
-.tmx li#lfsh, .tmx li#rtsh {
+.tmx li#_lfsh, .tmx li#_rtsh {
   height: 86px !important;
   margin-top: -44px;
 }
-.tmx li#rtsh {
+.tmx li#_rtsh {
   margin-left: 48px;
 }
-.tmx li#spce {
+.tmx li#_spce {
   width: 230px !important;
 }
 
@@ -224,7 +224,7 @@ li#lsgt, li#caps105, li#rtrn105 {
 |                                                                             |
 \*****************************************************************************/
 
-li#tab *, li#bksp *, li#caps *, li#lfsh *, li#rtsh *, li#rtrn * {
+li#_tab *, li#_bksp *, li#_caps *, li#_lfsh *, li#_rtsh *, li#_rtrn * {
 	display: none;
 }
 li.specialKey {
@@ -232,20 +232,20 @@ li.specialKey {
 	background-position: bottom left;
 }
 
-li#tab  { background-image: url(key-tab.png);  }
-li#bksp { background-image: url(key-bksp.png); }
-li#caps { background-image: url(key-caps.png); }
-li#rtrn { background-image: url(key-rtrn.png); }
-li#lfsh, li#rtsh {
+li#_tab  { background-image: url(key-tab.png);  }
+li#_bksp { background-image: url(key-bksp.png); }
+li#_caps { background-image: url(key-caps.png); }
+li#_rtrn { background-image: url(key-rtrn.png); }
+li#_lfsh, li#_rtsh {
 	background-image: url(key-shift.png);
 }
 
 /* IE6 hack, using GIF instead of PNG */
-* html li#tab  { background-image: url(key-tab.gif);  }
-* html li#bksp { background-image: url(key-bksp.gif); }
-* html li#caps { background-image: url(key-caps.gif); }
-* html li#rtrn { background-image: url(key-rtrn.gif); }
-* html li#lfsh, * html li#rtsh {
+* html li#_tab  { background-image: url(key-tab.gif);  }
+* html li#_bksp { background-image: url(key-bksp.gif); }
+* html li#_caps { background-image: url(key-caps.gif); }
+* html li#_rtrn { background-image: url(key-rtrn.gif); }
+* html li#_lfsh, * html li#_rtsh {
 	background-image: url(key-shift.gif);
 }
 
