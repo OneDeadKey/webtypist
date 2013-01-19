@@ -68,4 +68,14 @@
     <key name="AB10" base="+" shift="=" />
   </variant>
 
+  <variant id="fr_Mac" include="fr_FR" name="Mac">
+    <key name="TLDE" base="@" shift="#" />
+    <key name="AE06" base="§" shift="6" />
+    <key name="AE08" base="!" shift="8" />
+    <key name="AE12" base="-" shift="_" />
+    <key name="AD12" base="$" shift="*" />
+    <key name="BKSL" base="`" shift="£" />
+    <key name="AB10" base="=" shift="+" />
+  </variant>
+
 </layout>
