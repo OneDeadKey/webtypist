@@ -445,7 +445,7 @@ EVENTS.onDOMReady(function() {
   var layout = getCookie('layout') || 'layouts/qwerty.xml';
   setLayout(layout, getCookie('variantID'));
   setShape(getCookie('shape'));
-  showHints(getCookie('hints') == 'on');
+  showHints(getCookie('hints') != 'off');
 
   // bind event listeners to the text input:
   //  'keypress' : tracks normal keys (characters)
