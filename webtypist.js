@@ -5,19 +5,18 @@
 
 
 /**
- *
  * Web Typist
  * a free, web-based, simple touch-typing tutor
  */
 
+// Because (node.innerHTML = '';) is dirty and doesn't work with XHTML
 function removeAllChildren(node) {
-  // node.innerHTML = ''; // XXX dirty and not working with XHTML
   while (node.childNodes.length)
     node.removeChild(node.firstChild);
 }
 
 
-/**
+/******************************************************************************
  * Browser Abstraction Layer (events, XMLHttpRequest)
  */
 
@@ -87,7 +86,7 @@ function xhrLoadXML(href, callback) {
 }
 
 
-/**
+/******************************************************************************
  * Cookie Management
  */
 
@@ -107,7 +106,7 @@ function setCookie(name, value, expiredays) {
 }
 
 
-/**
+/******************************************************************************
  * Keyboard Display
  */
 
@@ -340,7 +339,7 @@ function textInput(value) {
 }
 
 
-/**
+/******************************************************************************
  * Typing Lessons (aka KTouchLecture)
  */
 
@@ -427,14 +426,14 @@ function nextPrompt() {
 }
 
 
-/**
+/******************************************************************************
  * Metrics
  */
 
 var gMetrics = {};
 
 
-/**
+/******************************************************************************
  * Startup
  */
 
@@ -472,7 +471,7 @@ EVENTS.onDOMReady(function() {
 });
 
 
-/**
+/******************************************************************************
  * Ad-Blocker test
  */
 

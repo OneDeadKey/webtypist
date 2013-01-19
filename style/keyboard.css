@@ -1,13 +1,17 @@
-/* graphical keyboard layout, fixed size (664*230px) */
+/**
+ * graphical keyboard layout, fixed size (664*230px)
+ */
+
 ul#keyboard, ul#keyboard ul {
   margin: 0;
   padding: 0;
   width: 664px;
 }
 * html ul#keyboard ul {
-  /* IE6-specific hack
-     required for the pc104/pc105 layouts
-     the TMx layout requires another hack on li#ac01, see below
+  /**
+   * IE6-specific hack:
+   * required for the pc104/pc105 layouts
+   * the TMx layout requires another hack on li#ac01, see below
    */
   width: 672px;
 }
@@ -18,11 +22,9 @@ ul#keyboard {
 }
 
 
-/*****************************************************************************\
-|                                                                             |
-|  Default Keyboard Geometry (pc104)                                          |
-|                                                                             |
-\*****************************************************************************/
+/*****************************************************************************
+ * Default Keyboard Geometry (pc104)
+ */
 
 /* rows */
 ul#keyboard li {
@@ -87,15 +89,9 @@ ul#keyboard li.specialKey * {
   font-size: 13px;
   font-style: italic;
 }
-/* li#rtrn, li#bksp, li#tab {
-  font-size: 24px;
-} */
 li#aaRow li.specialKey {
   width: 56px;
 }
-/* li#aaRow li.specialKey * {
-  font-style: italic;
-} */
 ul#keyboard li#tab,
 ul#keyboard li#bksp {
   width: 60px;
@@ -121,11 +117,9 @@ li#lsgt, li#caps105, li#rtrn105 {
 }
 
 
-/*****************************************************************************\
-|                                                                             |
-|  European Keyboard Geometry (pc105)                                         |
-|                                                                             |
-\*****************************************************************************/
+/*****************************************************************************
+ * European Keyboard Geometry (pc105)
+ */
 
 .pc105 li#lfsh {
   width: 50px !important;
@@ -145,7 +139,7 @@ li#lsgt, li#caps105, li#rtrn105 {
 }
 /* visual tweaks for CapsLock and Return */
 .pc105 li#caps105, .pc105 li#rtrn105 {
-  background-color: #e8e8e8;
+  background-color: #e8e8e8 !important;
   display: block;
 }
 .pc105 li#caps {
@@ -165,11 +159,9 @@ li#lsgt, li#caps105, li#rtrn105 {
 }
 
 
-/*****************************************************************************\
-|                                                                             |
-|  Ergonomic Keyboard Geometry (TMx)                                          |
-|                                                                             |
-\*****************************************************************************/
+/*****************************************************************************
+ * Ergonomic Keyboard Geometry (TMx)
+ */
 
 .tmx li#caps {
   display: none;
@@ -192,8 +184,7 @@ li#lsgt, li#caps105, li#rtrn105 {
 .tmx li#ac01 {
   margin-left: 55px;
 }
-* html .tmx li#ac01 {
-  /* IE6-specific hack */
+* html .tmx li#ac01 { /* IE6-specific hack */
   margin-left: 29px;
 }
 .tmx li#ae06, .tmx li#ad06, .tmx li#ac06, .tmx li#ab06 {
@@ -218,34 +209,33 @@ li#lsgt, li#caps105, li#rtrn105 {
   width: 230px !important;
 }
 
-/*****************************************************************************\
-|                                                                             |
-|  Background Images for Tab, Backspace, Caps, Return, Shift                  |
-|                                                                             |
-\*****************************************************************************/
+
+/*****************************************************************************
+ * Background Images for Tab, Backspace, Caps, Return, Shift
+ */
 
 li#tab *, li#bksp *, li#caps *, li#lfsh *, li#rtsh *, li#rtrn * {
-	display: none;
+  display: none;
 }
 li.specialKey {
-	background-repeat: no-repeat;
-	background-position: bottom left;
+  background-repeat: no-repeat;
+  background-position: bottom left;
 }
 
-li#tab  { background-image: url(key-tab.png);  }
-li#bksp { background-image: url(key-bksp.png); }
-li#caps { background-image: url(key-caps.png); }
-li#rtrn { background-image: url(key-rtrn.png); }
+li#tab  { background-image: url(images/key-tab.png);  }
+li#bksp { background-image: url(images/key-bksp.png); }
+li#caps { background-image: url(images/key-caps.png); }
+li#rtrn { background-image: url(images/key-rtrn.png); }
 li#lfsh, li#rtsh {
-	background-image: url(key-shift.png);
+  background-image: url(images/key-shift.png);
 }
 
 /* IE6 hack, using GIF instead of PNG */
-* html li#tab  { background-image: url(key-tab.gif);  }
-* html li#bksp { background-image: url(key-bksp.gif); }
-* html li#caps { background-image: url(key-caps.gif); }
-* html li#rtrn { background-image: url(key-rtrn.gif); }
+* html li#tab  { background-image: url(images/key-tab.gif);  }
+* html li#bksp { background-image: url(images/key-bksp.gif); }
+* html li#caps { background-image: url(images/key-caps.gif); }
+* html li#rtrn { background-image: url(images/key-rtrn.gif); }
 * html li#lfsh, * html li#rtsh {
-	background-image: url(key-shift.gif);
+  background-image: url(images/key-shift.gif);
 }
 
