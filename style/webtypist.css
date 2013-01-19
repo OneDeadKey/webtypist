@@ -23,10 +23,32 @@ textarea.error {
   font-weight: bold;
   color: white;
 }
+#hands {
+  float: left;
+  margin-left: 100px;
+  margin-top: -15px;
+  width: 150px;
+  height: 90px;
+  background-image: url(images/hands_0.png);
+  display: none;
+}
+.hints #hands {
+  display: block;
+}
+#hands.left5  { background-image: url(images/hands_1.png); }
+#hands.left4  { background-image: url(images/hands_2.png); }
+#hands.left3  { background-image: url(images/hands_3.png); }
+#hands.left2  { background-image: url(images/hands_4.png); }
+#hands.thumb  { background-image: url(images/hands_5.png); }
+#hands.right2 { background-image: url(images/hands_6.png); }
+#hands.right3 { background-image: url(images/hands_7.png); }
+#hands.right4 { background-image: url(images/hands_8.png); }
+#hands.right5 { background-image: url(images/hands_9.png); }
 
 /* keyboard settings: layout, geometry */
 form#keyboardSelector {
   float: right;
+  height: 90px;
 }
 form#keyboardSelector dl * {
   margin: 0;

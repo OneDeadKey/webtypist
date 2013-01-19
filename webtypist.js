@@ -145,12 +145,14 @@ function setShape(value) {
     document.getElementById('key_AE10').className = 'right5';
   }
   setCookie('shape', value);
-  document.body.className = value;
+  document.getElementById('keyboard').className = value;
   document.getElementById('shape').value = value;
 }
 
 function showHints(on) {
-  document.getElementById('keyboard').className = on ? 'hints' : '';
+  // document.getElementById('keyboard').className = on ? 'hints' : '';
+  // document.getElementById('hands').className = on ? 'hints' : '';
+  document.body.className = on ? 'hints' : '';
   document.getElementById('hints').checked = on;
   setCookie('hints', (on ? 'on' : 'off'));
 }
@@ -286,12 +288,14 @@ function highlightKey(keyChar) {
     var className = gKeyboard.activeKey.className.replace(/\s.*$/, '');
     gKeyboard.activeKey.className = className;
   }
-  if (gKeyboard.activeMod)
+  if (gKeyboard.activeMod) {
     gKeyboard.activeMod.className = 'specialKey';
+  }
 
-  // highlight the new key
+  // highlight the new key and the corresponding finger
   var key = gKeyboard.keymap[keyChar];
   if (key) {
+    document.getElementById('hands').className = key.className;
     gKeyboard.activeKey = key;
     key.className += ' active';
     // TODO: highlight the modifier, too
@@ -484,7 +488,7 @@ if (window.addEventListener) window.addEventListener('load', function() {
   // .querySelectorAll and the ^= selector (IE9, Firefox 3+, Safari...)
   var keys = document.querySelectorAll('[id^="key_A"]');
   for (var i = 0; i < keys.length; i++) {
-    if (parseInt(key[i].getBoundingClientRect().width, 10) < 40) {
+    if (parseInt(keys[i].getBoundingClientRect().width, 10) < 40) {
       badRendering.style.display = 'block';
       break;
     }
