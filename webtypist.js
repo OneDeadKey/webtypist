@@ -480,16 +480,13 @@ if (window.addEventListener) window.addEventListener('load', function() {
   // AdBlockPlus is likely to hide a few keys *sigh*
   var badRendering = document.getElementById('badRendering');
   if (!badRendering) return;
-
-  var keys = ['AE', 'AD', 'AC', 'AB'];
+  // All browsers supporting .addEventListener are reported to support
+  // .querySelectorAll and the ^= selector (IE9, Firefox 3+, Safari...)
+  var keys = document.querySelectorAll('[id^="key_A"]');
   for (var i = 0; i < keys.length; i++) {
-    for (var j = 1; j <= 12; j++) {
-      var num = (j < 10) ? '0' + j : j;
-      var key = document.getElementById('key_' + keys[i] + num);
-      if (key && parseInt(key.getBoundingClientRect().width, 10) < 40) {
-        badRendering.style.display = 'block';
-        break;
-      }
+    if (parseInt(key[i].getBoundingClientRect().width, 10) < 40) {
+      badRendering.style.display = 'block';
+      break;
     }
   }
 }, false);
