@@ -28,6 +28,20 @@ dd, dt {
   margin-bottom: 0.5em;
 }
 
+#github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 149px;
+  height: 149px;
+  background-image: url(images/forkme.png);
+}
+
+#github span {
+  display: none;
+}
+
 #badRendering {
   text-align: center;
   font-weight: bold;
