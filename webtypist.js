@@ -122,27 +122,27 @@ var gKeyboard = {
 
 function setShape(value) {
   if (value == 'pc105') {
-    document.getElementById('ae01').className = 'left5';
-    document.getElementById('ae02').className = 'left5';
-    document.getElementById('ae03').className = 'left4';
-    document.getElementById('ae04').className = 'left3';
-    document.getElementById('ae05').className = 'left2';
-    document.getElementById('ae06').className = 'left2';
-    document.getElementById('ae07').className = 'right2';
-    document.getElementById('ae08').className = 'right2';
-    document.getElementById('ae09').className = 'right3';
-    document.getElementById('ae10').className = 'right4';
+    document.getElementById('key_AE01').className = 'left5';
+    document.getElementById('key_AE02').className = 'left5';
+    document.getElementById('key_AE03').className = 'left4';
+    document.getElementById('key_AE04').className = 'left3';
+    document.getElementById('key_AE05').className = 'left2';
+    document.getElementById('key_AE06').className = 'left2';
+    document.getElementById('key_AE07').className = 'right2';
+    document.getElementById('key_AE08').className = 'right2';
+    document.getElementById('key_AE09').className = 'right3';
+    document.getElementById('key_AE10').className = 'right4';
   } else {
-    document.getElementById('ae01').className = 'left5';
-    document.getElementById('ae02').className = 'left4';
-    document.getElementById('ae03').className = 'left3';
-    document.getElementById('ae04').className = 'left2';
-    document.getElementById('ae05').className = 'left2';
-    document.getElementById('ae06').className = 'right2';
-    document.getElementById('ae07').className = 'right2';
-    document.getElementById('ae08').className = 'right3';
-    document.getElementById('ae09').className = 'right4';
-    document.getElementById('ae10').className = 'right5';
+    document.getElementById('key_AE01').className = 'left5';
+    document.getElementById('key_AE02').className = 'left4';
+    document.getElementById('key_AE03').className = 'left3';
+    document.getElementById('key_AE04').className = 'left2';
+    document.getElementById('key_AE05').className = 'left2';
+    document.getElementById('key_AE06').className = 'right2';
+    document.getElementById('key_AE07').className = 'right2';
+    document.getElementById('key_AE08').className = 'right3';
+    document.getElementById('key_AE09').className = 'right4';
+    document.getElementById('key_AE10').className = 'right5';
   }
   setCookie('shape', value);
   document.body.className = value;
@@ -219,10 +219,10 @@ function setVariant(variantID) {
 }
 
 function drawKey(xmlElement) {
-  var name = xmlElement.getAttribute('name').toLowerCase();
+  var name = xmlElement.getAttribute('name');
   var base = xmlElement.getAttribute('base');
   var shift = xmlElement.getAttribute('shift');
-  var element = document.getElementById(name);
+  var element = document.getElementById('key_' + name);
   if (!element) return;
 
   // fill <li> element
@@ -427,7 +427,7 @@ function nextPrompt() {
 
 
 /******************************************************************************
- * Metrics
+ * TODO: Metrics
  */
 
 var gMetrics = {};
@@ -476,22 +476,20 @@ EVENTS.onDOMReady(function() {
  */
 
 if (window.addEventListener) window.addEventListener('load', function() {
-  // Check that all keys are properly displayed
+  // Check that all keys are properly displayed --
   // AdBlockPlus is likely to hide a few keys *sigh*
   var badRendering = document.getElementById('badRendering');
   if (!badRendering) return;
 
-  var keys = [
-    'ae01', 'ae02', 'ae03', 'ae04', 'ae05', 'ae06', 'ae07', 'ae08', 'ae09', 'ae10', 'ae11', 'ae12',
-    'ad01', 'ad02', 'ad03', 'ad04', 'ad05', 'ad06', 'ad07', 'ad08', 'ad09', 'ad10', 'ad11', 'ad12',
-    'ac01', 'ac02', 'ac03', 'ac04', 'ac05', 'ac06', 'ac07', 'ac08', 'ac09', 'ac10', 'ac11',
-    'ab01', 'ab02', 'ab03', 'ab04', 'ab05', 'ab06', 'ab07', 'ab08', 'ab09', 'ab10'
-  ];
+  var keys = ['AE', 'AD', 'AC', 'AB'];
   for (var i = 0; i < keys.length; i++) {
-    var key = document.getElementById(keys[i]);
-    if (parseInt(key.getBoundingClientRect().width, 10) < 40) {
-      badRendering.style.display = 'block';
-      break;
+    for (var j = 1; j <= 12; j++) {
+      var num = (j < 10) ? '0' + j : j;
+      var key = document.getElementById('key_' + keys[i] + num);
+      if (key && parseInt(key.getBoundingClientRect().width, 10) < 40) {
+        badRendering.style.display = 'block';
+        break;
+      }
     }
   }
 }, false);
