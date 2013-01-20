@@ -9,12 +9,6 @@
  * a free, web-based, simple touch-typing tutor
  */
 
-// Because (node.innerHTML = '';) is dirty and doesn't work with XHTML
-function removeAllChildren(node) {
-  while (node.childNodes.length)
-    node.removeChild(node.firstChild);
-}
-
 
 /******************************************************************************
  * Browser Abstraction Layer (events, XMLHttpRequest)
@@ -150,49 +144,54 @@ function setShape(value) {
 }
 
 function showHints(on) {
-  // document.getElementById('keyboard').className = on ? 'hints' : '';
-  // document.getElementById('hands').className = on ? 'hints' : '';
   document.body.className = on ? 'hints' : '';
   document.getElementById('hints').checked = on;
   setCookie('hints', (on ? 'on' : 'off'));
 }
 
-function setLayout(href, variantID) {
-  // clear the variant selector
-  gKeyboard.variant.innerHTML = '<option> (loading...) </option>'; // XXX
+function setLayout(name, variantID) {
+  gKeyboard.variant.innerHTML = '<option> (loading...) </option>';
 
   // load the layout file
+  var href = 'layouts/' + name + '.xml';
   xhrLoadXML(href, function(xmldoc) {
     gKeyboard.xmldoc = xmldoc;
     var variants = xmldoc.getElementsByTagName('variant');
 
-    // fill the layout selector drop-down menu if needed
-    removeAllChildren(gKeyboard.variant);
+    // sort variants alphabetically
+    var options = [];
     for (var i = 0; i < variants.length; i++) {
-      var id = variants[i].getAttribute('id');
-      var name = variants[i].getAttribute('name') || '--';
+      options.push({
+        id: variants[i].getAttribute('id'),
+        name: variants[i].getAttribute('name')
+      });
+    }
+    options.sort(function(a, b) {
+      return a.name.localeCompare ?
+             a.name.localeCompare(b.name) : (a.name > b.name);
+    });
+
+    // fill the layout selector
+    gKeyboard.variant.innerHTML = '';
+    for (i = 0; i < options.length; i++) {
       var option = document.createElement('option');
-      var value = document.createTextNode(name);
+      var value = document.createTextNode(options[i].name);
       option.appendChild(value);
-      option.setAttribute('value', id);
-      if (!id)
-        option.disabled = true;
+      option.setAttribute('value', options[i].id);
       gKeyboard.variant.appendChild(option);
     }
 
     // select the layout, if any
-    if (!variantID)
-      variantID = variants[0].getAttribute('id');
-    setVariant(variantID);
+    setVariant(variantID || variants[0].getAttribute('id'));
   });
 
   // update the form selector
-  setCookie('layout', href);
-  document.getElementById('layout').value = href;
+  setCookie('layoutName', name);
+  document.getElementById('layout').value = name;
 }
 
 function setVariant(variantID) {
-  //var variant = gKeyboard.xmldoc.getElementById(variantID);
+  // var variant = gKeyboard.xmldoc.getElementById(variantID);
   // getElementById doesn't work on these XML files and I can't see why *sigh*
   // So this here's a dirty getElementById:
   var variant = null;
@@ -203,21 +202,24 @@ function setVariant(variantID) {
       break;
     }
   }
-  if (!variant) return;
+  if (!variant)
+    return;
 
   // load the base layout the selected variant relies on, if any
-  // if (variant.hasAttribute('include')) // not supported by IE
   var include = variant.getAttribute('include');
-  if (include) setVariant(include);
+  if (include) {
+    setVariant(include);
+  }
 
   // update the selector
-  setCookie('variantID', variantID);
+  setCookie('layoutVariant', variantID);
   document.getElementById('variant').value = variantID;
 
   // fill the graphical keyboard
   var keys = variant.getElementsByTagName('key');
-  for (var i = 0; i < keys.length; i++)
+  for (var i = 0; i < keys.length; i++) {
     drawKey(keys[i]);
+  }
 }
 
 function drawKey(xmlElement) {
@@ -225,10 +227,11 @@ function drawKey(xmlElement) {
   var base = xmlElement.getAttribute('base');
   var shift = xmlElement.getAttribute('shift');
   var element = document.getElementById('key_' + name);
-  if (!element) return;
+  if (!element)
+    return;
 
   // fill <li> element
-  removeAllChildren(element);
+  element.innerHTML = '';
   // create <strong> for 'shift'
   var strong = document.createElement('strong');
   var strongStr = document.createTextNode(shift);
@@ -354,17 +357,18 @@ var gLessons = {
   currentLevel: -1
 };
 
-function setLesson(href, levelIndex) {
+function setLesson(name, levelIndex) {
   // clear the level selector
-  gLessons.levelSelector.innerHTML = '<option> (loading...) </option>'; // XXX
+  gLessons.levelSelector.innerHTML = '<option> (loading...) </option>';
 
   // load the layout file
+  var href = 'lessons/' + name + '.ktouch.xml';
   xhrLoadXML(href, function(xmldoc) {
     gLessons.xmldoc = xmldoc;
     var levelNodes = xmldoc.getElementsByTagName('Level');
 
     // fill the lesson selector
-    removeAllChildren(gLessons.levelSelector);
+    gLessons.levelSelector.innerHTML = '';
     for (var i = 0; i < levelNodes.length; i++) {
       var name = levelNodes[i].getElementsByTagName('NewCharacters')
                               .item(0).childNodes[0].nodeValue;
@@ -380,13 +384,14 @@ function setLesson(href, levelIndex) {
   });
 
   // update the form selector
-  setCookie('lesson', href);
-  document.getElementById('lesson').value = href;
+  setCookie('lessonName', name);
+  document.getElementById('lesson').value = name;
 }
 
 function setLevel(levelIndex) {
+  levelIndex = levelIndex || 0;
   document.getElementById('level').value = levelIndex;
-  setCookie('level', levelIndex);
+  setCookie('lessonLevel', levelIndex);
   newPromptFromLessons();
 }
 
@@ -446,9 +451,8 @@ EVENTS.onDOMReady(function() {
   gKeyboard.variant = document.getElementById('variant');
   gKeyboard.txtInput = document.getElementById('txtInput');
   gKeyboard.keymap = new Array();
-  var layout = getCookie('layout') || 'layouts/qwerty.xml';
-  setLayout(layout, getCookie('variantID'));
-  setShape(getCookie('shape'));
+  setLayout(getCookie('layoutName') || 'qwerty', getCookie('layoutVariant'));
+  setShape(getCookie('shape') || 'pc104');
   showHints(getCookie('hints') != 'off');
 
   // bind event listeners to the text input:
@@ -467,8 +471,7 @@ EVENTS.onDOMReady(function() {
   gLessons.levelSelector = document.getElementById('level');
   gLessons.txtPrompt = document.getElementById('txtPrompt');
   gLessons.txtPrompt.value = '';
-  var lesson = getCookie('lesson') || 'lessons/english.ktouch.xml';
-  setLesson(lesson, getCookie('level'));
+  setLesson(getCookie('lessonName') || 'english', getCookie('lessonLevel'));
 
   // go, go, go!
   gKeyboard.txtInput.focus();
@@ -484,8 +487,8 @@ if (window.addEventListener) window.addEventListener('load', function() {
   // AdBlockPlus is likely to hide a few keys *sigh*
   var badRendering = document.getElementById('badRendering');
   if (!badRendering) return;
-  // All browsers supporting .addEventListener are reported to support
-  // .querySelectorAll and the ^= selector (IE9, Firefox 3+, Safari...)
+  // All browsers supporting `.addEventListener' are reported to support
+  // `.querySelectorAll' and the `^=' selector (IE9, Firefox 3+, Safari...)
   var keys = document.querySelectorAll('[id^="key_A"]');
   for (var i = 0; i < keys.length; i++) {
     if (parseInt(keys[i].getBoundingClientRect().width, 10) < 40) {

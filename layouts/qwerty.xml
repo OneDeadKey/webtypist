@@ -90,7 +90,6 @@
   </variant>
 
   <!-- South-European variants -->
-  <variant separator="true"/>
 
   <variant id="es_ES" include="en_US" name="Español">
     <key name="TLDE" base="º" shift="ª" />
@@ -154,7 +153,6 @@
   </variant>
 
   <!-- North-European variants -->
-  <variant separator="true"/>
 
   <variant id="da_DK" include="es_ES" name="Dansk">
     <key name="TLDE" base="½" shift="§" />

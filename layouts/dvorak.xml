@@ -128,7 +128,6 @@
   </variant>
 
   <!-- Dvorak-like language-specific layouts -->
-  <variant separator="true"/>
 
   <variant id="colemak" include="ANSI" name="Colemak">
     <!--row #1-->
@@ -235,7 +234,7 @@
     <key name="SPCE" base=" " shift=" " />
   </variant>
 
-  <variant id="fr-dvorak-bepo" name="Français (bépo)" url="http://clavier-dvorak.org/">
+  <variant id="fr-dvorak-bepo" name="Français (bépo)" url="http://bepo.fr/">
     <!--row #1-->
     <key name="TLDE" base="$" shift="#" />
     <key name="AE01" base='"' shift="1" />

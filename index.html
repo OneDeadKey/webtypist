@@ -17,7 +17,7 @@
     id="github"><span>Fork me on GitHub</span></a>
 
   <form id="lessonSelector">
-    <select id="lesson" onchange="setLesson('lessons/' + this.value + '.ktouch.xml')">
+    <select id="lesson" onchange="setLesson(this.value)">
       <option value="catalan">           Català              </option>
       <option value="danish">            Dansk (1)           </option>
       <option value="danish2">           Dansk (2)           </option>
@@ -346,10 +346,10 @@
       <dt> keyboard layout: </dt>
       <dd>
         <select id="layout" onchange="setLayout(this.value);">
-          <option value="layouts/azerty.xml"> azerty </option>
-          <option value="layouts/qwerty.xml" selected> qwerty </option>
-          <option value="layouts/qwertz.xml"> qwertz </option>
-          <option value="layouts/dvorak.xml"> dvorak </option>
+          <option> azerty </option>
+          <option selected> qwerty </option>
+          <option> qwertz </option>
+          <option> dvorak </option>
         </select>
         <select id="variant" onchange="setVariant(this.value);" style="width: 150px;">
           <option value="default"> (loading…) </option>
