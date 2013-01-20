@@ -61,14 +61,15 @@
     </select>
   </form>
 
-  <form>
+  <form id="lessonInput">
     <p>
+      <span id="hands"></span>
       <!--
         - IE<9 and Safari 4 do not support 'oninput', using 'onkeyup' instead
         - the thing is, 'oninput' works much better (less latency)…
         -->
-      <textarea id="txtPrompt" style="width: 100%;" readonly></textarea>
-      <textarea id="txtInput" style="width: 100%;" spellcheck="false"></textarea>
+      <textarea id="txtPrompt" readonly></textarea>
+      <textarea id="txtInput" spellcheck="false"></textarea>
     </p>
   </form>
 
@@ -339,8 +340,6 @@
       </ul>
     </li>
   </ul>
-
-  <div id="hands"></div>
 
   <form id="keyboardSelector">
     <dl>

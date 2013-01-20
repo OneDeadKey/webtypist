@@ -1,8 +1,14 @@
-textarea.error {
+#lessonInput textarea {
+  width: 100%;
+}
+#lessonInput textarea.error {
   background-color: red;
 }
 
 /* visual hints */
+.hints #lessonInput textarea {
+  width: 570px;
+}
 .hints li.active {
   background-color: brown;
 }
@@ -24,9 +30,8 @@ textarea.error {
   color: white;
 }
 #hands {
-  float: left;
-  margin-left: 100px;
-  margin-top: -15px;
+  float: right;
+  margin-top: 5px;
   width: 150px;
   height: 90px;
   background-image: url(images/hands_0.png);
@@ -46,23 +51,23 @@ textarea.error {
 #hands.right5 { background-image: url(images/hands_9.png); }
 
 /* keyboard settings: layout, geometry */
-form#keyboardSelector {
+#keyboardSelector {
   float: right;
-  height: 90px;
+  margin-top: -10px;
 }
-form#keyboardSelector dl * {
+#keyboardSelector dl * {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-form#keyboardSelector dl dt {
+#keyboardSelector dl dt {
   float: left;
   width: 200px;
   height: 1.5em;
   line-height: 1.5em;
   text-align: right;
 }
-form#keyboardSelector dl dd {
+#keyboardSelector dl dd {
   text-align: left;
   margin-left: 210px;
   height: 1.5em;
@@ -70,7 +75,7 @@ form#keyboardSelector dl dd {
 }
 
 /* page footer */
-div#footer {
+#footer {
   color: brown;
   border-top: 1px outset brown;
   padding-top: 5px;
