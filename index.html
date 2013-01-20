@@ -359,11 +359,12 @@
       <dd>
         <select id="shape" onchange="setShape(this.value);">
           <option value="tmx"> ergonomic </option>
-          <option value="pc104" selected> pc104 </option>
-          <option value="pc105"> pc105 </option>
+          <option value="pc104" selected> pc104 / ANSI </option>
+          <option value="pc105"> pc105 / ISO </option>
         </select>
         <!-- IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead -->
-        <input id="hints" type="checkbox" onclick="showHints(this.checked);"> show hints
+        <input id="hints" type="checkbox" onclick="showHints(this.checked);">
+        <label for="hints"> show hints </label>
       </dd>
     </dl>
   </form>
