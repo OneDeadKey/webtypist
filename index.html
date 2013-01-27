@@ -7,9 +7,6 @@
   <link type="text/css" rel="stylesheet" href="style/keyboard.css">
   <link type="text/css" rel="stylesheet" href="style/webtypist.css">
   <script type="text/javascript" src="webtypist.js"></script>
-  <script type="text/javascript">
-    /* define constants here? */
-  </script>
 </head>
 <body>
   <h1> Web Typist </h1>
@@ -17,7 +14,7 @@
     id="github"><span>Fork me on GitHub</span></a>
 
   <form id="lessonSelector">
-    <select id="lesson" onchange="setLesson(this.value)">
+    <select id="lesson">
       <option value="catalan">           Català              </option>
       <option value="danish">            Dansk (1)           </option>
       <option value="danish2">           Dansk (2)           </option>
@@ -56,7 +53,7 @@
       <option value="fr-dvorak-bepo-1">  Français (bépo-1)   </option>
       <option value="fr-dvorak-bepo-2">  Français (bépo-2)   </option>
     </select>
-    <select id="level" onchange="setLevel(this.selectedIndex);">
+    <select id="level">
       <option value="-1"> (loading…) </option>
     </select>
   </form>
@@ -345,25 +342,24 @@
     <dl>
       <dt> keyboard layout: </dt>
       <dd>
-        <select id="layout" onchange="setLayout(this.value);">
+        <select id="layout">
           <option> azerty </option>
           <option selected> qwerty </option>
           <option> qwertz </option>
           <option> dvorak </option>
         </select>
-        <select id="variant" onchange="setVariant(this.value);" style="width: 150px;">
+        <select id="variant" style="width: 150px;">
           <option value="default"> (loading…) </option>
         </select>
       </dd>
       <dt> keyboard shape: </dt>
       <dd>
-        <select id="shape" onchange="setShape(this.value);">
+        <select id="shape">
           <option value="tmx"> ergonomic </option>
           <option value="pc104" selected> pc104 / ANSI </option>
           <option value="pc105"> pc105 / ISO </option>
         </select>
-        <!-- IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead -->
-        <input id="hints" type="checkbox" onclick="showHints(this.checked);">
+        <input id="hints" type="checkbox">
         <label for="hints"> show hints </label>
       </dd>
     </dl>

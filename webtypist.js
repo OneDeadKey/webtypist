@@ -104,347 +104,429 @@ function setCookie(name, value, expiredays) {
  * Keyboard Display
  */
 
-var gKeyboard = {
-  xmldoc: null,        // xml layout document
-  keymap: new Array(), // [ (charString, keyRef) ]
-  keymod: new Array(), // [ (charString, modifierRef) ]
-  layoutId: '',
-  activeKey: null,
-  activeMod: null,
-  usrInputTimeout: 150,
-  usrInputStyle: 'color: white; background-color: black;'
-};
+var gKeyboard = (function(window, document, undefined) {
+  var layoutId = '';
+  var layoutDoc = null;     // xml layout document
+  var keymap = new Array(); // [ (charString, keyRef) ]
+  var keymod = new Array(); // [ (charString, modifierRef) ]
+  var usrInputTimeout = 150;
+  var usrInputStyle = 'color: white; background-color: black;';
+  var ui = {
+    layout: null,
+    variant: null,
+    txtInput: null,
+    keyboard: null,
+    shape: null,
+    hints: null,
+    hands: null,
+    activeKey: null,
+    activeMod: null
+  };
 
-function setShape(value) {
-  if (value == 'pc105') {
-    document.getElementById('key_AE01').className = 'left5';
-    document.getElementById('key_AE02').className = 'left5';
-    document.getElementById('key_AE03').className = 'left4';
-    document.getElementById('key_AE04').className = 'left3';
-    document.getElementById('key_AE05').className = 'left2';
-    document.getElementById('key_AE06').className = 'left2';
-    document.getElementById('key_AE07').className = 'right2';
-    document.getElementById('key_AE08').className = 'right2';
-    document.getElementById('key_AE09').className = 'right3';
-    document.getElementById('key_AE10').className = 'right4';
-  } else {
-    document.getElementById('key_AE01').className = 'left5';
-    document.getElementById('key_AE02').className = 'left4';
-    document.getElementById('key_AE03').className = 'left3';
-    document.getElementById('key_AE04').className = 'left2';
-    document.getElementById('key_AE05').className = 'left2';
-    document.getElementById('key_AE06').className = 'right2';
-    document.getElementById('key_AE07').className = 'right2';
-    document.getElementById('key_AE08').className = 'right3';
-    document.getElementById('key_AE09').className = 'right4';
-    document.getElementById('key_AE10').className = 'right5';
-  }
-  setCookie('kbShape', value);
-  document.getElementById('keyboard').className = value;
-  document.getElementById('shape').value = value;
-}
+  function init() {
+    keymap = new Array();
 
-function showHints(on) {
-  document.body.className = on ? 'hints' : '';
-  document.getElementById('hints').checked = on;
-  setCookie('kbHints', (on ? 'on' : 'off'));
-}
+    ui.layout = document.getElementById('layout');
+    ui.variant = document.getElementById('variant');
+    ui.txtInput = document.getElementById('txtInput');
+    ui.keyboard = document.getElementById('keyboard');
+    ui.shape = document.getElementById('shape');
+    ui.hints = document.getElementById('hints');
+    ui.hands = document.getElementById('hands');
 
-function setLayout(kbLayout) {
-  console.log(kbLayout);
-  gKeyboard.variant.innerHTML = '<option> (loading...) </option>';
+    ui.layout.onchange = function() { setLayout(this.value); };
+    ui.variant.onchange = function() { setVariant(this.value); };
+    ui.shape.onchange = function() { setShape(this.value); };
+    // IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead
+    ui.hints.onclick = function() { setHints(this.checked); };
 
-  // [layout]-[variant]
-  var tmp = kbLayout.split('-');
-  var name = tmp[0];
-  var variantID = (tmp.length > 1) ? tmp[1] : '';
+    var kbLayout = window.location.hash.substring(1) ||
+      getCookie('kbLayout') || 'qwerty';
+    setLayout(kbLayout);
+    setShape(getCookie('kbShape') || 'pc104');
+    showHints(getCookie('kbHints') != 'off');
 
-  // load the layout file
-  var href = 'layouts/' + name + '.xml';
-  xhrLoadXML(href, function(xmldoc) {
-    gKeyboard.xmldoc = xmldoc;
-    var variants = xmldoc.getElementsByTagName('variant');
-
-    // sort variants alphabetically
-    var options = [];
-    for (var i = 0; i < variants.length; i++) {
-      options.push({
-        id: variants[i].getAttribute('id'),
-        name: variants[i].getAttribute('name')
-      });
-    }
-    options.sort(function(a, b) {
-      return a.name.localeCompare ?
-             a.name.localeCompare(b.name) : (a.name > b.name);
+    /**
+     * Bind event listeners to the text input:
+     *  'keypress' : tracks normal keys (characters)
+     *  'keydown'  : tracks special keys (tab, escape, backspace...)
+     *  'keyup'    : tracks inputs in the <textarea> node:
+     *     the 'input' event would work much better (less latency)
+     *     but it isn't supported by IE<9 and Safari 4
+     */
+    EVENTS.addListener(ui.txtInput, 'keypress', keyPress);
+    EVENTS.addListener(ui.txtInput, 'keydown', keyDown);
+    EVENTS.addListener(ui.txtInput, 'keyup', function() {
+      textInput(this.value);
     });
+  }
 
-    // update the layout selector
-    gKeyboard.layoutId = name;
-    document.getElementById('layout').value = name;
-
-    // fill the variant selector
-    gKeyboard.variant.innerHTML = '';
-    for (i = 0; i < options.length; i++) {
-      var option = document.createElement('option');
-      var value = document.createTextNode(options[i].name);
-      option.appendChild(value);
-      option.setAttribute('value', options[i].id);
-      gKeyboard.variant.appendChild(option);
+  function setShape(value) {
+    if (value == 'pc105') {
+      document.getElementById('key_AE01').className = 'left5';
+      document.getElementById('key_AE02').className = 'left5';
+      document.getElementById('key_AE03').className = 'left4';
+      document.getElementById('key_AE04').className = 'left3';
+      document.getElementById('key_AE05').className = 'left2';
+      document.getElementById('key_AE06').className = 'left2';
+      document.getElementById('key_AE07').className = 'right2';
+      document.getElementById('key_AE08').className = 'right2';
+      document.getElementById('key_AE09').className = 'right3';
+      document.getElementById('key_AE10').className = 'right4';
+    } else {
+      document.getElementById('key_AE01').className = 'left5';
+      document.getElementById('key_AE02').className = 'left4';
+      document.getElementById('key_AE03').className = 'left3';
+      document.getElementById('key_AE04').className = 'left2';
+      document.getElementById('key_AE05').className = 'left2';
+      document.getElementById('key_AE06').className = 'right2';
+      document.getElementById('key_AE07').className = 'right2';
+      document.getElementById('key_AE08').className = 'right3';
+      document.getElementById('key_AE09').className = 'right4';
+      document.getElementById('key_AE10').className = 'right5';
     }
+    setCookie('kbShape', value);
+    ui.keyboard.className = value;
+    ui.shape.value = value;
+  }
 
-    // select the variant (and update the cookie)
-    setVariant(variantID || variants[0].getAttribute('id'));
-  });
-}
+  function showHints(on) {
+    document.body.className = on ? 'hints' : '';
+    ui.hints.checked = on;
+    setCookie('kbHints', (on ? 'on' : 'off'));
+  }
 
-function setVariant(variantID) {
-  // var variant = gKeyboard.xmldoc.getElementById(variantID);
-  // getElementById doesn't work on these XML files and I can't see why *sigh*
-  // So this here's a dirty getElementById:
-  var variant = null;
-  var tmp = gKeyboard.xmldoc.getElementsByTagName('variant');
-  for (var i = 0; i < tmp.length; i++) {
-    if (tmp[i].getAttribute('id') == variantID) {
-      variant = tmp[i];
-      break;
+  function setLayout(kbLayout) {
+    ui.variant.innerHTML = '<option> (loading...) </option>';
+
+    // [layout]-[variant]
+    var tmp = kbLayout.split('-');
+    var name = tmp[0];
+    var variantID = (tmp.length > 1) ? tmp[1] : '';
+
+    // load the layout file
+    var href = 'layouts/' + name + '.xml';
+    xhrLoadXML(href, function(xmldoc) {
+      layoutDoc = xmldoc;
+      var variants = xmldoc.getElementsByTagName('variant');
+
+      // sort variants alphabetically
+      var options = [];
+      for (var i = 0; i < variants.length; i++) {
+        options.push({
+          id: variants[i].getAttribute('id'),
+          name: variants[i].getAttribute('name')
+        });
+      }
+      options.sort(function(a, b) {
+        return a.name.localeCompare ?
+               a.name.localeCompare(b.name) : (a.name > b.name);
+      });
+
+      // update the layout selector
+      layoutId = name;
+      ui.layout.value = name;
+
+      // fill the variant selector
+      ui.variant.innerHTML = '';
+      for (i = 0; i < options.length; i++) {
+        var option = document.createElement('option');
+        var value = document.createTextNode(options[i].name);
+        option.appendChild(value);
+        option.setAttribute('value', options[i].id);
+        ui.variant.appendChild(option);
+      }
+
+      // select the variant (and update the cookie)
+      setVariant(variantID || variants[0].getAttribute('id'));
+    });
+  }
+
+  function setVariant(variantID) {
+    // var variant = layoutDoc.getElementById(variantID);
+    // getElementById doesn't work on these XML files and I can't see why *sigh*
+    // So this here's a dirty getElementById:
+    var variant = null;
+    var tmp = layoutDoc.getElementsByTagName('variant');
+    for (var i = 0; i < tmp.length; i++) {
+      if (tmp[i].getAttribute('id') == variantID) {
+        variant = tmp[i];
+        break;
+      }
     }
-  }
-  if (!variant)
-    return;
-
-  // load the base layout the selected variant relies on, if any
-  var include = variant.getAttribute('include');
-  if (include) {
-    setVariant(include);
-  }
-
-  // fill the graphical keyboard
-  var keys = variant.getElementsByTagName('key');
-  for (var i = 0; i < keys.length; i++) {
-    drawKey(keys[i]);
-  }
-
-  // update the variant selector
-  document.getElementById('variant').value = variantID;
-
-  // update hash + cookie
-  var kbLayout = gKeyboard.layoutId.split('-')[0] + '-' + variantID;
-  window.location.hash = kbLayout;
-  setCookie('kbLayout', kbLayout);
-  gKeyboard.layoutId = kbLayout;
-}
-
-function drawKey(xmlElement) {
-  var name = xmlElement.getAttribute('name');
-  var base = xmlElement.getAttribute('base');
-  var shift = xmlElement.getAttribute('shift');
-  var element = document.getElementById('key_' + name);
-  if (!element)
-    return;
-
-  // fill <li> element
-  element.innerHTML = '';
-  // create <strong> for 'shift'
-  var strong = document.createElement('strong');
-  var strongStr = document.createTextNode(shift);
-  strong.appendChild(strongStr);
-  element.appendChild(strong);
-  // append <em> for 'base' if necessary (not a letter)
-  if (shift.toLowerCase() != base) {
-    var em = document.createElement('em');
-    var emStr = document.createTextNode(base);
-    em.appendChild(emStr);
-    element.appendChild(em);
-  }
-
-  // store current key in the main hash table
-  gKeyboard.keymap[base] = element;
-  gKeyboard.keymap[shift] = element;
-}
-
-function keyPress(event) {
-  // find which key has been pressed
-  var keyChar = null;
-  if (event.which == null) {
-    keyChar = String.fromCharCode(event.keyCode);  // IE
-  }
-  else if (event.which != 0 && event.charCode != 0) {
-    keyChar = String.fromCharCode(event.which);    // modern browsers
-  }
-  else if (event.keyCode >= 32 && event.keyCode < 127) {
-    keyChar = String.fromCharCode(event.keyCode);
-  }
-
-  // highlight the key that has been pressed
-  var key = gKeyboard.keymap[keyChar];
-  if (key) {
-    key.style.cssText = gKeyboard.usrInputStyle;
-    setTimeout(function() {
-      key.style.cssText = '';
-    }, gKeyboard.usrInputTimeout);
-  }
-}
-
-function keyDown(event) {
-  // disable special keys in the text input box
-  switch (event.keyCode) {
-    case 8:  // BackSpace
-    case 9:  // Tab
-    case 46: // Delete
-    case 27: // Escape
-      EVENTS.preventDefault(event);
+    if (!variant)
       return;
-  }
-}
 
-function highlightKey(keyChar) {
-  // remove last key's highlighting
-  if (gKeyboard.activeKey) {
-    var className = gKeyboard.activeKey.className.replace(/\s.*$/, '');
-    gKeyboard.activeKey.className = className;
-  }
-  if (gKeyboard.activeMod) {
-    gKeyboard.activeMod.className = 'specialKey';
-  }
-
-  // highlight the new key and the corresponding finger
-  var key = gKeyboard.keymap[keyChar];
-  if (key) {
-    document.getElementById('hands').className = key.className;
-    gKeyboard.activeKey = key;
-    key.className += ' active';
-    // TODO: highlight the modifier, too
-  }
-}
-
-function textInput(value) {
-  if (!value.length) { // empty input box => reset timer
-    //gTimer.stop();
-    highlightKey(gLessons.txtPrompt.value.substr(0, 1));
-    return;
-  }
-
-  var pos = value.length - 1;
-  if (pos == 0) { // first char => start the timer
-    //gTimer.start();
-  }
-
-  // Check if the last char is correct
-  var entered = value.substring(pos);
-  var expected = gLessons.txtPrompt.value.substr(pos, 1);
-  if (entered != expected) { // mistake
-    //gTimer.typo();
-  }
-
-  // Check if the whole input is correct
-  var correct = (value == gLessons.txtPrompt.value.substr(0, pos + 1));
-  if (correct) {
-    // highlight the next key (or remove highlighting if it's finished)
-    highlightKey(gLessons.txtPrompt.value.substr(pos + 1, 1));
-    // finished?
-    if (pos >= gLessons.txtPrompt.value.length - 1) {
-      nextPrompt();
+    // load the base layout the selected variant relies on, if any
+    var include = variant.getAttribute('include');
+    if (include) {
+      setVariant(include);
     }
-  } else {
-    // TODO: highlight the backspace key
-    // highlightSpecialKey(gKeyboard.bspaceKey);
-    // alternative: auto-correction
-    gKeyboard.txtInput.className = 'error';
-    setTimeout(function() {
-      gKeyboard.txtInput.className = '';
-    }, gKeyboard.usrInputTimeout);
-    gKeyboard.txtInput.value = gKeyboard.txtInput.value.substr(0, pos);
+
+    // fill the graphical keyboard
+    var keys = variant.getElementsByTagName('key');
+    for (var i = 0; i < keys.length; i++) {
+      drawKey(keys[i]);
+    }
+
+    // update the variant selector
+    ui.variant.value = variantID;
+
+    // update hash + cookie
+    var kbLayout = layoutId.split('-')[0] + '-' + variantID;
+    window.location.hash = kbLayout;
+    setCookie('kbLayout', kbLayout);
+    layoutId = kbLayout;
   }
-}
+
+  function drawKey(xmlElement) {
+    var name = xmlElement.getAttribute('name');
+    var base = xmlElement.getAttribute('base');
+    var shift = xmlElement.getAttribute('shift');
+    var element = document.getElementById('key_' + name);
+    if (!element)
+      return;
+
+    // fill <li> element
+    element.innerHTML = '';
+    // create <strong> for 'shift'
+    var strong = document.createElement('strong');
+    var strongStr = document.createTextNode(shift);
+    strong.appendChild(strongStr);
+    element.appendChild(strong);
+    // append <em> for 'base' if necessary (not a letter)
+    if (shift.toLowerCase() != base) {
+      var em = document.createElement('em');
+      var emStr = document.createTextNode(base);
+      em.appendChild(emStr);
+      element.appendChild(em);
+    }
+
+    // store current key in the main hash table
+    keymap[base] = element;
+    keymap[shift] = element;
+  }
+
+  function keyPress(event) {
+    // find which key has been pressed
+    var keyChar = null;
+    if (event.which == null) {
+      keyChar = String.fromCharCode(event.keyCode);  // IE
+    }
+    else if (event.which != 0 && event.charCode != 0) {
+      keyChar = String.fromCharCode(event.which);    // modern browsers
+    }
+    else if (event.keyCode >= 32 && event.keyCode < 127) {
+      keyChar = String.fromCharCode(event.keyCode);
+    }
+
+    // highlight the key that has been pressed
+    var key = keymap[keyChar];
+    if (key) {
+      key.style.cssText = usrInputStyle;
+      setTimeout(function() {
+        key.style.cssText = '';
+      }, usrInputTimeout);
+    }
+  }
+
+  function keyDown(event) {
+    // disable special keys in the text input box
+    switch (event.keyCode) {
+      case 8:  // BackSpace
+      case 9:  // Tab
+      case 46: // Delete
+      case 27: // Escape
+        EVENTS.preventDefault(event);
+        return;
+    }
+  }
+
+  function highlightKey(keyChar) {
+    // remove last key's highlighting
+    if (ui.activeKey) {
+      var className = ui.activeKey.className.replace(/\s.*$/, '');
+      ui.activeKey.className = className;
+    }
+    if (ui.activeMod) {
+      ui.activeMod.className = 'specialKey';
+    }
+
+    // highlight the new key and the corresponding finger
+    var key = keymap[keyChar];
+    if (key) {
+      ui.hands.className = key.className;
+      ui.activeKey = key;
+      key.className += ' active';
+      // TODO: highlight the modifier, too
+    }
+  }
+
+  function textInput(value) { // XXX should not be part of gKeyboard
+    var text = gLessons.getText();
+
+    if (!value.length) { // empty input box => reset timer
+      //gTimer.stop();
+      highlightKey(text.substr(0, 1));
+      return;
+    }
+
+    var pos = value.length - 1;
+    if (pos == 0) { // first char => start the timer
+      //gTimer.start();
+    }
+
+    // Check if the last char is correct
+    var entered = value.substring(pos);
+    var expected = text.substr(pos, 1);
+    if (entered != expected) { // mistake
+      //gTimer.typo();
+    }
+
+    // Check if the whole input is correct
+    var correct = (value == text.substr(0, pos + 1));
+    if (correct) {
+      // highlight the next key (or remove highlighting if it's finished)
+      highlightKey(text.substr(pos + 1, 1));
+      // finished?
+      if (pos >= text.length - 1) {
+        gLessons.nextPrompt();
+      }
+    } else {
+      // TODO: highlight the backspace key
+      //   highlightSpecialKey(ui.bspaceKey);
+      // alternative: auto-correction
+      ui.txtInput.className = 'error';
+      setTimeout(function() {
+        ui.txtInput.className = '';
+      }, usrInputTimeout);
+      ui.txtInput.value = ui.txtInput.value.substr(0, pos);
+    }
+  }
+
+  return {
+    init: init,
+    getLayout: function() { return layoutId; },
+    setLayout: setLayout,
+    highlightKey: highlightKey,
+    clear: function() { ui.txtInput.value = ''; },
+    focus: function() { ui.txtInput.focus(); }
+  };
+})(window, document);
 
 
 /******************************************************************************
  * Typing Lessons (aka KTouchLecture)
  */
 
-var gLessons = {
-  xmldoc: null, // xml lesson document
-  levelSelector: null,
-  txtPrompt: null,
-  currentLevel: -1
-};
+var gLessons = (function(window, document, undefined) {
+  var lessonsDoc = null;
+  var currentLevel = -1;
+  var ui = {
+    lesson: null,
+    level: null,
+    txtPrompt: null
+  };
 
-function setLesson(name, levelIndex) {
-  // clear the level selector
-  gLessons.levelSelector.innerHTML = '<option> (loading...) </option>';
+  function init() {
+    ui.lesson = document.getElementById('lesson');
+    ui.level = document.getElementById('level');
+    ui.txtPrompt = document.getElementById('txtPrompt');
 
-  // load the layout file
-  var href = 'lessons/' + name + '.ktouch.xml';
-  xhrLoadXML(href, function(xmldoc) {
-    gLessons.xmldoc = xmldoc;
-    var levelNodes = xmldoc.getElementsByTagName('Level');
+    ui.lesson.onchange = function() { setLesson(this.value); };
+    ui.level.onchange = function() { setLevel(this.value); };
+    ui.txtPrompt.value = '';
 
-    // fill the lesson selector
-    gLessons.levelSelector.innerHTML = '';
-    for (var i = 0; i < levelNodes.length; i++) {
-      var name = levelNodes[i].getElementsByTagName('NewCharacters')
-                              .item(0).childNodes[0].nodeValue;
-      var option = document.createElement('option');
-      var text = document.createTextNode((i + 1) + ': ' + name);
-      option.appendChild(text);
-      option.setAttribute('value', i);
-      gLessons.levelSelector.appendChild(option);
-    }
+    setLesson(getCookie('lessonName') || 'english', getCookie('lessonLevel'));
+  }
 
-    // select the difficulty level
-    setLevel(levelIndex);
-  });
+  function setLesson(name, levelIndex) {
+    // clear the level selector
+    ui.level.innerHTML = '<option> (loading...) </option>';
 
-  // update the form selector
-  setCookie('lessonName', name);
-  document.getElementById('lesson').value = name;
-}
+    // load the layout file
+    var href = 'lessons/' + name + '.ktouch.xml';
+    xhrLoadXML(href, function(xmldoc) {
+      lessonsDoc = xmldoc;
+      var levelNodes = xmldoc.getElementsByTagName('Level');
 
-function setLevel(levelIndex) {
-  levelIndex = levelIndex || 0;
-  document.getElementById('level').value = levelIndex;
-  setCookie('lessonLevel', levelIndex);
-  newPromptFromLessons();
-}
+      // fill the lesson selector
+      ui.level.innerHTML = '';
+      for (var i = 0; i < levelNodes.length; i++) {
+        var name = levelNodes[i].getElementsByTagName('NewCharacters')
+                                .item(0).childNodes[0].nodeValue;
+        var option = document.createElement('option');
+        var text = document.createTextNode((i + 1) + ': ' + name);
+        option.appendChild(text);
+        option.setAttribute('value', i);
+        ui.level.appendChild(option);
+      }
 
-function newPrompt(value) {
-  // display a new exercise and start the test
-  highlightKey(value.substring(0, 1));
-  gLessons.txtPrompt.value = value;
-  gKeyboard.txtInput.value = '';
-  gKeyboard.txtInput.focus(); // XXX not working on Safari
-}
+      // select the difficulty level
+      setLevel(levelIndex);
+    });
 
-function newPromptFromLessons() {
-  // select a random line in the current level
-  var index = gLessons.levelSelector.selectedIndex;
-  if (index < 0) return;
-  var lines = gLessons.xmldoc.getElementsByTagName('Level').item(index)
-                             .getElementsByTagName('Line');
-  var i = Math.floor(Math.random() * lines.length);
-  newPrompt(lines[i].childNodes[0].nodeValue);
-}
+    // update the form selector
+    setCookie('lessonName', name);
+    ui.lesson.value = name;
+  }
 
-function nextPrompt() {
-  return newPromptFromLessons();
-  // TODO
-  gTimer.stop();
-  var nextLevel = gTimer.report();
-
-  if (gDialog.mode == modLESSONS) {
-    if (nextLevel) { // get to the next level
-      alert("Congrats!\nLet's get to the next level.");
-      gTimer.reset();
-      gDialog.level.selectedIndex++;
-    }
+  function setLevel(levelIndex) {
+    levelIndex = levelIndex || 0;
+    ui.level.value = levelIndex;
+    setCookie('lessonLevel', levelIndex);
     newPromptFromLessons();
   }
-  else if (gDialog.mode == modPANGRAMS) {
-    newPromptFromPangrams();
+
+  function newPrompt(value) {
+    // display a new exercise and start the test
+    gKeyboard.highlightKey(value.substring(0, 1));
+    ui.txtPrompt.value = value;
+    gKeyboard.clear();
+    gKeyboard.focus();
   }
-  else if (gDialog.mode == modCLIPBOARD) {
+
+  function newPromptFromLessons() {
+    var index = ui.level.selectedIndex;
+    if (index < 0)
+      return;
+
+    // select a random line in the current level
+    var lines = lessonsDoc.getElementsByTagName('Level').item(index)
+                          .getElementsByTagName('Line');
+    var i = Math.floor(Math.random() * lines.length);
+    newPrompt(lines[i].childNodes[0].nodeValue);
   }
-}
+
+  function nextPrompt() {
+    return newPromptFromLessons();
+    // TODO
+    gTimer.stop();
+    var nextLevel = gTimer.report();
+
+    if (gDialog.mode == modLESSONS) {
+      if (nextLevel) { // get to the next level
+        alert("Congrats!\nLet's get to the next level.");
+        gTimer.reset();
+        gDialog.level.selectedIndex++;
+      }
+      newPromptFromLessons();
+    }
+    else if (gDialog.mode == modPANGRAMS) {
+      newPromptFromPangrams();
+    }
+    else if (gDialog.mode == modCLIPBOARD) {
+    }
+  }
+
+  return {
+    init: init,
+    setLesson: setLesson,
+    newPrompt: newPrompt,
+    nextPrompt: nextPrompt,
+    getText: function() { return ui.txtPrompt.value; }
+  };
+})(window, document);
 
 
 /******************************************************************************
@@ -459,45 +541,15 @@ var gMetrics = {};
  */
 
 EVENTS.onDOMReady(function() {
-  // set the keyboard layout
-  gKeyboard.variant = document.getElementById('variant');
-  gKeyboard.txtInput = document.getElementById('txtInput');
-  gKeyboard.keymap = new Array();
-
-  var kbLayout = window.location.hash.substring(1) ||
-    getCookie('kbLayout') || 'qwerty';
-  setLayout(kbLayout);
-  setShape(getCookie('kbShape') || 'pc104');
-  showHints(getCookie('kbHints') != 'off');
-
-  /**
-   * Bind event listeners to the text input:
-   *  'keypress' : tracks normal keys (characters)
-   *  'keydown'  : tracks special keys (tab, escape, backspace...)
-   *  'keyup'    : tracks inputs in the <textarea> node:
-   *     the 'input' event would work much better (less latency)
-   *     but it isn't supported by IE<9 and Safari 4
-   */
-  EVENTS.addListener(gKeyboard.txtInput, 'keypress', keyPress);
-  EVENTS.addListener(gKeyboard.txtInput, 'keydown', keyDown);
-  EVENTS.addListener(gKeyboard.txtInput, 'keyup', function() {
-    textInput(this.value);
-  });
-
-  // set the typing lesson
-  gLessons.levelSelector = document.getElementById('level');
-  gLessons.txtPrompt = document.getElementById('txtPrompt');
-  gLessons.txtPrompt.value = '';
-  setLesson(getCookie('lessonName') || 'english', getCookie('lessonLevel'));
-
-  // go, go, go!
-  gKeyboard.txtInput.focus();
+  gLessons.init();
+  gKeyboard.init();
+  gKeyboard.focus();
 });
 
 EVENTS.addListener(window, 'hashchange', function() { // won't work with IE<8
   var kbLayout = window.location.hash.substr(1);
-  if (kbLayout != gKeyboard.layoutId) {
-    setLayout(kbLayout);
+  if (kbLayout != gKeyboard.getLayout()) {
+    gKeyboard.setLayout(kbLayout);
   }
 });
 
