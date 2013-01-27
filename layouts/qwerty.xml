@@ -2,7 +2,7 @@
 <layout>
   <title>qwerty</title>
 
-  <variant id="en_US" name="English (US)">
+  <variant id="us" name="English (US)">
     <!--row #1-->
     <key name="TLDE" base="`" shift="~" />
     <key name="AE01" base="1" shift="!" />
@@ -59,7 +59,7 @@
     <key name="SPCE" base=" " shift=" " />
   </variant>
 
-  <variant id="en_GB" include="en_US" name="English (GB)">
+  <variant id="gb" include="us" name="English (GB)">
     <key name="TLDE" base="`" shift="¬" />
     <key name="AE02" base="2" shift='"' />
     <key name="AE03" base="3" shift="£" />
@@ -67,7 +67,7 @@
     <key name="BKSL" base="#" shift="~" />
   </variant>
 
-  <variant id="pt_BR" include="en_US" name="Português (do Brasil)">
+  <variant id="br" include="us" name="Português (do Brasil)">
     <key name="TLDE" base="'" shift='"' />
     <key name="AE06" base="6" shift="¨" />
     <key name="AD11" base="´" shift="`" />
@@ -80,7 +80,7 @@
     <key name="ABNT" base="/" shift="?" />
   </variant>
 
-  <variant id="fr_FR" include="en_US" name="Français (Lafayette)">
+  <variant id="fr" include="us" name="Français (Lafayette)" url="http://kazhack.org/lafayette/">
     <key name="AD11" base="^" shift="«" />
     <key name="AD12" base="´" shift="»" />
     <key name="AC10" base="★" shift="¨" />
@@ -91,7 +91,7 @@
 
   <!-- South-European variants -->
 
-  <variant id="es_ES" include="en_US" name="Español">
+  <variant id="es" include="us" name="Español">
     <key name="TLDE" base="º" shift="ª" />
     <key name="AE02" base="2" shift='"' />
     <key name="AE03" base="3" shift="·" />
@@ -113,7 +113,7 @@
     <key name="AB10" base="-" shift="_" />
   </variant>
 
-  <variant id="it_IT" include="es_ES" name="Italiano">
+  <variant id="it" include="es" name="Italiano">
     <key name="TLDE" base="\" shift="|" />
     <key name="AE03" base="3" shift="£" />
     <key name="AE12" base="ì" shift="^" />
@@ -123,7 +123,7 @@
     <key name="BKSL" base="ù" shift="§" />
   </variant>
 
-  <variant id="pt_PT" include="es_ES" name="Português (Europeu)">
+  <variant id="pt" include="es" name="Português (Europeu)">
     <key name="TLDE" base="\" shift="|" />
     <key name="AE03" base="3" shift="#" />
     <key name="AE12" base="«" shift="»" />
@@ -134,7 +134,7 @@
     <key name="BKSL" base="~" shift="^" />
   </variant>
 
-  <variant id="tr_TR" include="es_ES" name="Türkçe">
+  <variant id="tr" include="es" name="Türkçe">
     <key name="TLDE" base='"' shift="é" />
     <key name="AE02" base="2" shift="'" />
     <key name="AE03" base="3" shift="^" />
@@ -154,7 +154,7 @@
 
   <!-- North-European variants -->
 
-  <variant id="da_DK" include="es_ES" name="Dansk">
+  <variant id="dk" include="es" name="Dansk">
     <key name="TLDE" base="½" shift="§" />
     <key name="AE03" base="3" shift="#" />
     <key name="AE04" base="4" shift="¤" />
@@ -167,23 +167,23 @@
     <key name="BKSL" base="'" shift="*" />
   </variant>
 
-  <variant id="fo_FO" include="da_DK" name="Faroese">
+  <variant id="fo" include="dk" name="Faroese">
     <key name="AD12" base="ð" shift="Ð" />
   </variant>
 
-  <variant id="no_NO" include="da_DK" name="Norsk">
+  <variant id="no" include="dk" name="Norsk">
     <key name="TLDE" base="|" shift="§" />
     <key name="AE12" base="\" shift="`" />
     <key name="AC10" base="ø" shift="Ø" />
     <key name="AC11" base="æ" shift="Æ" />
   </variant>
 
-  <variant id="sv_SE" include="da_DK" name="Svenska">
+  <variant id="se" include="dk" name="Svenska">
     <key name="TLDE" base="§" shift="½" />
     <key name="AC10" base="ö" shift="Ö" />
     <key name="AC11" base="ä" shift="Ä" />
   </variant>
 
-  <variant id="fi_FI" include="sv_SE" name="Suomi" />
+  <variant id="fi" include="se" name="Suomi" />
 
 </layout>

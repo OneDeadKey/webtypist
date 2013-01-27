@@ -2,7 +2,7 @@
 <layout>
   <title>azerty</title>
 
-  <variant id="fr_FR" name="Français">
+  <variant id="fr" name="Français">
     <!--row #1-->
     <key name="TLDE" base="²" shift="" />
     <key name="AE01" base="&amp;" shift="1" />
@@ -59,7 +59,7 @@
     <key name="SPCE" base=" " shift=" " />
   </variant>
 
-  <variant id="fr_BE" include="fr_FR" name="Belge">
+  <variant id="be" include="fr" name="Belge">
     <key name="TLDE" base="²" shift="³" />
     <key name="AE06" base="§" shift="6" />
     <key name="AE08" base="!" shift="8" />
@@ -69,7 +69,7 @@
     <key name="AB10" base="=" shift="+" />
   </variant>
 
-  <variant id="fr_Mac" include="fr_FR" name="Mac">
+  <variant id="mac" include="fr" name="Français (Mac)">
     <key name="TLDE" base="@" shift="#" />
     <key name="AE06" base="§" shift="6" />
     <key name="AE08" base="!" shift="8" />

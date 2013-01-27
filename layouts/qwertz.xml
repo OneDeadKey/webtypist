@@ -2,7 +2,7 @@
 <layout>
   <title>qwertz</title>
 
-  <variant id="de_DE" name="Deutsch">
+  <variant id="de" name="Deutsch">
     <!--row #1-->
     <key name="TLDE" base="^" shift="°" />
     <key name="AE01" base="1" shift="!" />
@@ -59,7 +59,7 @@
     <key name="SPCE" base=" " shift=" " />
   </variant>
 
-  <variant id="de_CH" include="de_DE" name="Schweiz">
+  <variant id="ch" include="de" name="Schweiz">
     <key name="TLDE" base="§" shift="°" />
     <key name="AE01" base="1" shift="+" />
     <key name="AE03" base="3" shift="*" />
@@ -73,13 +73,13 @@
     <key name="BKSL" base="$" shift="£" />
   </variant>
 
-  <variant id="fr_CH" include="de_CH" name="Suisse">
+  <variant id="fr" include="ch" name="Suisse">
     <key name="AD11" base="è" shift="ü" />
     <key name="AC10" base="é" shift="ö" />
     <key name="AC11" base="à" shift="ä" />
   </variant>
 
-  <variant id="hu_HU" include="de_DE" name="Magyar">
+  <variant id="hu" include="de" name="Magyar">
     <key name="TLDE" base="0" shift="§" />
     <key name="AE01" base="1" shift="'" />
     <key name="AE03" base="3" shift="+" />

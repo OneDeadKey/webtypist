@@ -108,6 +108,7 @@ var gKeyboard = {
   xmldoc: null,        // xml layout document
   keymap: new Array(), // [ (charString, keyRef) ]
   keymod: new Array(), // [ (charString, modifierRef) ]
+  layoutId: '',
   activeKey: null,
   activeMod: null,
   usrInputTimeout: 150,
@@ -138,7 +139,7 @@ function setShape(value) {
     document.getElementById('key_AE09').className = 'right4';
     document.getElementById('key_AE10').className = 'right5';
   }
-  setCookie('shape', value);
+  setCookie('kbShape', value);
   document.getElementById('keyboard').className = value;
   document.getElementById('shape').value = value;
 }
@@ -146,11 +147,17 @@ function setShape(value) {
 function showHints(on) {
   document.body.className = on ? 'hints' : '';
   document.getElementById('hints').checked = on;
-  setCookie('hints', (on ? 'on' : 'off'));
+  setCookie('kbHints', (on ? 'on' : 'off'));
 }
 
-function setLayout(name, variantID) {
+function setLayout(kbLayout) {
+  console.log(kbLayout);
   gKeyboard.variant.innerHTML = '<option> (loading...) </option>';
+
+  // [layout]-[variant]
+  var tmp = kbLayout.split('-');
+  var name = tmp[0];
+  var variantID = (tmp.length > 1) ? tmp[1] : '';
 
   // load the layout file
   var href = 'layouts/' + name + '.xml';
@@ -171,7 +178,11 @@ function setLayout(name, variantID) {
              a.name.localeCompare(b.name) : (a.name > b.name);
     });
 
-    // fill the layout selector
+    // update the layout selector
+    gKeyboard.layoutId = name;
+    document.getElementById('layout').value = name;
+
+    // fill the variant selector
     gKeyboard.variant.innerHTML = '';
     for (i = 0; i < options.length; i++) {
       var option = document.createElement('option');
@@ -181,13 +192,9 @@ function setLayout(name, variantID) {
       gKeyboard.variant.appendChild(option);
     }
 
-    // select the layout, if any
+    // select the variant (and update the cookie)
     setVariant(variantID || variants[0].getAttribute('id'));
   });
-
-  // update the form selector
-  setCookie('layoutName', name);
-  document.getElementById('layout').value = name;
 }
 
 function setVariant(variantID) {
@@ -211,15 +218,20 @@ function setVariant(variantID) {
     setVariant(include);
   }
 
-  // update the selector
-  setCookie('layoutVariant', variantID);
-  document.getElementById('variant').value = variantID;
-
   // fill the graphical keyboard
   var keys = variant.getElementsByTagName('key');
   for (var i = 0; i < keys.length; i++) {
     drawKey(keys[i]);
   }
+
+  // update the variant selector
+  document.getElementById('variant').value = variantID;
+
+  // update hash + cookie
+  var kbLayout = gKeyboard.layoutId.split('-')[0] + '-' + variantID;
+  window.location.hash = kbLayout;
+  setCookie('kbLayout', kbLayout);
+  gKeyboard.layoutId = kbLayout;
 }
 
 function drawKey(xmlElement) {
@@ -351,7 +363,7 @@ function textInput(value) {
  */
 
 var gLessons = {
-  xmldoc: null,        // xml lesson document
+  xmldoc: null, // xml lesson document
   levelSelector: null,
   txtPrompt: null,
   currentLevel: -1
@@ -451,16 +463,21 @@ EVENTS.onDOMReady(function() {
   gKeyboard.variant = document.getElementById('variant');
   gKeyboard.txtInput = document.getElementById('txtInput');
   gKeyboard.keymap = new Array();
-  setLayout(getCookie('layoutName') || 'qwerty', getCookie('layoutVariant'));
-  setShape(getCookie('shape') || 'pc104');
-  showHints(getCookie('hints') != 'off');
 
-  // bind event listeners to the text input:
-  //  'keypress' : tracks normal keys (characters)
-  //  'keydown'  : tracks special keys (tab, escape, backspace...)
-  //  'keyup'    : tracks inputs in the <textarea> node:
-  //     the 'input' event would work much better (less latency)
-  //     but it isn't supported by IE<9 and Safari 4
+  var kbLayout = window.location.hash.substring(1) ||
+    getCookie('kbLayout') || 'qwerty';
+  setLayout(kbLayout);
+  setShape(getCookie('kbShape') || 'pc104');
+  showHints(getCookie('kbHints') != 'off');
+
+  /**
+   * Bind event listeners to the text input:
+   *  'keypress' : tracks normal keys (characters)
+   *  'keydown'  : tracks special keys (tab, escape, backspace...)
+   *  'keyup'    : tracks inputs in the <textarea> node:
+   *     the 'input' event would work much better (less latency)
+   *     but it isn't supported by IE<9 and Safari 4
+   */
   EVENTS.addListener(gKeyboard.txtInput, 'keypress', keyPress);
   EVENTS.addListener(gKeyboard.txtInput, 'keydown', keyDown);
   EVENTS.addListener(gKeyboard.txtInput, 'keyup', function() {
@@ -475,6 +492,13 @@ EVENTS.onDOMReady(function() {
 
   // go, go, go!
   gKeyboard.txtInput.focus();
+});
+
+EVENTS.addListener(window, 'hashchange', function() { // won't work with IE<8
+  var kbLayout = window.location.hash.substr(1);
+  if (kbLayout != gKeyboard.layoutId) {
+    setLayout(kbLayout);
+  }
 });
 
 
