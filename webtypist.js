@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- * Browser Abstraction Layer (events, XMLHttpRequest)
+ * Browser Abstraction Layer: DOM events, localStorage, XMLHttpRequest
  */
 
 var EVENTS = (function(window, document, undefined) {
@@ -142,7 +142,25 @@ var EVENTS = (function(window, document, undefined) {
     preventDefault: preventDefault,
     onDOMReady: domReady
   };
-})(window, document);
+})(this, document);
+
+var STORAGE = (function(window, document, undefined) {
+  if ('localStorage' in window)
+    return localStorage;
+
+  return { // use cookies as a fallback
+    getItem: function getCookie(name) {
+      var results = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return results ? (unescape(results[2])) : '';
+    },
+    setItem: function setCookie(name, value, expiredays) {
+      document.cookie = name + '=' + escape(value);
+    },
+    removeItem: function removeCookie(name) {
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    }
+  };
+})(this, document);
 
 function xhrLoadXML(href, callback) {
   /**
@@ -174,26 +192,6 @@ function xhrLoadXML(href, callback) {
     };
     xhr.send(null);
   }
-}
-
-
-/******************************************************************************
- * Cookie Management
- */
-
-function getCookie(name) {
-  var results = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-  return results ? (unescape(results[2])) : null;
-}
-
-function setCookie(name, value, expiredays) {
-  var cookie = name + '=' + escape(value);
-  if (expiredays != null) {
-    var exdate = new Date();
-    exdate.setDate(exdate.getDate() + expiredays);
-    cookie += ';expires=' + exdate.toUTCString();
-  }
-  document.cookie = cookie;
 }
 
 
@@ -236,10 +234,10 @@ var gKeyboard = (function(window, document, undefined) {
     ui.hints.onclick = function() { showHints(this.checked); };
 
     var kbLayout = window.location.hash.substring(1) ||
-      getCookie('kbLayout') || 'qwerty';
+      STORAGE.getItem('kbLayout') || 'qwerty';
     setLayout(kbLayout);
-    setShape(getCookie('kbShape') || 'pc104');
-    showHints(getCookie('kbHints') != 'off');
+    setShape(STORAGE.getItem('kbShape') || 'pc104');
+    showHints(STORAGE.getItem('kbHints') != 'off');
   }
 
   function setShape(value) {
@@ -266,7 +264,7 @@ var gKeyboard = (function(window, document, undefined) {
       document.getElementById('key_AE09').className = 'right4';
       document.getElementById('key_AE10').className = 'right5';
     }
-    setCookie('kbShape', value);
+    STORAGE.setItem('kbShape', value);
     ui.keyboard.className = value;
     ui.shape.value = value;
   }
@@ -274,7 +272,7 @@ var gKeyboard = (function(window, document, undefined) {
   function showHints(on) {
     document.body.className = on ? 'hints' : '';
     ui.hints.checked = on;
-    setCookie('kbHints', (on ? 'on' : 'off'));
+    STORAGE.setItem('kbHints', (on ? 'on' : 'off'));
   }
 
   function setLayout(kbLayout) {
@@ -356,7 +354,7 @@ var gKeyboard = (function(window, document, undefined) {
     // update hash + cookie
     var kbLayout = layoutId.split('-')[0] + '-' + variantID;
     window.location.hash = kbLayout;
-    setCookie('kbLayout', kbLayout);
+    STORAGE.setItem('kbLayout', kbLayout);
     EVENTS.trigger(window, 'layoutchange');
     layoutId = kbLayout;
   }
@@ -427,7 +425,7 @@ var gKeyboard = (function(window, document, undefined) {
     highlightKey: highlightKey,
     pressKey: pressKey
   };
-})(window, document);
+})(this, document);
 
 
 /******************************************************************************
@@ -450,7 +448,8 @@ var gLessons = (function(window, document, undefined) {
     ui.lesson.onchange = function() { setLesson(this.value); };
     ui.level.onchange = function() { setLevel(this.value); };
 
-    setLesson(getCookie('lessonName') || 'english', getCookie('lessonLevel'));
+    setLesson(STORAGE.getItem('lessonName') || 'english',
+              STORAGE.getItem('lessonLevel'));
   }
 
   function setLesson(name, levelIndex) {
@@ -480,14 +479,14 @@ var gLessons = (function(window, document, undefined) {
     });
 
     // update the form selector
-    setCookie('lessonName', name);
+    STORAGE.setItem('lessonName', name);
     ui.lesson.value = name;
   }
 
   function setLevel(levelIndex) {
     levelIndex = levelIndex || 0;
     ui.level.value = levelIndex;
-    setCookie('lessonLevel', levelIndex);
+    STORAGE.setItem('lessonLevel', levelIndex);
     EVENTS.trigger(window, 'lessonchange');
   }
 
@@ -508,7 +507,7 @@ var gLessons = (function(window, document, undefined) {
     setLesson: setLesson,
     newPrompt: newPrompt
   };
-})(window, document);
+})(this, document);
 
 
 /******************************************************************************
@@ -629,7 +628,7 @@ var gTypist = (function(window, document, undefined) {
     init: init,
     newPrompt: newPrompt
   };
-})(window, document);
+})(this, document);
 
 
 /******************************************************************************
