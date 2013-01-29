@@ -14,38 +14,135 @@
  * Browser Abstraction Layer (events, XMLHttpRequest)
  */
 
-var EVENTS = {
-  addListener: function(node, type, callback) {},
-  preventDefault: function(event) {},
-  onDOMReady: function(callback) {}
-};
+var EVENTS = (function(window, document, undefined) {
+  var bind = function(node, type, callback) {};
+  var unbind = function(node, type, callback) {};
+  var trigger = function(node, type) {};
+  var preventDefault = function(event) {};
+  var domReady = function(callback) {};
 
-if (window.addEventListener) { // modern browsers
-  EVENTS.addListener = function(node, type, callback) {
-    node.addEventListener(type, callback, false);
+  // addEventListener should work fine everywhere except with IE<9
+  if (window.addEventListener) { // modern browsers
+    var eventList = {};
+    bind = function(node, type, callback) {
+      if (!node) return;
+      node.addEventListener(type, callback, false);
+    };
+    unbind = function(node, type, callback) {
+      if (!node) return;
+      node.removeEventListener(type, callback, false);
+    };
+    trigger = function(node, type) {
+      if (!node) return;
+      var evtObject = eventList[type];
+      if (!evtObject) {
+        evtObject = document.createEvent('Event');
+        evtObject.initEvent(type, false, false);
+        eventList[type] = evtObject;
+      }
+      node.dispatchEvent(evtObject);
+    };
+    preventDefault = function(event) {
+      event.preventDefault();
+    };
+    domReady = function(callback) {
+      window.addEventListener('DOMContentLoaded', callback, false);
+    };
+  }
+  else if (window.attachEvent) { // Internet Explorer 6/7/8
+    /**
+     * This also fixes the 'this' reference issue in all callbacks
+     * -- both for standard and custom events.
+     * http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
+     */
+    bind = function(node, type, callback) {
+      if (!node) return;
+      var ref = type + callback;
+      type = 'on' + type;
+      if (type in node) { // standard DOM event
+        if (!node['e' + ref]) {
+          node['e' + ref] = callback;
+          node[ref] = function() {
+            node['e' + ref](window.event);
+          };
+          node.attachEvent(type, node[ref]);
+        }
+      }
+      else { // custom event
+        if (!node.eventList) {
+          node.eventList = {};
+        }
+        if (!node.eventList[type]) {
+          node.eventList[type] = [];
+        }
+        node.eventList[type].push(callback);
+      }
+    };
+    unbind = function(node, type, callback) {
+      if (!node) return;
+      var ref = type + callback;
+      type = 'on' + type;
+      if (type in node) { // standard DOM event
+        if (node['e' + ref]) {
+          node.detachEvent(type, node[ref]);
+          try {
+            delete(node[ref]);
+            delete(node['e' + ref]);
+          } catch (e) { // IE6 doesn't support 'delete()' above
+            node[ref] = null;
+            node['e' + ref] = null;
+          }
+        }
+      }
+      else { // custom event
+        if (!node || !node.eventList || !node.eventList[type])
+          return;
+        var callbacks = node.eventList[type];
+        var cbLength = callbacks.length;
+        for (var i = 0; i < cbLength; i++) {
+          if (callbacks[i] == callback) {
+            callbacks.slice(i, 1);
+            return;
+          }
+        }
+      }
+    };
+    trigger = function(node, type) {
+      if (!node) return;
+      type = 'on' + type;
+      if (type in node) try { // standard DOM event?
+        node.fireEvent(type);
+        return;
+      } catch (e) {}
+      // custom event: pass an event-like structure to the callback
+      // + use call() to set the 'this' reference within the callback
+      var evtObject = {};
+      evtObject.target = node;
+      evtObject.srcElement = node;
+      if (!node || !node.eventList || !node.eventList[type])
+        return;
+      var callbacks = node.eventList[type];
+      var cbLength = callbacks.length;
+      for (var i = 0; i < cbLength; i++)
+        callbacks[i].call(node, evtObject);
+    };
+    preventDefault = function(event) {
+      event.returnValue = false;
+    };
+    domReady = function(callback) {
+      window.attachEvent('load', callback);
+    };
+  }
+
+  // API
+  return {
+    bind: bind,
+    unbind: unbind,
+    trigger: trigger,
+    preventDefault: preventDefault,
+    onDOMReady: domReady
   };
-  EVENTS.preventDefault = function(event) {
-    event.preventDefault();
-  };
-  EVENTS.onDOMReady = function(callback) {
-    window.addEventListener('DOMContentLoaded', callback, false);
-  };
-}
-else if (window.attachEvent) { // Internet Explorer 6/7/8
-  EVENTS.addListener = function(node, type, callback) {
-    // http://www.quirksmode.org/blog/archives/2005/10/_and_the_winner_1.html
-    var ref = type + callback;
-    node['e' + ref] = callback;
-    node[ref] = function() { node['e' + ref](window.event); };
-    node.attachEvent('on' + type, node[ref]);
-  };
-  EVENTS.preventDefault = function(event) {
-    event.returnValue = false;
-  };
-  EVENTS.onDOMReady = function(callback) {
-    window.attachEvent('onload', callback);
-  };
-}
+})(window, document);
 
 function xhrLoadXML(href, callback) {
   /**
@@ -260,6 +357,7 @@ var gKeyboard = (function(window, document, undefined) {
     var kbLayout = layoutId.split('-')[0] + '-' + variantID;
     window.location.hash = kbLayout;
     setCookie('kbLayout', kbLayout);
+    EVENTS.trigger(window, 'layoutchange');
     layoutId = kbLayout;
   }
 
@@ -390,10 +488,7 @@ var gLessons = (function(window, document, undefined) {
     levelIndex = levelIndex || 0;
     ui.level.value = levelIndex;
     setCookie('lessonLevel', levelIndex);
-
-    if (ui.output) {
-      ui.output.value = newPrompt();
-    }
+    EVENTS.trigger(window, 'lessonchange');
   }
 
   function newPrompt() {
@@ -411,8 +506,7 @@ var gLessons = (function(window, document, undefined) {
   return {
     init: init,
     setLesson: setLesson,
-    newPrompt: newPrompt,
-    setOutput: function(element) { ui.output = element; }
+    newPrompt: newPrompt
   };
 })(window, document);
 
@@ -436,12 +530,8 @@ var gTypist = (function(window, document, undefined) {
     ui.txtInput.value = '';
     ui.txtInput.focus();
 
-    /**
-     * This is a bit spaghetti-ish and I'm not sure it works on IE6.
-     */
-
-    gLessons.setOutput(ui.txtPrompt);
-    EVENTS.addListener(ui.txtPrompt, 'change', newPrompt);
+    EVENTS.bind(window, 'lessonchange', newPrompt);
+    EVENTS.bind(window, 'layoutchange', newPrompt);
 
     /**
      * Bind event listeners to the text input:
@@ -452,20 +542,19 @@ var gTypist = (function(window, document, undefined) {
      *     but it isn't supported by IE<9 and Safari 4
      */
 
-    EVENTS.addListener(ui.txtInput, 'keypress', onKeyPress);
-    EVENTS.addListener(ui.txtInput, 'keydown', onKeyDown);
-    EVENTS.addListener(ui.txtInput, 'keyup', function() {
+    EVENTS.bind(ui.txtInput, 'keypress', onKeyPress);
+    EVENTS.bind(ui.txtInput, 'keydown', onKeyDown);
+    EVENTS.bind(ui.txtInput, 'keyup', function() {
       onInput(this.value);
     });
   }
 
   // display a new exercise and start the test
   function newPrompt() {
-    console.log('newPrompt');
-    // var value = gLessons.newPrompt();
-    gKeyboard.highlightKey(ui.txtPrompt.value.substring(0, 1));
+    var value = gLessons.newPrompt();
+    gKeyboard.highlightKey(value.substring(0, 1));
 
-    // ui.txtPrompt.value = value;
+    ui.txtPrompt.value = value;
     ui.txtInput.value = '';
     ui.txtInput.focus();
   }
@@ -553,7 +642,7 @@ EVENTS.onDOMReady(function() {
   gTypist.init();
 });
 
-EVENTS.addListener(window, 'hashchange', function() { // won't work with IE<8
+EVENTS.bind(window, 'hashchange', function() { // won't work with IE<8
   var kbLayout = window.location.hash.substr(1);
   if (kbLayout != gKeyboard.getLayout()) {
     gKeyboard.setLayout(kbLayout);
