@@ -114,7 +114,6 @@ var gKeyboard = (function(window, document, undefined) {
   var ui = {
     layout: null,
     variant: null,
-    txtInput: null,
     keyboard: null,
     shape: null,
     hints: null,
@@ -128,7 +127,6 @@ var gKeyboard = (function(window, document, undefined) {
 
     ui.layout = document.getElementById('layout');
     ui.variant = document.getElementById('variant');
-    ui.txtInput = document.getElementById('txtInput');
     ui.keyboard = document.getElementById('keyboard');
     ui.shape = document.getElementById('shape');
     ui.hints = document.getElementById('hints');
@@ -138,27 +136,13 @@ var gKeyboard = (function(window, document, undefined) {
     ui.variant.onchange = function() { setVariant(this.value); };
     ui.shape.onchange = function() { setShape(this.value); };
     // IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead
-    ui.hints.onclick = function() { setHints(this.checked); };
+    ui.hints.onclick = function() { showHints(this.checked); };
 
     var kbLayout = window.location.hash.substring(1) ||
       getCookie('kbLayout') || 'qwerty';
     setLayout(kbLayout);
     setShape(getCookie('kbShape') || 'pc104');
     showHints(getCookie('kbHints') != 'off');
-
-    /**
-     * Bind event listeners to the text input:
-     *  'keypress' : tracks normal keys (characters)
-     *  'keydown'  : tracks special keys (tab, escape, backspace...)
-     *  'keyup'    : tracks inputs in the <textarea> node:
-     *     the 'input' event would work much better (less latency)
-     *     but it isn't supported by IE<9 and Safari 4
-     */
-    EVENTS.addListener(ui.txtInput, 'keypress', keyPress);
-    EVENTS.addListener(ui.txtInput, 'keydown', keyDown);
-    EVENTS.addListener(ui.txtInput, 'keyup', function() {
-      textInput(this.value);
-    });
   }
 
   function setShape(value) {
@@ -307,19 +291,7 @@ var gKeyboard = (function(window, document, undefined) {
     keymap[shift] = element;
   }
 
-  function keyPress(event) {
-    // find which key has been pressed
-    var keyChar = null;
-    if (event.which == null) {
-      keyChar = String.fromCharCode(event.keyCode);  // IE
-    }
-    else if (event.which != 0 && event.charCode != 0) {
-      keyChar = String.fromCharCode(event.which);    // modern browsers
-    }
-    else if (event.keyCode >= 32 && event.keyCode < 127) {
-      keyChar = String.fromCharCode(event.keyCode);
-    }
-
+  function pressKey(keyChar) {
     // highlight the key that has been pressed
     var key = keymap[keyChar];
     if (key) {
@@ -327,18 +299,6 @@ var gKeyboard = (function(window, document, undefined) {
       setTimeout(function() {
         key.style.cssText = '';
       }, usrInputTimeout);
-    }
-  }
-
-  function keyDown(event) {
-    // disable special keys in the text input box
-    switch (event.keyCode) {
-      case 8:  // BackSpace
-      case 9:  // Tab
-      case 46: // Delete
-      case 27: // Escape
-        EVENTS.preventDefault(event);
-        return;
     }
   }
 
@@ -362,55 +322,12 @@ var gKeyboard = (function(window, document, undefined) {
     }
   }
 
-  function textInput(value) { // XXX should not be part of gKeyboard
-    var text = gLessons.getText();
-
-    if (!value.length) { // empty input box => reset timer
-      //gTimer.stop();
-      highlightKey(text.substr(0, 1));
-      return;
-    }
-
-    var pos = value.length - 1;
-    if (pos == 0) { // first char => start the timer
-      //gTimer.start();
-    }
-
-    // Check if the last char is correct
-    var entered = value.substring(pos);
-    var expected = text.substr(pos, 1);
-    if (entered != expected) { // mistake
-      //gTimer.typo();
-    }
-
-    // Check if the whole input is correct
-    var correct = (value == text.substr(0, pos + 1));
-    if (correct) {
-      // highlight the next key (or remove highlighting if it's finished)
-      highlightKey(text.substr(pos + 1, 1));
-      // finished?
-      if (pos >= text.length - 1) {
-        gLessons.nextPrompt();
-      }
-    } else {
-      // TODO: highlight the backspace key
-      //   highlightSpecialKey(ui.bspaceKey);
-      // alternative: auto-correction
-      ui.txtInput.className = 'error';
-      setTimeout(function() {
-        ui.txtInput.className = '';
-      }, usrInputTimeout);
-      ui.txtInput.value = ui.txtInput.value.substr(0, pos);
-    }
-  }
-
   return {
     init: init,
     getLayout: function() { return layoutId; },
     setLayout: setLayout,
     highlightKey: highlightKey,
-    clear: function() { ui.txtInput.value = ''; },
-    focus: function() { ui.txtInput.focus(); }
+    pressKey: pressKey
   };
 })(window, document);
 
@@ -425,17 +342,15 @@ var gLessons = (function(window, document, undefined) {
   var ui = {
     lesson: null,
     level: null,
-    txtPrompt: null
+    output: null
   };
 
   function init() {
     ui.lesson = document.getElementById('lesson');
     ui.level = document.getElementById('level');
-    ui.txtPrompt = document.getElementById('txtPrompt');
 
     ui.lesson.onchange = function() { setLesson(this.value); };
     ui.level.onchange = function() { setLevel(this.value); };
-    ui.txtPrompt.value = '';
 
     setLesson(getCookie('lessonName') || 'english', getCookie('lessonLevel'));
   }
@@ -475,18 +390,13 @@ var gLessons = (function(window, document, undefined) {
     levelIndex = levelIndex || 0;
     ui.level.value = levelIndex;
     setCookie('lessonLevel', levelIndex);
-    newPromptFromLessons();
+
+    if (ui.output) {
+      ui.output.value = newPrompt();
+    }
   }
 
-  function newPrompt(value) {
-    // display a new exercise and start the test
-    gKeyboard.highlightKey(value.substring(0, 1));
-    ui.txtPrompt.value = value;
-    gKeyboard.clear();
-    gKeyboard.focus();
-  }
-
-  function newPromptFromLessons() {
+  function newPrompt() {
     var index = ui.level.selectedIndex;
     if (index < 0)
       return;
@@ -495,45 +405,142 @@ var gLessons = (function(window, document, undefined) {
     var lines = lessonsDoc.getElementsByTagName('Level').item(index)
                           .getElementsByTagName('Line');
     var i = Math.floor(Math.random() * lines.length);
-    newPrompt(lines[i].childNodes[0].nodeValue);
-  }
-
-  function nextPrompt() {
-    return newPromptFromLessons();
-    // TODO
-    gTimer.stop();
-    var nextLevel = gTimer.report();
-
-    if (gDialog.mode == modLESSONS) {
-      if (nextLevel) { // get to the next level
-        alert("Congrats!\nLet's get to the next level.");
-        gTimer.reset();
-        gDialog.level.selectedIndex++;
-      }
-      newPromptFromLessons();
-    }
-    else if (gDialog.mode == modPANGRAMS) {
-      newPromptFromPangrams();
-    }
-    else if (gDialog.mode == modCLIPBOARD) {
-    }
+    return lines[i].childNodes[0].nodeValue;
   }
 
   return {
     init: init,
     setLesson: setLesson,
     newPrompt: newPrompt,
-    nextPrompt: nextPrompt,
-    getText: function() { return ui.txtPrompt.value; }
+    setOutput: function(element) { ui.output = element; }
   };
 })(window, document);
 
 
 /******************************************************************************
- * TODO: Metrics
+ * Main (TODO: implement metrics)
  */
 
-var gMetrics = {};
+var gTypist = (function(window, document, undefined) {
+  var usrInputTimeout = 150;
+  var ui = {
+    txtPrompt: null,
+    txtInput: null
+  };
+
+  function init() {
+    ui.txtPrompt = document.getElementById('txtPrompt');
+    ui.txtInput = document.getElementById('txtInput');
+
+    ui.txtPrompt.value = '';
+    ui.txtInput.value = '';
+    ui.txtInput.focus();
+
+    /**
+     * This is a bit spaghetti-ish and I'm not sure it works on IE6.
+     */
+
+    gLessons.setOutput(ui.txtPrompt);
+    EVENTS.addListener(ui.txtPrompt, 'change', newPrompt);
+
+    /**
+     * Bind event listeners to the text input:
+     *  'keypress' : tracks normal keys (characters)
+     *  'keydown'  : tracks special keys (tab, escape, backspace...)
+     *  'keyup'    : tracks inputs in the <textarea> node:
+     *     the 'input' event would work much better (less latency)
+     *     but it isn't supported by IE<9 and Safari 4
+     */
+
+    EVENTS.addListener(ui.txtInput, 'keypress', onKeyPress);
+    EVENTS.addListener(ui.txtInput, 'keydown', onKeyDown);
+    EVENTS.addListener(ui.txtInput, 'keyup', function() {
+      onInput(this.value);
+    });
+  }
+
+  // display a new exercise and start the test
+  function newPrompt() {
+    console.log('newPrompt');
+    // var value = gLessons.newPrompt();
+    gKeyboard.highlightKey(ui.txtPrompt.value.substring(0, 1));
+
+    // ui.txtPrompt.value = value;
+    ui.txtInput.value = '';
+    ui.txtInput.focus();
+  }
+
+  // find which key has been pressed
+  function onKeyPress(event) {
+    var keyChar = '';
+    if (event.which == null) {
+      keyChar = String.fromCharCode(event.keyCode); // IE
+    } else if (event.which != 0 && event.charCode != 0) {
+      keyChar = String.fromCharCode(event.which);   // modern browsers
+    } else if (event.keyCode >= 32 && event.keyCode < 127) {
+      keyChar = String.fromCharCode(event.keyCode);
+    }
+    gKeyboard.pressKey(keyChar);
+  }
+
+  // disable special keys in the text input box
+  function onKeyDown(event) {
+    switch (event.keyCode) {
+      case 8:  // BackSpace
+      case 9:  // Tab
+      case 46: // Delete
+      case 27: // Escape
+        EVENTS.preventDefault(event);
+        return;
+    }
+  }
+
+  function onInput(value) {
+    var text = ui.txtPrompt.value;
+
+    if (!value.length) { // empty input box => reset timer
+      // gTimer.stop();
+      gKeyboard.highlightKey(text.substr(0, 1));
+      return;
+    }
+
+    var pos = value.length - 1;
+    if (pos == 0) { // first char => start the timer
+      // gTimer.start();
+    }
+
+    // Check if the last char is correct
+    var entered = value.substring(pos);
+    var expected = text.substr(pos, 1);
+    if (entered != expected) { // mistake
+      // gTimer.typo();
+    }
+
+    // Check if the whole input is correct
+    var correct = (value == text.substr(0, pos + 1));
+    if (correct) {
+      // highlight the next key (or remove highlighting if it's finished)
+      gKeyboard.highlightKey(text.substr(pos + 1, 1));
+      if (pos >= text.length - 1) { // finished
+        newPrompt();
+      }
+    } else {
+      // TODO: highlight the backspace key
+      //   gKeyboard.highlightSpecialKey(ui.bspaceKey);
+      // alternative: auto-correction
+      ui.txtInput.className = 'error';
+      setTimeout(function() {
+        ui.txtInput.className = '';
+      }, usrInputTimeout);
+      ui.txtInput.value = ui.txtInput.value.substr(0, pos);
+    }
+  }
+
+  return {
+    init: init,
+    newPrompt: newPrompt
+  };
+})(window, document);
 
 
 /******************************************************************************
@@ -543,7 +550,7 @@ var gMetrics = {};
 EVENTS.onDOMReady(function() {
   gLessons.init();
   gKeyboard.init();
-  gKeyboard.focus();
+  gTypist.init();
 });
 
 EVENTS.addListener(window, 'hashchange', function() { // won't work with IE<8
