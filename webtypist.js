@@ -511,11 +511,57 @@ var gLessons = (function(window, document, undefined) {
 
 
 /******************************************************************************
- * Main (TODO: implement metrics)
+ * Metrics
+ */
+
+var gTimer = (function(window, document, undefined) {
+  var typos = 0;
+  var startDate = null;
+  var testString = '';
+  var ui = {
+    accuracy: null,
+    speed: null
+  };
+
+  function init() {
+    ui.accuracy = document.getElementById('accuracy');
+    ui.speed = document.getElementById('speed');
+  }
+
+  function start(text) {
+    startDate = new Date();
+    testString = text;
+    typos = 0;
+  }
+
+  function stop() {
+    var elapsed = (new Date() - startDate) / 1000;
+    if (elapsed < 1)
+      return;
+    ui.speed.innerHTML = Math.round(testString.length * 60 / elapsed);
+    ui.accuracy.innerHTML = typos;
+  }
+
+  function typo() {
+    typos++;
+  }
+
+  return {
+    init: init,
+    start: start,
+    stop: stop,
+    typo: typo
+  };
+})(this, document);
+
+
+/******************************************************************************
+ * Main
  */
 
 var gTypist = (function(window, document, undefined) {
   var usrInputTimeout = 150;
+  var text = '';
   var ui = {
     txtPrompt: null,
     txtInput: null
@@ -550,12 +596,15 @@ var gTypist = (function(window, document, undefined) {
 
   // display a new exercise and start the test
   function newPrompt() {
-    var value = gLessons.newPrompt();
-    gKeyboard.highlightKey(value.substring(0, 1));
+    text = gLessons.newPrompt();
+    gTimer.stop();
+    gTimer.start(text);
 
-    ui.txtPrompt.value = value;
+    ui.txtPrompt.value = text;
     ui.txtInput.value = '';
     ui.txtInput.focus();
+
+    gKeyboard.highlightKey(text.substring(0, 1));
   }
 
   // find which key has been pressed
@@ -584,24 +633,22 @@ var gTypist = (function(window, document, undefined) {
   }
 
   function onInput(value) {
-    var text = ui.txtPrompt.value;
-
     if (!value.length) { // empty input box => reset timer
-      // gTimer.stop();
+      gTimer.start(text);
       gKeyboard.highlightKey(text.substr(0, 1));
       return;
     }
 
     var pos = value.length - 1;
     if (pos == 0) { // first char => start the timer
-      // gTimer.start();
+      gTimer.start(text);
     }
 
     // Check if the last char is correct
     var entered = value.substring(pos);
     var expected = text.substr(pos, 1);
     if (entered != expected) { // mistake
-      // gTimer.typo();
+      gTimer.typo();
     }
 
     // Check if the whole input is correct
@@ -613,9 +660,7 @@ var gTypist = (function(window, document, undefined) {
         newPrompt();
       }
     } else {
-      // TODO: highlight the backspace key
-      //   gKeyboard.highlightSpecialKey(ui.bspaceKey);
-      // alternative: auto-correction
+      // auto-correction
       ui.txtInput.className = 'error';
       setTimeout(function() {
         ui.txtInput.className = '';
@@ -638,6 +683,7 @@ var gTypist = (function(window, document, undefined) {
 EVENTS.onDOMReady(function() {
   gLessons.init();
   gKeyboard.init();
+  gTimer.init();
   gTypist.init();
 });
 
