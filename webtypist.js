@@ -385,6 +385,10 @@ var gKeyboard = (function(window, document, undefined) {
     // store current key in the main hash table
     keymap[base] = element;
     keymap[shift] = element;
+    if (base != shift) {
+      var id = 'key_' + (/^left/.test(element.className) ? 'RTSH' : 'LFSH');
+      keymod[shift] = document.getElementById(id);
+    }
   }
 
   function pressKey(keyChar) {
@@ -414,7 +418,14 @@ var gKeyboard = (function(window, document, undefined) {
       ui.hands.className = key.className;
       ui.activeKey = key;
       key.className += ' active';
-      // TODO: highlight the modifier, too
+    }
+
+    // highlight the modifier, if any
+    var mod = keymod[keyChar];
+    if (mod) {
+      ui.hands.className += ' shift';
+      ui.activeMod = mod;
+      mod.className += ' active';
     }
   }
 
