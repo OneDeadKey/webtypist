@@ -32,28 +32,38 @@
 }
 #hands {
   float: right;
+  position: relative;
   margin-top: 5px;
   width: 150px;
   height: 90px;
-  background-image: url(images/hands_0.png);
+  overflow: hidden;
   display: none;
 }
 .hints #hands {
   display: block;
+}
+#hands.left5  span { background-position: left 810px; }
+#hands.left4  span { background-position: left 720px; }
+#hands.left3  span { background-position: left 630px; }
+#hands.left2  span { background-position: left 540px; }
+#hands.thumb  span { background-position: left 450px; }
+#hands.right2 span { background-position: left 360px; }
+#hands.right3 span { background-position: left 270px; }
+#hands.right4 span { background-position: left 180px; }
+#hands.right5 span { background-position: left  90px; }
+#hands span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
   height: 90px;
   background-image: url(images/hands.png);
-  background-position: left 720px;
+  background-position: left top;
 }
-#hands.left5  { background-position-y: 810px; }
-#hands.left4  { background-position-y: 720px; }
-#hands.left3  { background-position-y: 630px; }
-#hands.left2  { background-position-y: 540px; }
-#hands.thumb  { background-position-y: 450px; }
-#hands.right2 { background-position-y: 360px; }
-#hands.right3 { background-position-y: 270px; }
-#hands.right4 { background-position-y: 180px; }
-#hands.right5 { background-position-y:  90px; }
-#hands.shift  { background-position-x: right; }
+#hands.shift span {
+  left: inherit;
+  right: 0;
+}
 
 /* keyboard settings: layout, geometry */
 #keyboardSelector {
