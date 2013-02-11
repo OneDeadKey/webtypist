@@ -135,7 +135,7 @@ var EVENTS = (function(window, document, undefined) {
     };
   }
 
-  // API
+  // browser-agnostic API
   return {
     bind: bind,
     unbind: unbind,
@@ -193,37 +193,48 @@ var STORAGE = (function(window, document, undefined) {
   };
 })(this, document);
 
-function xhrLoadXML(href, callback) {
-  /**
-   * - IE6 doesn't support XMLHttpRequest natively
-   * - IE6/7/8 don't support overrideMimeType with native XMLHttpRequest
-   * - IE6/7/8/9 don't allow loading any local file with native XMLHttpRequest
-   * => so we use ActiveX for XHR on IE, period.
-   */
-  if (window.ActiveXObject) {
-    var xhr = new ActiveXObject('Microsoft.XMLHTTP');
-    xhr.open('GET', href, true);
+var XHR = (function(window, document, undefined) {
+  function loadAsync(href, onSuccess, onFailure) {
+    onSuccess = onSuccess || function _onSuccess(data) {};
+    onFailure = onFailure || function _onFailure() {};
+    var xhr = ('XMLHttpRequest' in window) ?
+      new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+    if (!xhr)
+      return;
+    xhr.open('GET', href, true); // asynchrounous
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
-        var xmldoc = new ActiveXObject('Microsoft.XMLDOM');
-        xmldoc.loadXML(xhr.responseText);
-        callback(xmldoc);
+        onSuccess(xhr);
+      } else {
+        onFailure();
       }
     };
     xhr.send(null);
   }
-  // note that Chrome won't allow loading any local document with XHR
-  else if (window.XMLHttpRequest) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', href, true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
-        callback(xhr.responseXML);
-      }
-    };
-    xhr.send(null);
-  }
-}
+
+  return {
+    loadText: function(href, onSuccess, onFailure) {
+      return loadAsync(href, function(xhr) {
+        onSuccess(xhr.responseText);
+      }, onFailure);
+    },
+    loadJSON: function(href, onSuccess, onFailure) {
+      return loadAsync(href, function(xhr) {
+        onSuccess(JSON ? JSON.parse(xhr.responseText) : eval(xhr.responseText));
+      }, onFailure);
+    },
+    loadXML: function(href, onSuccess, onFailure) {
+      return loadAsync(href, function(xhr) {
+        var xmldoc = xhr.responseXML;
+        if (!xmldoc && window.ActiveXObject) {
+          xmldoc = new ActiveXObject('Microsoft.XMLDOM');
+          xmldoc.loadXML(xhr.responseText);
+        }
+        onSuccess(xmldoc);
+      }, onFailure);
+    }
+  };
+})(this, document);
 
 
 /******************************************************************************
@@ -243,20 +254,13 @@ var gKeyboard = (function(window, document, undefined) {
     keyboard: null,
     shape: null,
     hints: null,
-    hands: null,
-    activeKey: null,
-    activeMod: null
-  };
+    hands: null
+  }; // ui.activeKey and ui.activeMod are added dynamically
 
   function init() {
-    keymap = new Array();
-
-    ui.layout = document.getElementById('layout');
-    ui.variant = document.getElementById('variant');
-    ui.keyboard = document.getElementById('keyboard');
-    ui.shape = document.getElementById('shape');
-    ui.hints = document.getElementById('hints');
-    ui.hands = document.getElementById('hands');
+    for (var id in ui) {
+      ui[id] = document.getElementById(id);
+    }
 
     SELECT.onchange(ui.layout, setLayout);
     SELECT.onchange(ui.variant, setVariant);
@@ -264,6 +268,8 @@ var gKeyboard = (function(window, document, undefined) {
 
     // IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead
     ui.hints.onclick = function() { showHints(this.checked); };
+
+    keymap = new Array();
 
     var kbLayout = window.location.hash.substring(1) ||
       STORAGE.getItem('kbLayout') || 'qwerty';
@@ -297,8 +303,8 @@ var gKeyboard = (function(window, document, undefined) {
       document.getElementById('key_AE10').className = 'right5';
     }
     STORAGE.setItem('kbShape', value);
-    ui.keyboard.className = value;
     SELECT.setValue(ui.shape, value);
+    ui.keyboard.className = value;
   }
 
   function showHints(on) {
@@ -317,7 +323,7 @@ var gKeyboard = (function(window, document, undefined) {
 
     // load the layout file
     var href = 'layouts/' + name + '.xml';
-    xhrLoadXML(href, function(xmldoc) {
+    XHR.loadXML(href, function(xmldoc) {
       layoutDoc = xmldoc;
       var variants = xmldoc.getElementsByTagName('variant');
 
@@ -485,8 +491,9 @@ var gLessons = (function(window, document, undefined) {
   };
 
   function init() {
-    ui.lesson = document.getElementById('lesson');
-    ui.level = document.getElementById('level');
+    for (var id in ui) {
+      ui[id] = document.getElementById(id);
+    }
 
     SELECT.onchange(ui.lesson, setLesson);
     SELECT.onchange(ui.level, setLevel);
@@ -501,7 +508,7 @@ var gLessons = (function(window, document, undefined) {
 
     // load the layout file
     var href = 'lessons/' + name + '.ktouch.xml';
-    xhrLoadXML(href, function(xmldoc) {
+    XHR.loadXML(href, function(xmldoc) {
       lessonsDoc = xmldoc;
       var levelNodes = xmldoc.getElementsByTagName('Level');
 
@@ -567,8 +574,9 @@ var gTimer = (function(window, document, undefined) {
   };
 
   function init() {
-    ui.accuracy = document.getElementById('accuracy');
-    ui.speed = document.getElementById('speed');
+    for (var id in ui) {
+      ui[id] = document.getElementById(id);
+    }
   }
 
   function start(text) {
@@ -611,8 +619,9 @@ var gTypist = (function(window, document, undefined) {
   };
 
   function init() {
-    ui.txtPrompt = document.getElementById('txtPrompt');
-    ui.txtInput = document.getElementById('txtInput');
+    for (var id in ui) {
+      ui[id] = document.getElementById(id);
+    }
 
     ui.txtPrompt.value = '';
     ui.txtInput.value = '';
