@@ -22,7 +22,7 @@ var EVENTS = (function(window, document, undefined) {
   var domReady = function(callback) {};
 
   // addEventListener should work fine everywhere except with IE<9
-  if (window.addEventListener) { // modern browsers
+  if ('addEventListener' in window) { // modern browsers
     var eventList = {};
     bind = function(node, type, callback) {
       if (!node) return;
@@ -49,7 +49,7 @@ var EVENTS = (function(window, document, undefined) {
       window.addEventListener('DOMContentLoaded', callback, false);
     };
   }
-  else if (window.attachEvent) { // Internet Explorer 6/7/8
+  else if ('attachEvent' in window) { // Internet Explorer 6/7/8
     /**
      * This also fixes the 'this' reference issue in all callbacks
      * -- both for standard and custom events.
@@ -67,8 +67,7 @@ var EVENTS = (function(window, document, undefined) {
           };
           node.attachEvent(type, node[ref]);
         }
-      }
-      else { // custom event
+      } else { // custom event
         if (!node.eventList) {
           node.eventList = {};
         }
@@ -93,8 +92,7 @@ var EVENTS = (function(window, document, undefined) {
             node['e' + ref] = null;
           }
         }
-      }
-      else { // custom event
+      } else { // custom event
         if (!node || !node.eventList || !node.eventList[type])
           return;
         var callbacks = node.eventList[type];
@@ -537,10 +535,11 @@ var gLessons = (function(window, document, undefined) {
     levelIndex = levelIndex || 0;
     SELECT.setValue(ui.level, levelIndex);
     STORAGE.setItem('lessonLevel', levelIndex);
-    EVENTS.trigger(window, 'lessonchange');
+    // as SELECT.setValue is asynchronous on IE6, we need a timeout here
+    window.setTimeout(function() { EVENTS.trigger(window, 'lessonchange') });
   }
 
-  function newPrompt() {
+  function getPrompt() {
     var index = ui.level.selectedIndex;
     if (index < 0)
       return;
@@ -555,7 +554,7 @@ var gLessons = (function(window, document, undefined) {
   return {
     init: init,
     setLesson: setLesson,
-    newPrompt: newPrompt
+    getPrompt: getPrompt
   };
 })(this, document);
 
@@ -648,7 +647,7 @@ var gTypist = (function(window, document, undefined) {
 
   // display a new exercise and start the test
   function newPrompt() {
-    text = gLessons.newPrompt();
+    text = gLessons.getPrompt();
     gTimer.stop();
     gTimer.start(text);
 
@@ -751,7 +750,7 @@ EVENTS.bind(window, 'hashchange', function() { // won't work with IE<8
  * Ad-Blocker test
  */
 
-if (window.addEventListener) window.addEventListener('load', function() {
+if ('addEventListener' in window) window.addEventListener('load', function() {
   // Check that all keys are properly displayed --
   // AdBlockPlus is likely to hide a few keys *sigh*
   var badRendering = document.getElementById('badRendering');
