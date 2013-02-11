@@ -585,6 +585,11 @@ var gTimer = (function(window, document, undefined) {
   }
 
   function stop() {
+    if (!testString) {
+      ui.speed.innerHTML = '';
+      ui.accuracy.innerHTML = '';
+      return;
+    }
     var elapsed = (new Date() - startDate) / 1000;
     if (elapsed < 1)
       return;
@@ -648,6 +653,9 @@ var gTypist = (function(window, document, undefined) {
   // display a new exercise and start the test
   function newPrompt() {
     text = gLessons.getPrompt();
+    if (!text)
+      return;
+
     gTimer.stop();
     gTimer.start(text);
 
