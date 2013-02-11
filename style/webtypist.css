@@ -1,3 +1,6 @@
+#lessonInput {
+  padding: 1em 0;
+}
 #lessonInput textarea {
   width: 100%;
 }

@@ -64,15 +64,9 @@
   </form>
 
   <form id="lessonInput">
-    <p>
-      <div id="hands"><span></span></div>
-      <!--
-        - IE<9 and Safari 4 do not support 'oninput', using 'onkeyup' instead
-        - the thing is, 'oninput' works much better (less latency)…
-        -->
-      <textarea id="txtPrompt" readonly></textarea>
-      <textarea id="txtInput" spellcheck="false"></textarea>
-    </p>
+    <div id="hands"><span></span></div>
+    <textarea id="txtPrompt" readonly></textarea>
+    <textarea id="txtInput" spellcheck="false"></textarea>
   </form>
 
   <p id="badRendering">

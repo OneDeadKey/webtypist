@@ -145,11 +145,11 @@ var EVENTS = (function(window, document, undefined) {
 
 var SELECT = (function(window, document, undefined) {
   function setValue(select, value) {
-    if (window.addEventListener) {
+    if (!('ActiveXObject' in window)) { // decent browsers
       select.value = value;
       return;
     }
-    // IE is magic...
+    // IE is magic... even IE9 needs this *sigh*
     for (var i = 0; i < select.options.length; i++) {
       var option = select.options[i];
       if (value == (option.value || option.text)) {
