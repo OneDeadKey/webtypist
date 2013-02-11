@@ -38,6 +38,10 @@ dd, dt {
   background-image: url(images/forkme.png);
 }
 
+* html #github { /* IE6 */
+  background-image: url(images/forkme.gif);
+}
+
 #github span {
   display: none;
 }

@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- * Browser Abstraction Layer: DOM events, localStorage, XMLHttpRequest
+ * Browser Abstraction Layer: DOM events, <select>, localStorage, XMLHttpRequest
  */
 
 var EVENTS = (function(window, document, undefined) {
@@ -123,14 +123,15 @@ var EVENTS = (function(window, document, undefined) {
         return;
       var callbacks = node.eventList[type];
       var cbLength = callbacks.length;
-      for (var i = 0; i < cbLength; i++)
+      for (var i = 0; i < cbLength; i++) {
         callbacks[i].call(node, evtObject);
+      }
     };
     preventDefault = function(event) {
       event.returnValue = false;
     };
     domReady = function(callback) {
-      window.attachEvent('load', callback);
+      window.attachEvent('onload', callback);
     };
   }
 
@@ -141,6 +142,36 @@ var EVENTS = (function(window, document, undefined) {
     trigger: trigger,
     preventDefault: preventDefault,
     onDOMReady: domReady
+  };
+})(this, document);
+
+var SELECT = (function(window, document, undefined) {
+  function setValue(select, value) {
+    if (window.addEventListener) {
+      select.value = value;
+      return;
+    }
+    // IE is magic...
+    for (var i = 0; i < select.options.length; i++) {
+      var option = select.options[i];
+      if (value == (option.value || option.text)) {
+        window.setTimeout(function() { select.selectedIndex = i; });
+        return;
+      }
+    }
+  }
+
+  function setCallback(callback) {
+    this.onchange = function() {
+      callback(this.value || this.options[this.selectedIndex].text);
+    };
+  }
+
+  return {
+    setValue: setValue,
+    onchange: function(select, callback) {
+      setCallback.call(select, callback);
+    }
   };
 })(this, document);
 
@@ -227,9 +258,10 @@ var gKeyboard = (function(window, document, undefined) {
     ui.hints = document.getElementById('hints');
     ui.hands = document.getElementById('hands');
 
-    ui.layout.onchange = function() { setLayout(this.value); };
-    ui.variant.onchange = function() { setVariant(this.value); };
-    ui.shape.onchange = function() { setShape(this.value); };
+    SELECT.onchange(ui.layout, setLayout);
+    SELECT.onchange(ui.variant, setVariant);
+    SELECT.onchange(ui.shape, setShape);
+
     // IE6 doesn't support 'onchange' on checkboxes, using 'onclick' instead
     ui.hints.onclick = function() { showHints(this.checked); };
 
@@ -266,7 +298,7 @@ var gKeyboard = (function(window, document, undefined) {
     }
     STORAGE.setItem('kbShape', value);
     ui.keyboard.className = value;
-    ui.shape.value = value;
+    SELECT.setValue(ui.shape, value);
   }
 
   function showHints(on) {
@@ -304,7 +336,7 @@ var gKeyboard = (function(window, document, undefined) {
 
       // update the layout selector
       layoutId = name;
-      ui.layout.value = name;
+      SELECT.setValue(ui.layout, name);
 
       // fill the variant selector
       ui.variant.innerHTML = '';
@@ -349,7 +381,7 @@ var gKeyboard = (function(window, document, undefined) {
     }
 
     // update the variant selector
-    ui.variant.value = variantID;
+    SELECT.setValue(ui.variant, variantID);
 
     // update hash + cookie
     var kbLayout = layoutId.split('-')[0] + '-' + variantID;
@@ -456,8 +488,8 @@ var gLessons = (function(window, document, undefined) {
     ui.lesson = document.getElementById('lesson');
     ui.level = document.getElementById('level');
 
-    ui.lesson.onchange = function() { setLesson(this.value); };
-    ui.level.onchange = function() { setLevel(this.value); };
+    SELECT.onchange(ui.lesson, setLesson);
+    SELECT.onchange(ui.level, setLevel);
 
     setLesson(STORAGE.getItem('lessonName') || 'english',
               STORAGE.getItem('lessonLevel'));
@@ -491,12 +523,12 @@ var gLessons = (function(window, document, undefined) {
 
     // update the form selector
     STORAGE.setItem('lessonName', name);
-    ui.lesson.value = name;
+    SELECT.setValue(ui.lesson, name);
   }
 
   function setLevel(levelIndex) {
     levelIndex = levelIndex || 0;
-    ui.level.value = levelIndex;
+    SELECT.setValue(ui.level, levelIndex);
     STORAGE.setItem('lessonLevel', levelIndex);
     EVENTS.trigger(window, 'lessonchange');
   }
