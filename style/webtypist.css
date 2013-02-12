@@ -1,25 +1,34 @@
 #lessonInput {
   padding: 1em 0;
 }
+
 #lessonInput textarea {
   width: 100%;
 }
+
 #lessonInput textarea.error {
   background-color: red;
 }
 
-/* visual hints */
 .hints #lessonInput textarea {
   width: 570px;
 }
+
+
+/******************************************************************************
+ * Visual hints: colored keys
+ */
+
 .hints li.active,
 .hints ul#keyboard li.specialKey.active {
   background-color: brown;
 }
+
 .hints li.active * {
   font-weight: bold;
   color: white;
 }
+
 .hints .left2  { background-color: #db0; }
 .hints .right2 { background-color: #ee0; }
 .hints .left3, .hints .right3 { background-color: #ac0; }
@@ -33,6 +42,12 @@
   font-weight: bold;
   color: white;
 }
+
+
+/******************************************************************************
+ * Visual hints: hands picture
+ */
+
 #hands {
   float: right;
   position: relative;
@@ -42,9 +57,11 @@
   overflow: hidden;
   display: none;
 }
+
 .hints #hands {
   display: block;
 }
+
 #hands.left5  span { background-position: left 810px; }
 #hands.left4  span { background-position: left 720px; }
 #hands.left3  span { background-position: left 630px; }
@@ -54,6 +71,7 @@
 #hands.right3 span { background-position: left 270px; }
 #hands.right4 span { background-position: left 180px; }
 #hands.right5 span { background-position: left  90px; }
+
 #hands span {
   position: absolute;
   top: 0;
@@ -63,20 +81,27 @@
   background-image: url(images/hands.png);
   background-position: left top;
 }
+
 #hands.shift span {
   left: -150px;
 }
 
-/* keyboard settings: layout, geometry */
+
+/******************************************************************************
+ * Keyboard settings: layout, geometry
+ */
+
 #keyboardSelector {
   float: right;
   margin-top: -10px;
 }
+
 #keyboardSelector dl * {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
+
 #keyboardSelector dl dt {
   float: left;
   width: 200px;
@@ -84,18 +109,11 @@
   line-height: 1.5em;
   text-align: right;
 }
+
 #keyboardSelector dl dd {
   text-align: left;
   margin-left: 210px;
   height: 1.5em;
   line-height: 1.5em;
-}
-
-/* page footer */
-#footer {
-  color: brown;
-  border-top: 1px outset brown;
-  padding-top: 5px;
-  font-size: smaller;
 }
 

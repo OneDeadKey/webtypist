@@ -22,7 +22,7 @@ ul#keyboard {
 }
 
 
-/*****************************************************************************
+/******************************************************************************
  * Default Keyboard Geometry (pc104)
  */
 
@@ -117,7 +117,7 @@ li#key_LSGT, li#key_CAPS105, li#key_RTRN105 {
 }
 
 
-/*****************************************************************************
+/******************************************************************************
  * European Keyboard Geometry (pc105)
  */
 
@@ -159,7 +159,7 @@ li#key_LSGT, li#key_CAPS105, li#key_RTRN105 {
 }
 
 
-/*****************************************************************************
+/******************************************************************************
  * Ergonomic Keyboard Geometry (TMx)
  */
 
@@ -210,7 +210,7 @@ li#key_LSGT, li#key_CAPS105, li#key_RTRN105 {
 }
 
 
-/*****************************************************************************
+/******************************************************************************
  * Background Images for Tab, Backspace, Caps, Return, Shift
  */
 
@@ -238,5 +238,17 @@ li#key_LFSH, li#key_RTSH {
 * html li#key_RTRN { background-image: url(images/key-rtrn.gif); }
 * html li#key_LFSH, * html li#key_RTSH {
   background-image: url(images/key-shift.gif);
+}
+
+
+/******************************************************************************
+ * Displayed if the keyboard rendering is altered by an ad blocker
+ */
+
+#badRendering {
+  text-align: center;
+  font-weight: bold;
+  color: brown;
+  display: none;
 }
 
