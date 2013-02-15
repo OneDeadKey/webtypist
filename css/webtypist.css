@@ -1,3 +1,60 @@
+
+/******************************************************************************
+ * Full-height page with sticky footer
+ */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #ccc;
+}
+
+#wrapper, #footer {
+  width: 740px;
+}
+
+#wrapper {
+  position: relative;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  background-color: white;
+   -webkit-box-shadow: 0px 1px 10px #888;
+      -moz-box-shadow: 0px 1px 10px #888;
+       -ms-box-shadow: 0px 1px 10px #888;
+        -o-box-shadow: 0px 1px 10px #888;
+           box-shadow: 0px 1px 10px #888;
+}
+
+* html #wrapper { /* IE6 does not support min-height */
+  height: 100%;
+}
+
+#content {
+  padding-bottom: 40px; /* >= height of the footer */
+  background-color: white;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 34px; /* 34 + 1 + 5 = 40px */
+  border-top: 1px outset brown;
+  padding-top: 5px;
+  font-size: smaller;
+  color: brown;
+}
+
+
+/******************************************************************************
+ * Main text prompt/input area
+ */
+
 #lessonInput {
   padding: 1em 0;
 }
