@@ -1,1 +1,88 @@
-/home/kaze/www/me/_shared/layout.css
+h1 {
+  margin-top: 0;
+  padding-top: 30px;
+}
+
+h1, h2 {
+  color: brown;
+  border-bottom: 1px inset brown;
+}
+
+dd, dt {
+  margin-bottom: 0.5em;
+}
+
+
+/******************************************************************************
+ * Full-height page with sticky footer
+ */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ccc;
+}
+
+#wrapper, #footer {
+  width: 740px;
+}
+
+#wrapper {
+  position: relative;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-family: sans-serif;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  background-color: white;
+           box-shadow: 0px 1px 10px #888;
+        -o-box-shadow: 0px 1px 10px #888;
+      -moz-box-shadow: 0px 1px 10px #888;
+   -webkit-box-shadow: 0px 1px 10px #888;
+}
+
+* html #wrapper { /* IE6 */
+  height: 100%;
+}
+
+#content {
+  padding-bottom: 40px; /* >= height of the footer */
+  background-color: white;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 34px; /* 34 + 1 + 5 = 40px */
+  border-top: 1px outset brown;
+  padding-top: 5px;
+  font-size: smaller;
+  color: brown;
+}
+
+
+/******************************************************************************
+ * "Fork me" ribbon
+ */
+
+#github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  display: block;
+  width: 149px;
+  height: 149px;
+  background-image: url(images/forkme.png);
+}
+
+* html #github { /* IE6 */
+  background-image: url(images/forkme.gif);
+}
+
+#github span {
+  display: none;
+}
+
