@@ -1,0 +1,143 @@
+
+/******************************************************************************
+ * Full-height page with sticky footer
+ */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #ccc;
+}
+
+#wrapper, #footer {
+  width: 740px;
+}
+
+#wrapper {
+  position: relative;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  background-color: white;
+  box-shadow: 0px 1px 10px #888;
+}
+
+#content {
+  padding-bottom: 40px; /* >= height of the footer */
+  background-color: white;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 34px; /* 34 + 1 + 5 = 40px */
+  border-top: 1px outset brown;
+  padding-top: 5px;
+  font-size: smaller;
+  color: brown;
+}
+
+
+/******************************************************************************
+ * Title
+ */
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 30px;
+  border-bottom: 1px inset brown;
+  color: brown;
+}
+
+h1 small {
+  font-size: 0.6em;
+  font-style: italic;
+}
+
+h1 + p {
+  margin-top: 0.5em;
+  color: #c8a;
+}
+
+
+/******************************************************************************
+ * Main text prompt/input area
+ */
+
+#lessonInput {
+  padding: 1em 0;
+}
+
+#lessonInput textarea {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#lessonInput textarea.error {
+  background-color: red;
+}
+
+.hints #lessonInput textarea {
+  width: 570px;
+}
+
+
+/******************************************************************************
+ * Visual hints: hands picture
+ */
+
+#hands {
+  float: right;
+  position: relative;
+  margin-top: 5px;
+  width: 150px;
+  height: 90px;
+  overflow: hidden;
+  display: none;
+}
+
+.hints #hands {
+  display: block;
+}
+
+#hands span {
+  position: absolute;
+  top: 0;
+  height: 90px;
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
+#leftHand   { left:  0px; width: 52px; background-image: url(hints/leftHand.png);   }
+#leftThumb  { left: 52px; width: 23px; background-image: url(hints/leftThumb.png);  }
+#rightThumb { left: 75px; width: 23px; background-image: url(hints/rightThumb.png); }
+#rightHand  { left: 97px; width: 52px; background-image: url(hints/rightHand.png);  }
+
+.l5 #leftHand, .r5 #rightHand { background-position-y:  -90px; }
+.l4 #leftHand, .r4 #rightHand { background-position-y: -180px; }
+.l3 #leftHand, .r3 #rightHand { background-position-y: -270px; }
+.l2 #leftHand, .r2 #rightHand { background-position-y: -360px; }
+
+.m1 #leftThumb, .m1 #rightThumb,
+.l1 #leftThumb, .r1 #rightThumb { background-position-y: -90px; }
+
+
+/******************************************************************************
+ * Keyboard settings: layout, geometry
+ */
+
+x-keyboard {
+  display: block;
+  height: 250px;
+}
+
+#keyboardSelector {
+  text-align: center;
+}

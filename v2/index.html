@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="An online typing tutor for modern web browsers.">
+  <title> Web Typist </title>
+  <link href="./webtypist.css" type="text/css" rel="stylesheet">
+  <script src="./webtypist.js" type="text/javascript"></script>
+  <script type="module" src="https://fabi1cazenave.github.io/x-keyboard/x-keyboard.js"></script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="content">
+      <h1> Web Typist <small>(v2 preview)</small> </h1>
+      <p> An online typing tutor for modern web browsers. Work in progress. </p>
+
+      <div id="metrics" style="float: right;">
+        <span id="speed">0</span> cpm
+        <span id="accuracy">0</span> errors
+      </div>
+
+      <form id="lessonSelector">
+        <select id="lesson">
+          <option value="catalan">           Català              </option>
+          <option value="danish">            Dansk (1)           </option>
+          <option value="danish2">           Dansk (2)           </option>
+          <option value="german">            Deutsch (1)         </option>
+          <option value="german2">           Deutsch (2)         </option>
+          <option value="german3">           Deutsch (3)         </option>
+          <option value="english" selected>  English             </option>
+          <option value="spanish">           Español             </option>
+          <option value="french">            Français (1)        </option>
+          <option value="french2">           Français (2)        </option>
+          <option value="italian">           Italiano            </option>
+          <option value="hungarian">         Magyar              </option>
+          <option value="hungarian_expert">  Magyar (expert)     </option>
+          <option value="nederlands">        Nederlands          </option>
+          <option value="nederlands_junior"> Nederlands (junior) </option>
+          <option value="norwegian">         Norsk               </option>
+          <option value="polish">            Polski              </option>
+          <option value="slovenian">         Slovensko           </option>
+          <option value="finnish">           Suomi               </option>
+          <option value="finnish_for_kids">  Suomi (junior)      </option>
+          <!-- Cyrillic layouts, not ready yet
+          <option value="bulgarian">         bulgarian (1)       </option>
+          <option value="bulgarian_long">    bulgarian (2)       </option>
+          <option value="russian">           Русский (1)         </option>
+          <option value="russian2">          Русский (2)         </option>
+          <option value="russian_long">      Русский (long)      </option>
+          <option value="russian_slava">     Русский (slava)     </option>
+          -->
+          <!-- Dvorak layouts -->
+          <option disabled> -- Dvorak -- </option>
+          <option value="dvorak_ABCD">       dvorak (abcd)       </option>
+          <option value="german.neo">        Deutsch (neo)       </option>
+          <option value="dvorak">            English (dvorak)    </option>
+          <option value="dvorak_es">         Español (dvorak-ES) </option>
+          <option value="bepo">              Français (bépo)     </option>
+          <option value="fr-dvorak-bepo-1">  Français (bépo-1)   </option>
+          <option value="fr-dvorak-bepo-2">  Français (bépo-2)   </option>
+        </select>
+        <select id="level">
+          <option value="-1"> (loading…) </option>
+        </select>
+      </form>
+
+      <form id="lessonInput">
+        <div id="hands">
+          <span id="leftHand"></span>
+          <span id="leftThumb"></span>
+          <span id="rightThumb"></span>
+          <span id="rightHand"></span>
+        </div>
+        <textarea id="txtPrompt" readonly></textarea>
+        <textarea id="txtInput" spellcheck="false"></textarea>
+      </form>
+
+      <x-keyboard id="keyboard">
+        <p>Loading web component…</p>
+        <p hidden>Your browser is not supported at the moment.</p>
+        <p hidden>Please reload this page with a browser that supports web components,
+        such as Mozilla Firefox or Google Chrome.</p>
+      </x-keyboard>
+
+      <form id="keyboardSelector">
+        <select id="layout">
+          <option selected> qwerty </option>
+          <option> lafayette </option>
+          <option> lafayette42 </option>
+          <option> dvorak </option>
+        </select>
+        <select id="shape">
+          <option value="iso"> pc105 / ISO </option>
+          <option value="ansi" selected> pc104 / ANSI </option>
+          <option value="ol60"> ergonomic </option>
+        </select>
+        <input id="hints" type="checkbox">
+        <label for="hints"> show hints </label>
+      </form>
+    </div>
+
+    <div id="footer">
+      Copyleft 2019 Kazé &amp; Léo
+      — <a href="https://github.com/fabi1cazenave/webtypist">project page</a>
+    </div>
+  </div>
+</body>
+</html>
