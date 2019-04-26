@@ -21,43 +21,9 @@
 
       <form id="lessonSelector">
         <select id="lesson">
-          <option value="catalan">           Català              </option>
-          <option value="danish">            Dansk (1)           </option>
-          <option value="danish2">           Dansk (2)           </option>
-          <option value="german">            Deutsch (1)         </option>
-          <option value="german2">           Deutsch (2)         </option>
-          <option value="german3">           Deutsch (3)         </option>
-          <option value="english" selected>  English             </option>
-          <option value="spanish">           Español             </option>
-          <option value="french">            Français (1)        </option>
-          <option value="french2">           Français (2)        </option>
-          <option value="italian">           Italiano            </option>
-          <option value="hungarian">         Magyar              </option>
-          <option value="hungarian_expert">  Magyar (expert)     </option>
-          <option value="nederlands">        Nederlands          </option>
-          <option value="nederlands_junior"> Nederlands (junior) </option>
-          <option value="norwegian">         Norsk               </option>
-          <option value="polish">            Polski              </option>
-          <option value="slovenian">         Slovensko           </option>
-          <option value="finnish">           Suomi               </option>
-          <option value="finnish_for_kids">  Suomi (junior)      </option>
-          <!-- Cyrillic layouts, not ready yet
-          <option value="bulgarian">         bulgarian (1)       </option>
-          <option value="bulgarian_long">    bulgarian (2)       </option>
-          <option value="russian">           Русский (1)         </option>
-          <option value="russian2">          Русский (2)         </option>
-          <option value="russian_long">      Русский (long)      </option>
-          <option value="russian_slava">     Русский (slava)     </option>
-          -->
-          <!-- Dvorak layouts -->
-          <option disabled> -- Dvorak -- </option>
-          <option value="dvorak_ABCD">       dvorak (abcd)       </option>
-          <option value="german.neo">        Deutsch (neo)       </option>
-          <option value="dvorak">            English (dvorak)    </option>
-          <option value="dvorak_es">         Español (dvorak-ES) </option>
-          <option value="bepo">              Français (bépo)     </option>
-          <option value="fr-dvorak-bepo-1">  Français (bépo-1)   </option>
-          <option value="fr-dvorak-bepo-2">  Français (bépo-2)   </option>
+          <option value="us" selected>  English              </option>
+          <option value="us.dvorak1">   English (dvorak 1)   </option>
+          <option value="us.dvorak2">   English (dvorak 2)   </option>
         </select>
         <select id="level">
           <option value="-1"> (loading…) </option>
@@ -84,12 +50,12 @@
 
       <form id="keyboardSelector">
         <select id="layout">
-          <option selected> qwerty </option>
-          <option> qwerty-intl </option>
-          <option> qwerty-alt </option>
-          <option> lafayette </option>
-          <option> lafayette42 </option>
-          <option> dvorak </option>
+          <option value="us" selected>    qwerty      </option>
+          <option value="us.intl">        qwerty-intl </option>
+          <option value="us.alt">         qwerty-alt  </option>
+          <option value="fr.lafayette">   lafayette   </option>
+          <option value="fr.lafayette42"> lafayette42 </option>
+          <option value="us.dvorak">      dvorak      </option>
         </select>
         <select id="shape">
           <option value="iso"> pc105 / ISO </option>
