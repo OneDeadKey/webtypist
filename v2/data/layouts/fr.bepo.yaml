@@ -21,6 +21,6 @@ full: |
   ┗━━━━━━━┻━━━━━━━┻━━━━━━━┹────────────────────────────────┺━━━━━━━┻━━━━━━━┻━━━━━━━┻━━━━━━━┛
 
 spacebar:
-  shift:       "\u00a0"  # NO-BREAK SPACE
+  shift:       "\u202f"  # NARROW NO-BREAK SPACE
   altgr:       "\u005f"  # LOW LINE
-  altgr_shift: "\u202f"  # NARROW NO-BREAK SPACE
+  altgr_shift: "\u00a0"  # NO-BREAK SPACE
