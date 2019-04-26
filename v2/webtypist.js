@@ -67,7 +67,7 @@ var gKeyboard = (function(window, document, undefined) {
   }
 
   function setLayout(kbLayout) {
-    fetch(`layouts/${kbLayout}.json`)
+    fetch(`./data/layouts/${kbLayout}.json`)
       .then(response => response.json())
       .then(data => {
         ui.keyboard.setKalamineLayout(data.layout, data.dead_keys);
@@ -117,7 +117,7 @@ var gLessons = (function(window, document, undefined) {
 
   function setLesson(lessonName, levelIndex) {
     ui.level.innerHTML = '<option> (loading\u2026) </option>';
-    fetch(`../lessons/${lessonName}.ktouch.xml`)
+    fetch(`./data/courses/${lessonName}.xml`)
       .then(response => response.text())
       .then(str => (new DOMParser()).parseFromString(str, 'text/xml'))
       .then(xmldoc => {
@@ -125,8 +125,8 @@ var gLessons = (function(window, document, undefined) {
 
         // fill the lesson selector
         let i = 0, innerHTML = '';
-        Array.from(xmldoc.getElementsByTagName('Level')).forEach(node => {
-          let name = node.getElementsByTagName('NewCharacters')
+        Array.from(xmldoc.getElementsByTagName('lesson')).forEach(node => {
+          let name = node.getElementsByTagName('title')
             .item(0).childNodes[0].nodeValue;
           innerHTML += `<option value="${i++}">${i}: ${name}</option>`;
         });
@@ -149,15 +149,17 @@ var gLessons = (function(window, document, undefined) {
   }
 
   function getPrompt() {
-    var index = ui.level.selectedIndex;
+    const index = ui.level.selectedIndex;
     if (index < 0) {
       return;
     }
     // select a random line in the current level
-    var lines = lessonsDoc.getElementsByTagName('Level').item(index)
-                          .getElementsByTagName('Line');
-    var i = Math.floor(Math.random() * lines.length);
-    return lines[i].childNodes[0].nodeValue;
+    const trim = /^\s+|\s+$/g;
+    const text = lessonsDoc.getElementsByTagName('lesson').item(index)
+      .getElementsByTagName('text').item(0).childNodes[0].nodeValue;
+    const lines = text.replace(trim, '').split('\n');
+    const i = Math.floor(Math.random() * lines.length);
+    return lines[i].replace(trim, '');
   }
 
   return { init, getPrompt };

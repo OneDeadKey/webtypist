@@ -1,4 +1,0 @@
-These keyboard layouts are defined in the YAML files.
-They are converted to JSON for <x-keyboard> by Kalamine:
-
-https://github.com/fabi1cazenave/kalamine
