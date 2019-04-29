@@ -1,17 +1,4 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ANSI",
-    "name": "dvorak",
-    "name8": "dvorak",
-    "locale": "us",
-    "description": "standard Dvorak-US layout",
-    "url": "http://fabi1cazenave.github.com/kalamine/",
-    "version": "1.0.0",
-    "fileName": "dvorak",
-    "lastChange": "2019-04-11"
-  },
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "@" ],

@@ -1,0 +1,170 @@
+{
+  "courses": {
+    "bg1": {
+      "title": "Bulgarian (auto-generated)",
+      "description": "Georgi P. Georgiev\njoro_georgiev2001@magibg.com",
+      "layouts": [ "bg" ]
+    },
+    "bg2": {
+      "title": "Bulgarian (auto-generated, long)",
+      "description": "Georgi P. Georgiev,\njoro_georgiev2001@magibg.com",
+      "layouts": [ "bg" ]
+    },
+    "br": {
+      "title": "Português (Brasileiro)",
+      "description": "Arquivo de treinamento gerado Wed Aug 24 14:00:33 2005\nPreparado por Ari Caldeira",
+      "layouts": [ "br" ]
+    },
+    "ch1": {
+      "title": "Deutsch (CH)",
+      "description": "Deutscher Kurs für KTouch von Markus Frisch <frisch@vr-web.de>  (Modified for Swiss keyboard layout)",
+      "layouts": [ "ch" ]
+    },
+    "ch2": {
+      "title": "Deutsch (CH - aus Tipptrainer)",
+      "description": "German training file\nadapted by Sven Gohlke <sven@clio.in-berlin.de>\nfor ktouch from a training file distributed by\nAndreas Kalbitz  <felix@pingos.schulnetz.org>\nfor Tipptrainer V0.4 http://www.pingos.schulnetz.org/tipptrainer\ndistributed under the GPL2\nVersion: 0.1 beta  (Modified for Swiss keyboard layout)",
+      "layouts": [ "ch" ]
+    },
+    "de1": {
+      "title": "Deutsch",
+      "description": "Deutscher Kurs für KTouch von Markus Frisch <frisch@vr-web.de>",
+      "layouts": [ "de" ]
+    },
+    "de2": {
+      "title": "Deutsch (aus Tipptrainer)",
+      "description": "German training file\nadapted by Sven Gohlke <sven@clio.in-berlin.de>\nfor ktouch from a training file distributed by\nAndreas Kalbitz  <felix@pingos.schulnetz.org>\nfor Tipptrainer V0.4 http://www.pingos.schulnetz.org/tipptrainer\ndistributed under the GPL2\nVersion: 0.1 beta",
+      "layouts": [ "de" ]
+    },
+    "es1": {
+      "title": "Español 1 (generado automáticamente)",
+      "description": "KTouch training file generated Mon Mar 31 17:09:15 2003\nPerl Script written by Steinar Theigmann & Håvard Frøiland.",
+      "layouts": [ "es" ]
+    },
+    "es2": {
+      "title": "Español 2 (generado automáticamente)",
+      "description": "Fichero KTouch de entrenamiento generado por JRodas (sin tildes)",
+      "layouts": [ "es" ]
+    },
+    "es3": {
+      "title": "Español 3 (generado automáticamente)",
+      "description": "Fichero KTouch de entrenamiento generado por JRodas (sin tildes)",
+      "layouts": [ "es" ]
+    },
+    "es4": {
+      "title": "Euskara",
+      "description": "KTouch ariketa sorta Alexander Gabilondok egina.",
+      "layouts": [ "es" ]
+    },
+    "fr.bepo": {
+      "title": "Français (bépo)",
+      "description": "http://bepo.fr/wiki/Exercices",
+      "layouts": [ "fr(bepo)" ]
+    },
+    "fr.dvarok": {
+      "title": "Français (dvorak-fr)",
+      "description": "Apprentissage du clavier Dvorak-fr\n30 mai 2002 - Francis Leboutte, www.algo.be\n7 décembre 2004 - Passage au format ktouch par Matthieu MOY\n14 septembre 2005 - Passage au format ktouch XML par Stéphane Raimbault",
+      "layouts": [ "fr(dvorak)" ]
+    },
+    "fr": {
+      "title": "Français (auto-généré)",
+      "description": "Trainingfile generated Mon Oct  1 08:14:15 2001\nProgram written by Håvard Frøiland",
+      "layouts": [ "fr" ]
+    },
+    "fr.lafayette": {
+      "title": "Français (Lafayette)",
+      "description": "https://qwerty-lafayette.org/",
+      "layouts": [ "fr(lafayette)", "fr(qwerty42)" ]
+    },
+    "gb": {
+      "title": "English (auto-generated)",
+      "description": "KTouch training file generated Sun Mar 11 09:59:58 2007\nPerl Script written by Steinar Theigmann and Håvard Frøiland.",
+      "layouts": [ "gb" ]
+    },
+    "gr": {
+      "title": "Ελληνικά",
+      "description": "KTouch training file generated Fri Jun 14 19:46:08 2002\nPerl Script written by Steinar Theigmann & Håvard Frøiland.",
+      "layouts": [ "gr" ]
+    },
+    "it": {
+      "title": "Italiano",
+      "description": "File di addestramento tratto da «Appunti di informatica\n libera»",
+      "layouts": [ "it" ]
+    },
+    "it2": {
+      "title": "Italiano (generata automaticamente)",
+      "description": "Lezione generata automaticamente usando ktouch-lesson-generator\nda Simone Gaiarin <simgunz@gmail.com>",
+      "layouts": [ "it" ]
+    },
+    "ru.legacy": {
+      "title": "Русская (Legacy)",
+      "description": "Created by Oleksiy Gorelov <grolm@ukr.net>\nKiev, Ukraine\nMon Nov 14, 2005",
+      "layouts": [ "ru(legacy)" ]
+    },
+    "ru1": {
+      "title": "Русская (автоматически сгенерированная)",
+      "description": "Russian training file\nadapted by Chemisov Konstantin <dabc4123@mail.ru>\nfrom ktouch-gen utility\n29-08-2005",
+      "layouts": [ "ru" ]
+    },
+    "ru2": {
+      "title": "Русская (автоматически сгенерированная, длинная)",
+      "description": "KTouch training file generated Tue Oct 25 12:51:40 MSD 2005 by Miha Ulanov (mulanov@mail.ru)",
+      "layouts": [ "ru" ]
+    },
+    "ua": {
+      "title": "Українська",
+      "description": "Уроки для ktouch українською.\nСтворено 15 вересня 2006 року.\nАвтор: Янович Борис (Yanovych Borys, borman@univ.kiev.ua)",
+      "layouts": [ "ua" ]
+    },
+    "us.colemak": {
+      "title": "English (USA) Colemak (auto-generated)",
+      "description": "2005-12-15 Shai Coleman, http://colemak.com/ . Public domain.\nModified by Sascha Peilicke 2008-08-07",
+      "layouts": [ "us(colemak)" ]
+    },
+    "us.dvorak1": {
+      "title": "Dvorak (US) (auto-generated)",
+      "description": "Trainingfile genereated Mon Apr  8 18:44:12 2002\nProgram written by Håvard Frøiland",
+      "layouts": [ "us(dvorak)" ]
+    },
+    "us.dvorak2": {
+      "title": "Dvorak (US) - ABCD",
+      "description": "This ktouch course is taken from Dan Wood's\nA Basic Course in Dvorac (ABCD)\nAvailable at http://www.gigliwood.com/abcd/abcd.html",
+      "layouts": [ "us(dvorak)" ]
+    },
+    "us.workman": {
+      "title": "English Workman (auto-generated)",
+      "description": "Auto-Generated for ordered letters: t h s a n e o i g y c l d r u p q w b j f z x m v k\n\nBy Peter Feigl <craven@gmx.net>",
+      "layouts": [ "us(workman)" ]
+    },
+    "us": {
+      "title": "English (US) (auto-generated)",
+      "description": "KTouch training file generated Sun Mar 11 09:59:58 2007\nPerl Script written by Steinar Theigmann and Håvard Frøiland.",
+      "layouts": [ "us" ]
+    }
+  },
+  "layouts": {
+    "be":              "België",
+    "bg":              "Bulgarian",
+    "br":              "Português (Brasileiro)",
+    "ch":              "Deutsch (Schweiz)",
+    "ch(fr)":          "Français (Suisse)",
+    "de":              "Deutsch",
+    "es":              "Español",
+    "fr":              "Français",
+    "fr(afnor)":       "Français (afnor)",
+    "fr(bepo)":        "Français (bépo)",
+    "fr(dvorak)":      "Français (dvorak-fr)",
+    "fr(lafayette)":   "Français (Lafayette)",
+    "fr(qwerty42)":    "Français (qwerty42)",
+    "gb":              "English (UK)",
+    "gb(dvorak)":      "English (UK, Dvorak)",
+    "it":              "Italiana",
+    "latam":           "Español (latinoamarican)",
+    "pt":              "Português",
+    "ru":              "Русская",
+    "ru(legacy)":      "Русская (legacy)",
+    "us":              "English (US)",
+    "us(colemak)":     "English (US, Colemak)",
+    "us(dvorak)":      "English (US, Dvorak)",
+    "us(workman)":     "English (US, Workman)"
+  }
+}

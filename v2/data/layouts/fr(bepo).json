@@ -1,15 +1,4 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ISO",
-    "name": "bépo",
-    "description": "“ergonomic” French layout",
-    "version": "1.0.0",
-    "name8": "bépo",
-    "fileName": "bépo",
-    "lastChange": "2019-04-26"
-  },
   "layout": {
     "AE01": [ "\"", "1", "—", "„" ],
     "AE02": [ "«", "2", "<", "“" ],

@@ -27,12 +27,11 @@ var gKeyboard = (function(window, document, undefined) {
   var keyPressStyle = '';
   var ui = {
     layout: null,
-    variant: null,
     keyboard: null,
     shape: null,
     hints: null,
     hands: null
-  }; // ui.activeKey and ui.activeMod are added dynamically
+  };
 
   function init() {
     for (var id in ui) {
@@ -53,7 +52,7 @@ var gKeyboard = (function(window, document, undefined) {
 
   function setShape(value) {
     localStorage.setItem('kbShape', value);
-    ui.keyboard.shape = value;
+    ui.keyboard.geometry = value;
     ui.shape.value = value;
   }
 
@@ -316,6 +315,26 @@ var gTypist = (function(window, document, undefined) {
  */
 
 window.addEventListener('DOMContentLoaded', () => {
+  fetch(`./data/index.json`)
+    .then(response => response.json())
+    .then(data => {
+      // fill lesson selector
+      let innerHTML = '';
+      Object.entries(data.courses)
+        .sort(([ id1, data1 ], [ id2, data2 ]) =>
+          data1.title.localeCompare(data2.title))
+        .forEach(([ key, data ]) => innerHTML += `
+          <option value="${key}">${data.title}</option>`);
+      document.getElementById('lesson').innerHTML = innerHTML;
+      // fill layout selector
+      innerHTML = '';
+      Object.entries(data.layouts)
+        .sort(([ id1, name1 ], [ id2, name2 ]) => name1.localeCompare(name2))
+        .forEach(([ key, name ]) => innerHTML += `
+          <option value="${key}">${name}</option>`);
+      document.getElementById('layout').innerHTML = innerHTML;
+    });
+
   gLessons.init();
   gKeyboard.init();
   gTimer.init();

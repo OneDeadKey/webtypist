@@ -5,7 +5,7 @@
     "AE03": [ "3", "#" ],
     "AE04": [ "4", "$" ],
     "AE05": [ "5", "%" ],
-    "AE06": [ "6", "^" ],
+    "AE06": [ "6", "*^" ],
     "AE07": [ "7", "&" ],
     "AE08": [ "8", "*" ],
     "AE09": [ "9", "(" ],
@@ -44,12 +44,53 @@
     "AE12": [ "=", "+" ],
     "AD11": [ "[", "{" ],
     "AD12": [ "]", "}" ],
-    "AC11": [ "'", "\"" ],
-    "TLDE": [ "`", "~" ],
+    "AC11": [ "*´", "*¨" ],
+    "TLDE": [ "*`", "*~" ],
     "BKSL": [ "\\", "|" ],
     "LSGT": [ "\\", "|" ],
     "SPCE": [ " ", " " ]
   },
-  "dead_keys": [],
+  "dead_keys": [
+    {
+      "char": "*`",
+      "name": "grave",
+      "base": "aeinouwyAEINOUWY",
+      "alt": "àèìǹòùẁỳÀÈÌǸÒÙẀỲ",
+      "alt_space": "`",
+      "alt_self": "`"
+    },
+    {
+      "char": "*~",
+      "name": "tilde",
+      "base": "aeinouvyAEINOUVY",
+      "alt": "ãẽĩñõũṽỹÃẼĨÑÕŨṼỸ",
+      "alt_space": "~",
+      "alt_self": "~"
+    },
+    {
+      "char": "*^",
+      "name": "circumflex",
+      "base": "aceghijosuwyzACEGHIJOSUWYZ",
+      "alt": "âĉêĝĥîĵôŝûŵŷẑÂĈÊĜĤÎĴÔŜÛŴŶẐ",
+      "alt_space": "^",
+      "alt_self": "^"
+    },
+    {
+      "char": "*´",
+      "name": "acute",
+      "base": "acegiklmnoprsuwyzACEGIKLMNOPRSUWYZ",
+      "alt": "áćéǵíḱĺḿńóṕŕśúẃýźÁĆÉǴÍḰĹḾŃÓṔŔŚÚẂÝŹ",
+      "alt_space": "'",
+      "alt_self": "´"
+    },
+    {
+      "char": "*¨",
+      "name": "diaeresis",
+      "base": "aehiotuwxyAEHIOUWXY",
+      "alt": "äëḧïöẗüẅẍÿÄËḦÏÖÜẄẌŸ",
+      "alt_space": "\"",
+      "alt_self": "¨"
+    }
+  ],
   "has_altgr": false
 }

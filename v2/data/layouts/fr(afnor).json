@@ -1,15 +1,4 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ISO",
-    "name": "azerty-afnor",
-    "name8": "azerty-a",
-    "description": "standard Azerty-FR layout, Afnor variant",
-    "version": "1.0.0",
-    "fileName": "azerty-a",
-    "lastChange": "2019-04-26"
-  },
   "layout": {
     "AE01": [ "à", "1", "§" ],
     "AE02": [ "é", "2", "´" ],
