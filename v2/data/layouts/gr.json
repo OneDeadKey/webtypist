@@ -1,4 +1,7 @@
 {
+  "name": "qwerty-gr",
+  "description": "Greek QWERTY layout",
+  "geometry": "ANSI",
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "@" ],
@@ -47,7 +50,6 @@
     "AC11": [ "'", "\"" ],
     "TLDE": [ "`", "~" ],
     "BKSL": [ "\\", "|" ],
-    "LSGT": [ "\\", "|" ],
     "SPCE": [ " ", " ", " ", " " ]
   },
   "dead_keys": [

@@ -41,9 +41,6 @@ const gKeyboard = (function(window, document, undefined) {
     ui.layout.addEventListener('change', (e) => setLayout(e.target.value));
     ui.shape.addEventListener('change', (e) => setShape(e.target.value));
     ui.hints.addEventListener('change', () => showHints(ui.hints.checked));
-
-    setShape(localStorage.getItem('kbShape') || 'ansi');
-    showHints(localStorage.getItem('kbHints') != 'off');
   }
 
   function setShape(value) {
@@ -62,14 +59,18 @@ const gKeyboard = (function(window, document, undefined) {
   }
 
   function setLayout(kbLayout) {
+    layoutId = kbLayout;
     ui.layout.value = kbLayout;
     gLessons.setLayout(kbLayout);
     return fetch(`./data/layouts/${kbLayout}.json`)
       .then(response => response.json())
       .then(data => {
-        ui.keyboard.setKalamineLayout(data.layout, data.dead_keys);
+        ui.keyboard.setKalamineLayout(data.layout, data.dead_keys,
+          data.geometry.replace('ERGO', 'ISO'));
         localStorage.setItem('kbLayout', kbLayout);
         window.location.hash = kbLayout;
+        showHints(localStorage.getItem('kbHints') != 'off');
+        setShape(localStorage.getItem('kbShape'));
       });
   }
 

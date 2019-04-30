@@ -1,4 +1,7 @@
 {
+  "name": "qwerty-us-intl",
+  "description": "American QWERTY layout, international variant",
+  "geometry": "ANSI",
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "@" ],
@@ -44,10 +47,9 @@
     "AE12": [ "=", "+" ],
     "AD11": [ "[", "{" ],
     "AD12": [ "]", "}" ],
-    "AC11": [ "*´", "*¨" ],
+    "AC11": [ "**", "*¨" ],
     "TLDE": [ "*`", "*~" ],
     "BKSL": [ "\\", "|" ],
-    "LSGT": [ "\\", "|" ],
     "SPCE": [ " ", " " ]
   },
   "dead_keys": [
@@ -76,12 +78,12 @@
       "alt_self": "^"
     },
     {
-      "char": "*´",
-      "name": "acute",
-      "base": "acegiklmnoprsuwyzACEGIKLMNOPRSUWYZ",
-      "alt": "áćéǵíḱĺḿńóṕŕśúẃýźÁĆÉǴÍḰĹḾŃÓṔŔŚÚẂÝŹ",
+      "char": "**",
+      "name": "1dk",
+      "base": "euioacEUIOAC",
+      "alt": "éúíóáçÉÚÍÓÁÇ",
       "alt_space": "'",
-      "alt_self": "´"
+      "alt_self": "'"
     },
     {
       "char": "*¨",

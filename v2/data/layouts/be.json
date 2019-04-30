@@ -1,4 +1,7 @@
 {
+  "name": "azerty-be",
+  "description": "Belgian AZERTY layout",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "&", "1", "|", "¦" ],
     "AE02": [ "é", "2", "@" ],

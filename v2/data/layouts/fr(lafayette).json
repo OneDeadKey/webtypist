@@ -1,18 +1,7 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ISO",
-    "name": "Qwerty-Lafayette",
-    "name8": "qwerty-l",
-    "locale": "fr",
-    "variant": "lafayette",
-    "description": "French (Qwerty-Lafayette)",
-    "url": "https://github.com/fabi1cazenave/qwerty-lafayette",
-    "version": "0.8.0",
-    "fileName": "qwerty-l",
-    "lastChange": "2019-04-14"
-  },
+  "name": "lafayette",
+  "description": "French QWERTY layout - https://qwerty-lafayette.org/",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "1", "!", "!" ],
     "AE02": [ "2", "@", "(", "⁽" ],

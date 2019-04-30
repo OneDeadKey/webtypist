@@ -1,4 +1,7 @@
 {
+  "name": "qwerty-br",
+  "description": "Brazilian QWERTY layout",
+  "geometry": "ABNT",
   "layout": {
     "AE01": [ "1", "!", "¹" ],
     "AE02": [ "2", "@", "²" ],

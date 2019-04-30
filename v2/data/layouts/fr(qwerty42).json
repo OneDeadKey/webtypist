@@ -1,18 +1,7 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ERGO",
-    "name": "Lafayette42",
-    "name8": "q42-fr",
-    "locale": "fr",
-    "variant": "lafayette42",
-    "description": "French (Qwerty-Lafayette, compact variant)",
-    "url": "https://github.com/fabi1cazenave/qwerty-lafayette",
-    "version": "0.7.0",
-    "fileName": "q42-fr",
-    "lastChange": "2019-04-15"
-  },
+  "name": "qwerty42-fr",
+  "description": "French QWERTY layout, compact variant - https://github.com/fabi1cazenave/qwerty-lafayette",
+  "geometry": "ERGO",
   "layout": {
     "AE01": [ "1", "!", "!" ],
     "AE02": [ "2", "@", "(", "⁽" ],

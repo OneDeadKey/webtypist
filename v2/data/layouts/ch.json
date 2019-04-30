@@ -1,4 +1,7 @@
 {
+  "name": "qwertz-ch-de",
+  "description": "Swiss QWERTZ layout, German-speaking variant",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "1", "+", "|", "¦" ],
     "AE02": [ "2", "\"", "@" ],

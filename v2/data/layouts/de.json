@@ -1,4 +1,7 @@
 {
+  "name": "qwertz-de",
+  "description": "German QWERTZ layout",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "\"", "²" ],

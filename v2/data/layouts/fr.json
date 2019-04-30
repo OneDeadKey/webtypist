@@ -1,15 +1,7 @@
 {
-  "meta": {
-    "author": "Fabien Cazenave",
-    "license": "WTFPL - Do What The Fuck You Want Public License",
-    "geometry": "ISO",
-    "name": "azerty",
-    "name8": "azerty",
-    "description": "standard Azerty-FR layout",
-    "version": "1.0.0",
-    "fileName": "azerty",
-    "lastChange": "2019-04-26"
-  },
+  "name": "azerty-fr",
+  "description": "French AZERTY layout",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "&", "1" ],
     "AE02": [ "é", "2", "~" ],

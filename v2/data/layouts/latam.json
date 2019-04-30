@@ -1,4 +1,7 @@
 {
+  "name": "qwerty-latam",
+  "description": "Latin American QWERTY layout",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "\"" ],

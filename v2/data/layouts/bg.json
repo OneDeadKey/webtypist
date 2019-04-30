@@ -1,7 +1,7 @@
 {
   "name": "bg",
   "description": "standard Bulgarian layout",
-  "geometry": "ISO",
+  "geometry": "ALT",
   "layout": {
     "AE01": [ "1", "!" ],
     "AE02": [ "2", "?" ],
@@ -50,7 +50,6 @@
     "AC11": [ "ч", "Ч" ],
     "TLDE": [ "(", ")" ],
     "BKSL": [ "„", "“" ],
-    "LSGT": [ "/", "|" ],
     "SPCE": [ " ", " " ]
   },
   "dead_keys": [],

@@ -1,4 +1,7 @@
 {
+  "name": "azerty-afnor",
+  "description": "French AZERTY layout, AFNOR variant",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "à", "1", "§" ],
     "AE02": [ "é", "2", "´" ],

@@ -1,4 +1,7 @@
 {
+  "name": "dvorak-fr",
+  "description": "French Dvorak-style layout - https://www.algo.be/ergo/dvorak-fr.html",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "=", "1" ],
     "AE02": [ "/", "2" ],

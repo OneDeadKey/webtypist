@@ -1,4 +1,7 @@
 {
+  "name": "bépo",
+  "description": "French Dvorak-style layout - https://bepo.fr/",
+  "geometry": "ISO",
   "layout": {
     "AE01": [ "\"", "1", "—", "„" ],
     "AE02": [ "«", "2", "<", "“" ],
@@ -48,7 +51,7 @@
     "TLDE": [ "$", "#", "–" ],
     "BKSL": [ "ç", "Ç" ],
     "LSGT": [ "ê", "Ê", "/" ],
-    "SPCE": [ " ", " ", "_", " " ]
+    "SPCE": [ " ", " ", "_", " " ]
   },
   "dead_keys": [
     {
