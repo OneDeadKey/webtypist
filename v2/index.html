@@ -19,9 +19,22 @@
         <span id="accuracy">0</span> errors
       </div>
 
+      <form id="keyboardSelector">
+        <select id="layout">
+          <option>loading…</option>
+        </select>
+        <select id="shape">
+          <option value="iso"> pc105 / ISO </option>
+          <option value="ansi" selected> pc104 / ANSI </option>
+          <option value="ol60"> ergonomic </option>
+        </select>
+        <input id="hints" type="checkbox">
+        <label for="hints"> show hints </label>
+      </form>
+
       <form id="lessonSelector">
         <select id="lesson">
-          <option>loading…</option>
+          <option> (loading…) </option>
         </select>
         <select id="level">
           <option value="-1"> (loading…) </option>
@@ -45,19 +58,6 @@
         <p hidden>Please reload this page with a browser that supports web components,
         such as Mozilla Firefox or Google Chrome.</p>
       </x-keyboard>
-
-      <form id="keyboardSelector">
-        <select id="layout">
-          <option>loading…</option>
-        </select>
-        <select id="shape">
-          <option value="iso"> pc105 / ISO </option>
-          <option value="ansi" selected> pc104 / ANSI </option>
-          <option value="ol60"> ergonomic </option>
-        </select>
-        <input id="hints" type="checkbox">
-        <label for="hints"> show hints </label>
-      </form>
     </div>
 
     <div id="footer">

@@ -3,29 +3,19 @@
 
 /**
  * Web Typist
- * a free, web-based, simple touch-typing tutor
+ * online touch-typing tutor
  */
-
-var eventList = [];
-function triggerEvent(eventName) {
-  var evtObject = eventList[eventName];
-  if (!evtObject) {
-    evtObject = document.createEvent('Event');
-    evtObject.initEvent(eventName, false, false);
-    eventList[eventName] = evtObject;
-  }
-  window.dispatchEvent(evtObject);
-}
 
 
 /******************************************************************************
  * Keyboard Display
  */
 
-var gKeyboard = (function(window, document, undefined) {
-  var layoutId = '';
-  var keyPressStyle = '';
-  var ui = {
+const gKeyboard = (function(window, document, undefined) {
+  let layoutList = {};
+  let layoutId = '';
+  let keyPressStyle = '';
+  let ui = {
     layout: null,
     keyboard: null,
     shape: null,
@@ -33,19 +23,25 @@ var gKeyboard = (function(window, document, undefined) {
     hands: null
   };
 
-  function init() {
-    for (var id in ui) {
+  function init(layouts) {
+    layoutList = layouts;
+    for (let id in ui) {
       ui[id] = document.getElementById(id);
     }
     ui.keyboard = document.querySelector('x-keyboard');
+
+    // fill layout selector
+    let innerHTML = '';
+    Object.entries(layouts)
+      .sort(([ id1, name1 ], [ id2, name2 ]) => name1.localeCompare(name2))
+      .forEach(([ key, name ]) => innerHTML += `
+        <option value="${key}">${name}</option>`);
+    ui.layout.innerHTML = innerHTML;
 
     ui.layout.addEventListener('change', (e) => setLayout(e.target.value));
     ui.shape.addEventListener('change', (e) => setShape(e.target.value));
     ui.hints.addEventListener('change', () => showHints(ui.hints.checked));
 
-    var kbLayout = window.location.hash.substring(1) ||
-      localStorage.getItem('kbLayout') || 'qwerty';
-    setLayout(kbLayout);
     setShape(localStorage.getItem('kbShape') || 'ansi');
     showHints(localStorage.getItem('kbHints') != 'off');
   }
@@ -66,11 +62,14 @@ var gKeyboard = (function(window, document, undefined) {
   }
 
   function setLayout(kbLayout) {
-    fetch(`./data/layouts/${kbLayout}.json`)
+    ui.layout.value = kbLayout;
+    gLessons.setLayout(kbLayout);
+    return fetch(`./data/layouts/${kbLayout}.json`)
       .then(response => response.json())
       .then(data => {
         ui.keyboard.setKalamineLayout(data.layout, data.dead_keys);
         localStorage.setItem('kbLayout', kbLayout);
+        window.location.hash = kbLayout;
       });
   }
 
@@ -82,6 +81,7 @@ var gKeyboard = (function(window, document, undefined) {
 
   return {
     init,
+    setLayout,
     get layout() { return layoutId; },
     set layout(value) { setLayout(value); },
     keyUp:   (code) => ui.keyboard.keyUp(code),
@@ -95,23 +95,48 @@ var gKeyboard = (function(window, document, undefined) {
  * Typing Lessons (aka KTouchLecture)
  */
 
-var gLessons = (function(window, document, undefined) {
-  var lessonsDoc = null;
-  var currentLevel = -1;
-  var ui = {
+const gLessons = (function(window, document, undefined) {
+  let lessonsList = {};
+  let lessonsDoc = null;
+  let currentLevel = -1;
+  let ui = {
     lesson: null,
     level: null,
     output: null
   };
 
-  function init() {
-    for (var id in ui) {
+  function init(courses) {
+    lessonsList = courses;
+    for (let id in ui) {
       ui[id] = document.getElementById(id);
     }
+
+    // fill lesson selector (hidden options)
+    let innerHTML = '';
+    Object.entries(courses)
+      .sort(([ id1, data1 ], [ id2, data2 ]) =>
+        data1.title.localeCompare(data2.title))
+      .forEach(([ key, data ]) => innerHTML += `
+        <option hidden value="${key}">${data.title}</option>`);
+    ui.lesson.innerHTML = innerHTML;
+
+    // activate the lesson selector and select the user lesson
     ui.lesson.addEventListener('change', (e) => setLesson(e.target.value));
     ui.level.addEventListener('change', (e) => setLevel(e.target.value));
     setLesson(localStorage.getItem('lessonName') || 'english',
               localStorage.getItem('lessonLevel'));
+  }
+
+  function setLayout(layoutName) {
+    const suitable = Object.entries(lessonsList)
+      .filter(([ id, data ]) => data.layouts.indexOf(layoutName) >= 0)
+      .map(([ id, data ]) => id);
+    const options = Array.from(ui.lesson.children);
+    options.forEach(opt => opt.hidden = (suitable.indexOf(opt.value) < 0));
+    ui.lesson.hidden = (options.filter(opt => !opt.hidden).length <= 1);
+    if (suitable.indexOf(ui.lesson.value) < 0) {
+      setLesson(suitable[0], 0);
+    }
   }
 
   function setLesson(lessonName, levelIndex) {
@@ -125,7 +150,7 @@ var gLessons = (function(window, document, undefined) {
         // fill the lesson selector
         let i = 0, innerHTML = '';
         Array.from(xmldoc.getElementsByTagName('lesson')).forEach(node => {
-          let name = node.getElementsByTagName('title')
+          const name = node.getElementsByTagName('title')
             .item(0).childNodes[0].nodeValue;
           innerHTML += `<option value="${i++}">${i}: ${name}</option>`;
         });
@@ -144,7 +169,7 @@ var gLessons = (function(window, document, undefined) {
     levelIndex = levelIndex || 0;
     ui.level.value = levelIndex;
     localStorage.setItem('lessonLevel', levelIndex);
-    triggerEvent('lessonchange');
+    gTypist.newPrompt();
   }
 
   function getPrompt() {
@@ -161,7 +186,7 @@ var gLessons = (function(window, document, undefined) {
     return lines[i].replace(trim, '');
   }
 
-  return { init, getPrompt };
+  return { init, getPrompt, setLayout };
 })(this, document);
 
 
@@ -169,7 +194,7 @@ var gLessons = (function(window, document, undefined) {
  * Metrics
  */
 
-var gTimer = (function(window, document, undefined) {
+const gTimer = (function(window, document, undefined) {
   var typos = 0;
   var startDate = null;
   var testString = '';
@@ -215,7 +240,7 @@ var gTimer = (function(window, document, undefined) {
  * Main
  */
 
-var gTypist = (function(window, document, undefined) {
+const gTypist = (function(window, document, undefined) {
   var usrInputTimeout = 150;
   var text = '';
   var hints = [];
@@ -225,7 +250,7 @@ var gTypist = (function(window, document, undefined) {
   };
 
   function init() {
-    for (var id in ui) {
+    for (let id in ui) {
       ui[id] = document.getElementById(id);
     }
 
@@ -314,36 +339,25 @@ var gTypist = (function(window, document, undefined) {
  * Startup
  */
 
+window.addEventListener('hashchange', () => {
+  let kbLayout = window.location.hash.substr(1);
+  if (kbLayout !== gKeyboard.layout) {
+    gKeyboard.layout = kbLayout;
+  }
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   fetch(`./data/index.json`)
     .then(response => response.json())
     .then(data => {
-      // fill lesson selector
-      let innerHTML = '';
-      Object.entries(data.courses)
-        .sort(([ id1, data1 ], [ id2, data2 ]) =>
-          data1.title.localeCompare(data2.title))
-        .forEach(([ key, data ]) => innerHTML += `
-          <option value="${key}">${data.title}</option>`);
-      document.getElementById('lesson').innerHTML = innerHTML;
-      // fill layout selector
-      innerHTML = '';
-      Object.entries(data.layouts)
-        .sort(([ id1, name1 ], [ id2, name2 ]) => name1.localeCompare(name2))
-        .forEach(([ key, name ]) => innerHTML += `
-          <option value="${key}">${name}</option>`);
-      document.getElementById('layout').innerHTML = innerHTML;
+      gLessons.init(data.courses);
+      gKeyboard.init(data.layouts);
+      // apply keyboard layout -- from URL hash, or from localStorage
+      const kbLayout = window.location.hash.substring(1) ||
+        localStorage.getItem('kbLayout') || 'us';
+      gKeyboard.setLayout(kbLayout).then(() => {
+        gTimer.init();
+        gTypist.init();
+      });
     });
-
-  gLessons.init();
-  gKeyboard.init();
-  gTimer.init();
-  gTypist.init();
-});
-
-window.addEventListener('hashchange', () => {
-  var kbLayout = window.location.hash.substr(1);
-  if (kbLayout !== gKeyboard.layout) {
-    gKeyboard.layout = kbLayout;
-  }
 });
