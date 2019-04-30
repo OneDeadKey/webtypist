@@ -38,17 +38,17 @@
     "es1": {
       "title": "Español 1 (generado automáticamente)",
       "description": "KTouch training file generated Mon Mar 31 17:09:15 2003\nPerl Script written by Steinar Theigmann & Håvard Frøiland.",
-      "layouts": [ "es" ]
+      "layouts": [ "es", "latam" ]
     },
     "es2": {
       "title": "Español 2 (generado automáticamente)",
       "description": "Fichero KTouch de entrenamiento generado por JRodas (sin tildes)",
-      "layouts": [ "es" ]
+      "layouts": [ "es", "latam" ]
     },
     "es3": {
       "title": "Español 3 (generado automáticamente)",
       "description": "Fichero KTouch de entrenamiento generado por JRodas (sin tildes)",
-      "layouts": [ "es" ]
+      "layouts": [ "es", "latam" ]
     },
     "es4": {
       "title": "Euskara",
