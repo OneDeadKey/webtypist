@@ -6,6 +6,8 @@
  * online touch-typing tutor
  */
 
+const layoutsBase = 'https://fabi1cazenave.github.io/x-keyboard/layouts/';
+
 
 /******************************************************************************
  * Keyboard Display
@@ -62,7 +64,7 @@ const gKeyboard = (function(window, document, undefined) {
     layoutId = kbLayout;
     ui.layout.value = kbLayout;
     gLessons.setLayout(kbLayout);
-    return fetch(`./data/layouts/${kbLayout}.json`)
+    return fetch(`${layoutsBase}/${kbLayout}.json`)
       .then(response => response.json())
       .then(data => {
         ui.keyboard.setKalamineLayout(data.layout, data.dead_keys,
@@ -142,7 +144,7 @@ const gLessons = (function(window, document, undefined) {
 
   function setLesson(lessonName, levelIndex) {
     ui.level.innerHTML = '<option> (loading\u2026) </option>';
-    fetch(`./data/courses/${lessonName}.xml`)
+    fetch(`./lessons/${lessonName}.xml`)
       .then(response => response.text())
       .then(str => (new DOMParser()).parseFromString(str, 'text/xml'))
       .then(xmldoc => {
@@ -348,7 +350,7 @@ window.addEventListener('hashchange', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  fetch(`./data/index.json`)
+  fetch(`./lessons.json`)
     .then(response => response.json())
     .then(data => {
       gLessons.init(data.courses);
