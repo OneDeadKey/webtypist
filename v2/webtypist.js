@@ -275,9 +275,6 @@ const gTypist = (function(window, document, undefined) {
       previousValue = ui.txtInput.value;
       return false;
     };
-
-    window.addEventListener('lessonchange', newPrompt);
-    window.addEventListener('layoutchange', newPrompt);
   }
 
   // display a new exercise and start the test
@@ -350,6 +347,8 @@ window.addEventListener('hashchange', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
+  gTimer.init();
+  gTypist.init();
   fetch(`./lessons.json`)
     .then(response => response.json())
     .then(data => {
@@ -358,9 +357,6 @@ window.addEventListener('DOMContentLoaded', () => {
       // apply keyboard layout -- from URL hash, or from localStorage
       const kbLayout = window.location.hash.substring(1) ||
         localStorage.getItem('kbLayout') || 'us';
-      gKeyboard.setLayout(kbLayout).then(() => {
-        gTimer.init();
-        gTypist.init();
-      });
+      gKeyboard.setLayout(kbLayout).then(gTypist.newPrompt);
     });
 });
