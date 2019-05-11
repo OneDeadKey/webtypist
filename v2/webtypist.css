@@ -127,13 +127,3 @@ h1 + p {
 
 .m1 #leftThumb, .m1 #rightThumb,
 .l1 #leftThumb, .r1 #rightThumb { background-position-y: -90px; }
-
-
-/******************************************************************************
- * Keyboard settings: layout, geometry
- */
-
-x-keyboard {
-  display: block;
-  height: 250px;
-}
