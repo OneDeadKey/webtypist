@@ -15,6 +15,11 @@
       "description": "Arquivo de treinamento gerado Wed Aug 24 14:00:33 2005\nPreparado por Ari Caldeira",
       "layouts": [ "br" ]
     },
+    "cat": {
+      "title": "Català (autogenerat)",
+      "description": "KTouch training file generated Sat Aug 23 21:40:00 2003\nPerl Script written by Steinar Theigmann & Håvard Frøiland.",
+      "layouts": [ "es" ]
+    },
     "ch1": {
       "title": "Deutsch (CH)",
       "description": "Deutscher Kurs für KTouch von Markus Frisch <frisch@vr-web.de>  (Modified for Swiss keyboard layout)",
@@ -34,6 +39,11 @@
       "title": "Deutsch (aus Tipptrainer)",
       "description": "German training file\nadapted by Sven Gohlke <sven@clio.in-berlin.de>\nfor ktouch from a training file distributed by\nAndreas Kalbitz  <felix@pingos.schulnetz.org>\nfor Tipptrainer V0.4 http://www.pingos.schulnetz.org/tipptrainer\ndistributed under the GPL2\nVersion: 0.1 beta",
       "layouts": [ "de" ]
+    },
+    "dk1": {
+      "title": "Dansk",
+      "description": "Træningsfil udviklet af\nGunther Strube,  gstrube@tiscali.dk og\nAnja Lysholm, anjal@danbbs.dk, April-Juli 2002\n\nBaseret på:\n \"Lær maskinskrivning i Folke- og Ungdomsskolen\"\n    Kamma Jensen & Jytte Møller\n    ISBN 87-17-02200-2\n\nProgram udviklet af Håvard Frøiland",
+      "layouts": [ "dk" ]
     },
     "es1": {
       "title": "Español 1 (generado automáticamente)",
@@ -95,6 +105,11 @@
       "description": "Lezione generata automaticamente usando ktouch-lesson-generator\nda Simone Gaiarin <simgunz@gmail.com>",
       "layouts": [ "it" ]
     },
+    "no": {
+      "title": "Norsk",
+      "description": "KTouch training file generated Sun Apr 22 16:26:01 2007\nPerl Script written by Steinar Theigmann & Håvard Frøiland.\nManually modified in nano and gedit by Jarl Arntzen Wed Dec 1 2010 18:57.\nSeparate levels for keys u, y and z needed",
+      "layouts": [ "no" ]
+    },
     "ru.legacy": {
       "title": "Русская (Legacy)",
       "description": "Created by Oleksiy Gorelov <grolm@ukr.net>\nKiev, Ukraine\nMon Nov 14, 2005",
@@ -121,12 +136,12 @@
       "layouts": [ "us(colemak)" ]
     },
     "us.dvorak1": {
-      "title": "Dvorak (US) (auto-generated)",
+      "title": "Dvorak (auto-generated)",
       "description": "Trainingfile genereated Mon Apr  8 18:44:12 2002\nProgram written by Håvard Frøiland",
-      "layouts": [ "us(dvorak)" ]
+      "layouts": [ "us(dvorak)", "gb(dvorak)" ]
     },
     "us.dvorak2": {
-      "title": "Dvorak (US) - ABCD",
+      "title": "Dvorak - ABCD",
       "description": "This ktouch course is taken from Dan Wood's\nA Basic Course in Dvorac (ABCD)\nAvailable at http://www.gigliwood.com/abcd/abcd.html",
       "layouts": [ "us(dvorak)" ]
     },
