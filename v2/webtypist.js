@@ -1,4 +1,4 @@
-const layoutsBase = 'https://fabi1cazenave.github.io/x-keyboard/layouts/';
+const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
 
 
 /******************************************************************************
@@ -87,6 +87,7 @@ const gTypist = (function(window, document, undefined) {
   let previousValue = ''; // required for a dirty workaround
 
   function start() {
+    ui.txtInput.className = 'active';
     previousValue = '';
     startDate = new Date();
     typos = 0;
@@ -94,26 +95,24 @@ const gTypist = (function(window, document, undefined) {
 
   function stop() {
     if (!text) {
-      ui.speed.textContent = '';
-      ui.accuracy.textContent = '';
+      ui.speed.textContent = '0';
+      ui.accuracy.textContent = '0';
       return;
     }
     const elapsed = (new Date() - startDate) / 1000;
-    if (elapsed < 1) {
-      return;
-    }
     ui.speed.textContent = Math.round(text.length * 60 / elapsed);
     ui.accuracy.textContent = typos;
+    ui.txtInput.className = '';
+    startDate = null; // back to idle state
   }
 
-  // display a new exercise and start the test
+  // display a new exercise
   function newPrompt() {
     text = state.prompt;
     if (!text) {
       return;
     }
     stop();
-    start();
     ui.txtPrompt.value = text;
     ui.txtInput.value = '';
     ui.txtInput.focus();
@@ -121,18 +120,12 @@ const gTypist = (function(window, document, undefined) {
   }
 
   function onInput(value) {
-    if (!value.length) { // empty input box => reset timer
-      highlightKey(text.substr(0, 1));
-      start();
-      return;
-    }
-
-    const pos = value.length - 1;
-    if (pos == 0) { // first char => start the timer
+    if (!startDate) { // first char => start the timer
       start();
     }
 
     // Check if the last char is correct
+    const pos = value.length - 1;
     const entered = value.substring(pos);
     const expected = text.substr(pos, 1);
     if (entered !== expected) { // mistake
@@ -149,9 +142,8 @@ const gTypist = (function(window, document, undefined) {
       }
     } else {
       // auto-correction
-      console.log('expected: ' + text);
       ui.txtInput.className = 'error';
-      setTimeout(() => ui.txtInput.className = '', 250);
+      setTimeout(() => ui.txtInput.className = 'active', 250);
       ui.txtInput.value = ui.txtInput.value.substr(0, pos);
     }
   }
@@ -207,7 +199,7 @@ class State {
     }
     ui.layout.value = value;
     this._layoutID = value;
-    fetch(`${layoutsBase}/${value}.json`)
+    fetch(`${keylayoutBaseURL}/${value}.json`)
       .then(response => response.json())
       .then(data => {
         ui.keyboard.setKalamineLayout(data.layout, data.dead_keys,
