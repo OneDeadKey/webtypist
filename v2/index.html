@@ -9,64 +9,59 @@
   <link href="./webtypist.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-  <div id="wrapper">
-    <div id="content">
-      <h1> Web Typist <small>v2</small> </h1>
-      <p> A typing tutor for modern web browsers. </p>
+  <header>
+    <h1> Web Typist <small>v2</small> </h1>
+    <p> A typing tutor for modern web browsers. </p>
+  </header>
 
-      <div id="metrics" style="float: right;">
-        <span id="speed">0</span> cpm
-        <span id="accuracy">0</span> errors
-      </div>
-
-      <form id="keyboardSelector">
-        <select id="layout">
-          <option>loading…</option>
-        </select>
-        <select id="shape">
-          <option value="" selected>(auto)</option>
-          <option value="alt">  ALT  </option>
-          <option value="abnt"> ABNT </option>
-          <option value="iso">  ISO  </option>
-          <option value="ansi"> ANSI </option>
-          <option value="ol60"> TMx  </option>
-        </select>
-        <input id="hints" type="checkbox">
-        <label for="hints"> show hints </label>
-      </form>
-
-      <form id="lessonSelector">
-        <select id="lesson">
-          <option> (loading…) </option>
-        </select>
-        <select id="level">
-          <option value="-1"> (loading…) </option>
-        </select>
-      </form>
-
-      <form id="lessonInput">
-        <div id="hands">
-          <span id="leftHand"></span>
-          <span id="leftThumb"></span>
-          <span id="rightThumb"></span>
-          <span id="rightHand"></span>
-        </div>
-        <textarea id="txtPrompt" readonly></textarea>
-        <textarea id="txtInput" spellcheck="false"></textarea>
-      </form>
-
-      <x-keyboard id="keyboard">
-        <p>Loading web component…</p>
-        <p hidden>Your browser is not supported at the moment.</p>
-        <p hidden>Please reload this page with a browser that supports web components,
-        such as Mozilla Firefox or Google Chrome.</p>
-      </x-keyboard>
+  <div>
+    <div id="metrics">
+      <span id="speed">0</span> cpm
+      <span id="accuracy">0</span> errors
     </div>
-
-    <div id="footer">
-      Copyleft 2019 Kazé &amp; Léo
-      — <a href="https://github.com/fabi1cazenave/webtypist">project page</a>
-    </div>
+    <form>
+      <select id="layout">
+        <option>loading…</option>
+      </select>
+      <select id="shape">
+        <option value="" selected>(auto)</option>
+        <option value="alt">  ALT  </option>
+        <option value="abnt"> ABNT </option>
+        <option value="iso">  ISO  </option>
+        <option value="ansi"> ANSI </option>
+        <option value="ol60"> TMx  </option>
+      </select>
+      <input id="hints" type="checkbox">
+      <label for="hints"> show hints </label>
+    </form>
+    <form>
+      <select id="lesson">
+        <option> (loading…) </option>
+      </select>
+      <select id="level">
+        <option value="-1"> (loading…) </option>
+      </select>
+    </form>
   </div>
+
+  <div>
+    <div id="hands">
+      <span id="leftHand"></span>
+      <span id="leftThumb"></span>
+      <span id="rightThumb"></span>
+      <span id="rightHand"></span>
+    </div>
+    <textarea id="txtPrompt" readonly></textarea>
+    <textarea id="txtInput" spellcheck="false"></textarea>
+  </div>
+
+  <x-keyboard id="keyboard">
+    <p>Loading web component…</p>
+  </x-keyboard>
+
+  <footer>
+    copyleft 2019 Kazé &amp; Léo
+    — <a href="https://github.com/fabi1cazenave/webtypist">project page</a>
+  </footer>
 </body>
 </html>

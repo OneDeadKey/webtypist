@@ -1,58 +1,50 @@
-
 /******************************************************************************
- * Full-height page with sticky footer
+ * Full-height page, vertically justified content
  */
 
-html, body {
+html {
+  background-color: #ccc;
+  border: none;
   height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
-  border: none;
-  background-color: #ccc;
+  width: 100%;
 }
 
-#wrapper, #footer {
-  width: 740px;
-}
-
-#wrapper {
-  position: relative;
-  min-height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+body {
+  background-color: #fff;
   border-left: 1px solid #aaa;
   border-right: 1px solid #aaa;
-  background-color: white;
-  box-shadow: 0px 1px 10px #888;
+  box-shadow: 0 1px 10px #888;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 51em;
+  padding: 0 20px;
 }
 
-#content {
-  padding-bottom: 40px; /* >= height of the footer */
-  background-color: white;
-}
-
-#footer {
-  position: absolute;
-  bottom: 0;
-  height: 34px; /* 34 + 1 + 5 = 40px */
-  border-top: 1px outset brown;
-  padding-top: 5px;
-  font-size: smaller;
-  color: brown;
+/* ensure a 3:1 ratio until the component is loaded */
+x-keyboard p {
+  margin: 0;
+  padding: 0 0 calc(33% - 10px);
 }
 
 
 /******************************************************************************
- * Title
+ * Header & Footer
  */
 
+header, footer {
+  color: brown;
+}
+
 h1 {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 30px;
   border-bottom: 1px inset brown;
   color: brown;
+  font-size: 1.5em;
+  margin-bottom: 0;
 }
 
 h1 small {
@@ -61,42 +53,68 @@ h1 small {
 }
 
 h1 + p {
-  margin-top: 0.5em;
-  color: #c8a;
+  font-size: smaller;
+  margin-top: .4em;
+}
+
+footer {
+  border-top: 1px outset brown;
+  font-size: smaller;
+  padding: .5em 0;
+  text-align: right;
+  width: 100%;
 }
 
 
 /******************************************************************************
- * Main text prompt/input area
+ * Keyboard & Lesson selection
  */
 
-#lessonInput {
-  padding: 1em 0;
+#metrics {
+  float: right;
+  margin-top: 6px;
 }
 
-#lessonInput textarea {
-  width: 100%;
-  padding: 0;
-  box-sizing: border-box;
+form * {
+  margin: 0 6px 6px 0;
+  vertical-align: middle;
 }
 
-#lessonInput textarea.error {
-  background-color: red;
-}
-
-.hints #lessonInput textarea {
-  width: 570px;
+label[for] {
+  display: inline-block;
+  margin-left: -6px;
+  user-select: none;
 }
 
 
 /******************************************************************************
- * Visual hints: hands picture
+ * Text prompt & input
+ */
+
+textarea {
+  box-sizing: border-box;
+  height: 42px;
+  margin-bottom: 2px;
+  padding: 0;
+  resize: none;
+  width: 100%;
+}
+
+.hints textarea {
+  width: calc(100% - 160px);
+}
+
+#txtInput.active { background-color: #dfd; }
+#txtInput.error  { background-color: #f00; }
+
+
+/******************************************************************************
+ * Visual hints
  */
 
 #hands {
   float: right;
   position: relative;
-  margin-top: 5px;
   width: 150px;
   height: 90px;
   overflow: hidden;
@@ -108,11 +126,11 @@ h1 + p {
 }
 
 #hands span {
-  position: absolute;
-  top: 0;
-  height: 90px;
   background-position: left top;
   background-repeat: no-repeat;
+  height: 90px;
+  position: absolute;
+  top: 0;
 }
 
 #leftHand   { left:  0px; width: 52px; background-image: url(hints/leftHand.png);   }
