@@ -83,6 +83,7 @@ form * {
 label[for] {
   display: inline-block;
   margin-left: -6px;
+  -moz-user-select: none;
   user-select: none;
 }
 

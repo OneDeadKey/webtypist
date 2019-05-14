@@ -275,7 +275,8 @@ fetch(`./lessons.json`)
     state = new State(data.courses, data.layouts);
     populateLessonSelector(data.courses);
     populateLayoutSelector(data.layouts);
-    state.layout = window.location.hash.substr(1);
+    state.layout = window.location.hash.substr(1) || 'us';
+    state.hints = true;
   });
 
 window.addEventListener('hashchange', () => {
