@@ -1,4 +1,5 @@
-const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
+// const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
+const keylayoutBaseURL = '../../x-keyboard/layouts';
 
 
 /******************************************************************************
@@ -84,7 +85,6 @@ const gTypist = (function(window, document, undefined) {
   let startDate = null;
   let typos = 0;
   let text = '';
-  let previousValue = ''; // required for a dirty workaround
 
   function start() {
     ui.txtInput.className = 'active';
@@ -102,49 +102,43 @@ const gTypist = (function(window, document, undefined) {
     const elapsed = (new Date() - startDate) / 1000;
     ui.speed.textContent = Math.round(text.length * 60 / elapsed);
     ui.accuracy.textContent = typos;
-    ui.txtInput.className = '';
     startDate = null; // back to idle state
   }
 
-  // display a new exercise
-  function newPrompt() {
+  function newPrompt() { // display a new exercise
     text = state.prompt;
     if (!text) {
       return;
     }
-    stop();
     ui.txtPrompt.value = text;
+    ui.txtInput.className = '';
     ui.txtInput.value = '';
     ui.txtInput.focus();
-    highlightKey(text.substring(0, 1));
+    highlightKey(text.substr(0, 1));
   }
 
-  function onInput(value) {
+  function onKeyDown(char) {
+    const pos = ui.txtInput.value.length;
     if (!startDate) { // first char => start the timer
       start();
     }
-
-    // Check if the last char is correct
-    const pos = value.length - 1;
-    const entered = value.substring(pos);
-    const expected = text.substr(pos, 1);
-    if (entered !== expected) { // mistake
-      typos++;
-    }
-
-    // Check if the whole input is correct
-    const correct = (value == text.substr(0, pos + 1));
-    if (correct) {
-      // highlight the next key (or remove highlighting if it's finished)
-      highlightKey(text.substr(pos + 1, 1));
-      if (pos >= text.length - 1) { // finished
-        newPrompt();
+    if (!char) {
+      // a dead key has probably just been pressed
+      highlightKey(text.substr(pos, 1));
+    } else if (char === text.substr(pos, 1)) {
+      // correct key: append it to the text input
+      ui.txtInput.value += char;
+      if (pos < text.length - 1) {
+        highlightKey(text.substr(pos + 1, 1));
+      } else { // finished
+        stop();
+        setTimeout(newPrompt, 500);
       }
     } else {
-      // auto-correction
+      // typo: increment the counter and flash the text input
+      typos++;
       ui.txtInput.className = 'error';
       setTimeout(() => ui.txtInput.className = 'active', 250);
-      ui.txtInput.value = ui.txtInput.value.substr(0, pos);
     }
   }
 
@@ -153,18 +147,22 @@ const gTypist = (function(window, document, undefined) {
   ui.txtInput.value = '';
   ui.txtInput.focus();
 
-  // highlight keyboard keys and emulate the keyboard layout
+  // emulate the keyboard layout
   ui.txtInput.onkeyup = event => ui.keyboard.keyUp(event.code);
   ui.txtInput.onkeydown = event => {
-    const value = ui.keyboard.keyDown(event.code);
-    if (previousValue !== ui.txtInput.value) {
-      // working around a weird bug with dead keys on Firefox + Linux
-      ui.txtInput.value = previousValue;
+    if (event.code.startsWith('F')
+      || event.ctrlKey || event.metaKey || event.altKey) {
+      return true; // don't steal F5 or ctrl-* shortcuts
     }
-    ui.txtInput.value += value;
-    onInput(ui.txtInput.value);
-    previousValue = ui.txtInput.value;
+    if (event.code === 'Tab') {
+      layout.focus(); // make the Tab key great again
+    } else {
+      onKeyDown(ui.keyboard.keyDown(event.code));
+    }
     return false;
+  };
+  ui.txtInput.oninput = (event) => { // disable direct input, just in case
+    event.target.value = event.target.value.slice(0, -event.data.length);
   };
 
   return { newPrompt };
