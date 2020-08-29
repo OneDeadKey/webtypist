@@ -122,8 +122,8 @@ const gTypist = (function(window, document, undefined) {
   // highlight keyboard keys and emulate the selected layout
   ui.txtInput.onkeydown = (event) => {
     pressedKeys[event.code] = true;
-    const pos = ui.txtInput.value.length;
-    const value = keyboard.keyDown(event);
+    const pos = event.target.value.length;
+    const value = ui.keyboard.keyDown(event);
     if (value) {
       if (!startDate) { // first char => start the timer
         start();
@@ -143,6 +143,8 @@ const gTypist = (function(window, document, undefined) {
         event.target.className = 'error';
         setTimeout(() => event.target.className = 'active', 250);
       }
+    } else if (ui.keyboard.layout.pendingDK) { // dead key
+      highlightKey(text.substr(pos, 1));
     } else if (event.code === 'Enter') { // restart on <Enter>
       event.target.value = '';
       startDate = null;
@@ -155,7 +157,7 @@ const gTypist = (function(window, document, undefined) {
   };
   ui.txtInput.addEventListener('keyup', (event) => {
     if (pressedKeys[event.code]) { // expected behavior
-      keyboard.keyUp(event);
+      ui.keyboard.keyUp(event);
       delete pressedKeys[event.code];
     } else {
       /**
@@ -165,8 +167,8 @@ const gTypist = (function(window, document, undefined) {
        * which can result in a typo (especially when the "real" dead key is used
        * for an emulated dead key) -- but there's not much else we can do.
        */
-      event.target.value += keyboard.keyDown(event);
-      setTimeout(() => keyboard.keyUp(event), 100);
+      event.target.value += ui.keyboard.keyDown(event);
+      setTimeout(() => ui.keyboard.keyUp(event), 100);
     }
   });
 
