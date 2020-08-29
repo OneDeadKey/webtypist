@@ -1,5 +1,4 @@
-// const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
-const keylayoutBaseURL = '../../x-keyboard/layouts';
+const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
 
 
 /******************************************************************************
@@ -117,53 +116,64 @@ const gTypist = (function(window, document, undefined) {
     highlightKey(text.substr(0, 1));
   }
 
-  function onKeyDown(char) {
+  // required to work around a Chrome bug, see the `keyup` listener below
+  const pressedKeys = {};
+
+  // highlight keyboard keys and emulate the selected layout
+  ui.txtInput.onkeydown = (event) => {
+    pressedKeys[event.code] = true;
     const pos = ui.txtInput.value.length;
-    if (!startDate) { // first char => start the timer
-      start();
-    }
-    if (!char) {
-      // a dead key has probably just been pressed
-      highlightKey(text.substr(pos, 1));
-    } else if (char === text.substr(pos, 1)) {
-      // correct key: append it to the text input
-      ui.txtInput.value += char;
-      if (pos < text.length - 1) {
-        highlightKey(text.substr(pos + 1, 1));
-      } else { // finished
-        stop();
-        setTimeout(newPrompt, 500);
+    const value = keyboard.keyDown(event);
+    if (value) {
+      if (!startDate) { // first char => start the timer
+        start();
       }
+      if (value === text.substr(pos, 1)) {
+        // correct key: append it to the text input
+        event.target.value += value;
+        if (pos < text.length - 1) {
+          highlightKey(text.substr(pos + 1, 1));
+        } else { // finished
+          stop();
+          setTimeout(newPrompt, 500);
+        }
+      } else {
+        // typo: increment the counter and flash the text input
+        typos++;
+        event.target.className = 'error';
+        setTimeout(() => event.target.className = 'active', 250);
+      }
+    } else if (event.code === 'Enter') { // restart on <Enter>
+      event.target.value = '';
+      startDate = null;
+    } else if (event.code === 'Tab') { // focus the layout selector
+      setTimeout(() => document.getElementById('layout').focus(), 100);
     } else {
-      // typo: increment the counter and flash the text input
-      typos++;
-      ui.txtInput.className = 'error';
-      setTimeout(() => ui.txtInput.className = 'active', 250);
+      return true; // don't intercept special keys or key shortcuts
     }
-  }
+    return false; // event has been consumed, stop propagation
+  };
+  ui.txtInput.addEventListener('keyup', (event) => {
+    if (pressedKeys[event.code]) { // expected behavior
+      keyboard.keyUp(event);
+      delete pressedKeys[event.code];
+    } else {
+      /**
+       * We got a `keyup` event for a key that did not trigger any `keydown`
+       * event first: this is a known bug with "real" dead keys on Chrome.
+       * As a workaround, emulate a keydown + keyup. This introduces some lag,
+       * which can result in a typo (especially when the "real" dead key is used
+       * for an emulated dead key) -- but there's not much else we can do.
+       */
+      event.target.value += keyboard.keyDown(event);
+      setTimeout(() => keyboard.keyUp(event), 100);
+    }
+  });
 
   // init
   ui.txtPrompt.value = '';
   ui.txtInput.value = '';
   ui.txtInput.focus();
-
-  // emulate the keyboard layout
-  ui.txtInput.onkeyup = event => ui.keyboard.keyUp(event.code);
-  ui.txtInput.onkeydown = event => {
-    if (event.code.startsWith('F')
-      || event.ctrlKey || event.metaKey || event.altKey) {
-      return true; // don't steal F5 or ctrl-* shortcuts
-    }
-    if (event.code === 'Tab') {
-      layout.focus(); // make the Tab key great again
-    } else {
-      onKeyDown(ui.keyboard.keyDown(event.code));
-    }
-    return false;
-  };
-  ui.txtInput.oninput = (event) => { // disable direct input, just in case
-    event.target.value = event.target.value.slice(0, -event.data.length);
-  };
 
   return { newPrompt };
 })(this, document);
@@ -200,8 +210,8 @@ class State {
     fetch(`${keylayoutBaseURL}/${value}.json`)
       .then(response => response.json())
       .then(data => {
-        ui.keyboard.setKalamineLayout(data.layout, data.dead_keys,
-          data.geometry.replace('ERGO', 'ISO'));
+        ui.keyboard.setKeyboardLayout(data.keymap, data.deadkeys,
+          data.geometry.replace('ergo', 'iso'));
         window.location.hash = value;
         // enable lessons that are compatible with this layout, hide all others
         const suitableLessons = Object.entries(this._lessons)
