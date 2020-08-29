@@ -75,7 +75,7 @@
       "description": "http://bepo.fr/wiki/Exercices",
       "layouts": [ "fr(bepo)" ]
     },
-    "fr.dvarok": {
+    "fr.dvorak": {
       "title": "Français (dvorak-fr)",
       "description": "Apprentissage du clavier Dvorak-fr\n30 mai 2002 - Francis Leboutte, www.algo.be\n7 décembre 2004 - Passage au format ktouch par Matthieu MOY\n14 septembre 2005 - Passage au format ktouch XML par Stéphane Raimbault",
       "layouts": [ "fr(dvorak)" ]
