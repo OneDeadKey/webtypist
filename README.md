@@ -7,7 +7,7 @@ Online touch-typing tutor.
 Live Version
 --------------------------------------------------------------------------------
 
-https://fabi1cazenave.github.io/webtypist/
+https://OneDeadKey.github.io/webtypist/
 
 Technically outdated (works with IE6!) but still working. It should be on par with [KTouch][1].
 
@@ -15,7 +15,7 @@ Technically outdated (works with IE6!) but still working. It should be on par wi
 V2 Preview (work in progress)
 --------------------------------------------------------------------------------
 
-https://fabi1cazenave.github.io/webtypist/v2/
+https://OneDeadKey.github.io/webtypist/v2/
 
 This version is built on the [x-keyboard][3] component, which brings two new features:
 
@@ -54,8 +54,8 @@ This project reuses [KTouch][1]’s lessons and some [Klavaro][5] visuals.
 
   [1]: https://edu.kde.org/ktouch/
   [2]: https://edu.kde.org/ktouch/kde4/ktouch-lectures.php
-  [3]: https://github.com/fabi1cazenave/x-keyboard/
-  [4]: https://github.com/fabi1cazenave/kalamine/
+  [3]: https://github.com/OneDeadKey/x-keyboard/
+  [4]: https://github.com/OneDeadKey/kalamine/
   [5]: https://sourceforge.net/projects/klavaro/
   [6]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
   [7]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent

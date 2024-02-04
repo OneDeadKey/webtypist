@@ -1,4 +1,4 @@
-const keylayoutBaseURL = 'https://fabi1cazenave.github.io/x-keyboard/layouts';
+const keylayoutBaseURL = 'https://OneDeadKey.github.io/x-keyboard/layouts';
 
 
 /******************************************************************************
